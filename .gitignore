@@ -12,3 +12,16 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
+
+# IDE files
+.idea/
+.vscode/
+
+# Cache files
+.cache/
+
+# Environment variables
+.env
+
+# Husky
+.husky/
