@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "node": true
   },
   "extends": [
     "eslint:recommended",
@@ -20,6 +21,7 @@
     // "quotes": ["error", "single"],
     // "no-console": "warn",
     "no-unused-vars": "warn",
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "@typescript-eslint/no-var-requires": "off"
   }
 }
