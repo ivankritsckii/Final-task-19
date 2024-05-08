@@ -1,6 +1,7 @@
 import { apiCreateCustomer } from "../../apiRequests/apiCreateCustomer";
 import { createInput } from "../../helpers/creators/createInput";
 import { checkRegisstrationForm } from "../../helpers/checks/checkRegisstrationForm";
+import { emailAlreadyPopup } from "./popup/emailAlreadyPopup";
 const styles = require("./form.module.scss");
 
 export function registrationPage(parent: HTMLElement) {
@@ -56,13 +57,21 @@ export function registrationPage(parent: HTMLElement) {
   );
   passwordInput.placeholder = "******";
   const passwordLabel = document.createElement("label");
-  passwordLabel.textContent = "password incorrect! min 6 simbols!";
+  passwordLabel.innerHTML = `password incorrect! At least one lowercase and uppercase letter, at least one digit. <br> Minimum length of 8 characters`;
   passwordLabel.classList.add(styles["label-registration"], "passwordLabel");
 
   const buttonForm = document.createElement("button");
   buttonForm.type = "button";
   buttonForm.textContent = "Register";
   buttonForm.classList.add("button-form");
+
+  form.addEventListener("keypress", function (e) {
+    const key = e.code;
+    console.log(key);
+    if (key.toString() === "Enter" || key.toString() === "NumpadEnter") {
+      buttonForm.click();
+    }
+  });
 
   buttonForm.addEventListener("click", () => {
     if (
@@ -86,4 +95,5 @@ export function registrationPage(parent: HTMLElement) {
     buttonForm,
   );
   parent.append(form);
+  emailAlreadyPopup();
 }

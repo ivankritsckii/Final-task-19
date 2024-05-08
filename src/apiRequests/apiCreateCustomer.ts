@@ -34,7 +34,21 @@ export function apiCreateCustomer(
     "https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/customers",
     requestOptions,
   )
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.error(error));
+    .then((response) => {
+      console.log(response);
+      if (response.status === 400) {
+        console.log("EMAIL");
+        const popup = document.querySelector(".popup");
+        const popupButton = document.querySelector(
+          ".popup__button",
+        ) as HTMLButtonElement;
+        popup?.classList.add("popup_active");
+        popupButton.focus();
+      }
+      console.log(response.text());
+    })
+    //.then((result) => console.log(result))
+    .catch((error) => {
+      console.error("error: ", error);
+    });
 }
