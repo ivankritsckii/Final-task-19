@@ -13,41 +13,55 @@ export function registrationPage(parent: HTMLElement) {
 
   const emailInput = createInput(
     "text",
-    styles["input-email"],
+    styles.input_registration,
     "input-email",
     "input-email",
     true,
   );
-  emailInput.placeholder = "Enter your email address:";
+  const emailLabel = document.createElement("label");
+  emailLabel.textContent =
+    "email incorrect, write your email like a: john.doe@example.com";
+  emailLabel.classList.add(styles["label-registration"], "emailLabel");
+  emailInput.placeholder = "yourmail@gmail.com";
   const nameInput = createInput(
     "text",
-    styles["input-name"],
+    styles.input_registration,
     "input-name",
     "input-name",
     true,
   );
-  nameInput.placeholder = "Name...";
+  const nameLabel = document.createElement("label");
+  nameLabel.textContent =
+    "name incorrect! only latin, first letter capitalized, min 3 letters";
+  nameLabel.classList.add(styles["label-registration"], "nameLabel");
+  nameInput.placeholder = "Thomas";
   const surnameInput = createInput(
     "text",
-    styles["input-surname"],
+    styles.input_registration,
     "input-surname",
     "input-surname",
     true,
   );
-  surnameInput.placeholder = "Surname...";
+  surnameInput.placeholder = "Anderson";
+  const surnameLabel = document.createElement("label");
+  surnameLabel.textContent =
+    "surname incorrect! only latin, first letter capitalized, min 3 letters";
+  surnameLabel.classList.add(styles["label-registration"], "surnameLabel");
   const passwordInput = createInput(
     "password",
-    styles["input-password"],
+    styles.input_registration,
     "input-password",
     "input-password",
     true,
   );
-  passwordInput.pattern = `[0-9a-fA-F]{6,8}`;
-  passwordInput.placeholder = "write your password";
+  passwordInput.placeholder = "******";
+  const passwordLabel = document.createElement("label");
+  passwordLabel.textContent = "password incorrect! min 6 simbols!";
+  passwordLabel.classList.add(styles["label-registration"], "passwordLabel");
 
   const buttonForm = document.createElement("button");
   buttonForm.type = "button";
-  buttonForm.textContent = "SEND";
+  buttonForm.textContent = "Register";
   buttonForm.classList.add("button-form");
 
   buttonForm.addEventListener("click", () => {
@@ -62,9 +76,13 @@ export function registrationPage(parent: HTMLElement) {
   fieldset.append(
     legend,
     emailInput,
+    emailLabel,
     nameInput,
+    nameLabel,
     surnameInput,
+    surnameLabel,
     passwordInput,
+    passwordLabel,
     buttonForm,
   );
   parent.append(form);
