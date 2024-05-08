@@ -17,6 +17,22 @@ module.exports = {
         use: "ts-loader",
         exclude: /node_modules/,
       },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-modules-typescript-loader" },
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: "[local]",
+              },
+            },
+          },
+          { loader: "sass-loader" },
+        ],
+      },
     ],
   },
   resolve: {
