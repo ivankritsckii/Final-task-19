@@ -6,6 +6,10 @@ const styles = require("./form.module.scss");
 export function registrationPage(parent: HTMLElement) {
   const form = document.createElement("form");
   form.classList.add("form");
+  const fieldset = document.createElement("fieldset");
+  fieldset.classList.add(styles.fieldset);
+  const legend = document.createElement("legend");
+  legend.textContent = "Create account";
 
   const emailInput = createInput(
     "text",
@@ -54,6 +58,14 @@ export function registrationPage(parent: HTMLElement) {
     }
   });
 
-  form.append(emailInput, nameInput, surnameInput, passwordInput, buttonForm);
+  form.append(fieldset);
+  fieldset.append(
+    legend,
+    emailInput,
+    nameInput,
+    surnameInput,
+    passwordInput,
+    buttonForm,
+  );
   parent.append(form);
 }
