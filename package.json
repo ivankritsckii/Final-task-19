@@ -39,6 +39,7 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
-    "css-modules-typescript-loader": "^4.0.1"
+    "css-modules-typescript-loader": "^4.0.1",
+    "sass-loader": "^14.2.1"
   }
 }
