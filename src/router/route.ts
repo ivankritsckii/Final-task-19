@@ -10,8 +10,6 @@ import { showProductByUrl } from "../pages/main/content/showProductByUrl";
 
 export const route = (path: string, id?: string): Promise<void> => {
   return new Promise<void>((resolve) => {
-    const content = document.getElementById("content") as HTMLElement;
-
     // eslint-disable-next-line no-unused-vars
     const urlRoutes: { [key: string]: (content: any) => void } = {
       404: notPage,
@@ -25,6 +23,7 @@ export const route = (path: string, id?: string): Promise<void> => {
     const urlRoute = () => {
       window.history.pushState({}, "", path);
     };
+    const content = document.getElementById("content") as HTMLElement;
     if (id) {
       const location: string = window.location.href;
       const adress = sessionStorage.getItem("adress");
@@ -33,6 +32,7 @@ export const route = (path: string, id?: string): Promise<void> => {
       }
       const card = apiGetProductById(id);
       card.then((element) => {
+        console.log(content);
         content.innerHTML = "";
         createContent(content, element as Result);
       });

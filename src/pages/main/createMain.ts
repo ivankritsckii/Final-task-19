@@ -5,7 +5,7 @@ const styles = require("./content/content.module.scss");
 
 export function createMain(parent: HTMLBodyElement): void {
   const main = createElement("main", styles.main);
-  const content = createElement("div", styles.content);
+  const content = createElement("div", styles.content, "", "content");
   createLoading(main);
   main.append(content);
   parent.append(main);
