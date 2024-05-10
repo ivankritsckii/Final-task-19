@@ -1,5 +1,3 @@
-import { createProductsPage } from "../helpers/creators/createProductsPage";
-
 export async function apiGetProducts() {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -21,7 +19,7 @@ export async function apiGetProducts() {
     );
 
     const result = await response.text();
-    createProductsPage(result);
+    return result;
   } catch (error) {
     console.error(error);
   }
