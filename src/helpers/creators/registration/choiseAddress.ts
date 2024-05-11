@@ -33,8 +33,7 @@ export function choiseAddress(): HTMLElement {
 
   const oneAddress = createElement("fieldset", "fieldset-address");
   const oneAddressLegend = createElement("span", "legend-address");
-  oneAddressLegend.textContent =
-    "use default address for billing and shipping?";
+  oneAddressLegend.textContent = "use one address for billing and shipping?";
   const oneAddressInput = createInput(
     "checkbox",
     "one-address",
