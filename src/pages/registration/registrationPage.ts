@@ -1,14 +1,16 @@
 import { apiCreateCustomer } from "../../apiRequests/apiCreateCustomer";
-import { createInputBlock } from "../../helpers/creators/createInputBlock";
+//import { createInputBlock } from "../../helpers/creators/createInputBlock";
 import { checkRegisstrationForm } from "../../helpers/checks/checkRegisstrationForm";
-import { addAdressBlock } from "./adress/adress";
+//import { addAdressBlock } from "./adress/adress";
 import { setDateOfBirth } from "../../apiRequests/setDateOfBirth";
 import { apiAddAdress } from "../../apiRequests/apiAddAdress";
 import { route } from "../../router/route";
-const styles = require("./form.module.scss");
+import { createRegistrationForm } from "../../helpers/creators/registration/createRegistrationForm";
+//const styles = require("./form.module.scss");
 
 export function registrationPage(parent: HTMLElement): void {
-  parent.innerHTML = "";
+  createRegistrationForm(parent);
+  /*parent.innerHTML = "";
   const form = document.createElement("form");
   form.classList.add("form");
   const fieldset = document.createElement("fieldset");
@@ -57,7 +59,7 @@ export function registrationPage(parent: HTMLElement): void {
   fieldset.append(legend, emailBlock, nameBlock, surnameBlock, passwordBlock);
   addAdressBlock(fieldset);
   fieldset.append(buttonForm);
-  parent.append(form);
+  parent.append(form);*/
 
   form.addEventListener("keypress", function (e) {
     const key = e.code;
