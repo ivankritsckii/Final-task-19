@@ -52,14 +52,65 @@ export function addAdressBlock(parent: HTMLElement): void {
     "Apartment number",
   );
 
+  const streetBlockBilling = createInputBlock(
+    "min size - 4, numbers or letters",
+    "street-billing",
+    "text",
+    true,
+    "Street name",
+  );
+
+  const buildingBlockBilling = createInputBlock(
+    "min size - 4, numbers or letters",
+    "building-billing",
+    "text",
+    true,
+    "House name/number",
+  );
+
+  const apartmentBlockBilling = createInputBlock(
+    "max size - 3, only numbers",
+    "apartment-billing",
+    "number",
+    true,
+    "Apartment number",
+  );
+  const adressBlock = createElement("div", styles.adresses);
+  const shipping = createElement("div", "shipping");
+  shipping.classList.add(styles.adress);
+  const shippingDescription = createElement(
+    "span",
+    "shipping__description",
+    "shipping adress",
+  );
+  const billing = createElement("div", "billing");
+  billing.classList.add(styles.adress);
+  const billingDescription = createElement(
+    "span",
+    "billing__description",
+    "billing adress",
+  );
+
+  adressBlock.append(shipping, billing);
+  shipping.append(
+    shippingDescription,
+    streetBlock,
+    buildingBlock,
+    apartmentBlock,
+  );
+  billing.append(
+    billingDescription,
+    streetBlockBilling,
+    buildingBlockBilling,
+    apartmentBlockBilling,
+  );
+
   informBlock.append(
     countryBlock,
     birthBlock,
     cityBlock,
     postcodeBlock,
-    streetBlock,
-    buildingBlock,
-    apartmentBlock,
+    adressBlock,
   );
   parent.append(informBlock);
 }
