@@ -1,6 +1,6 @@
 .inform {
   width: 100%;
-  height: 50%;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,6 +50,9 @@
 @media (max-width: 800px) {
   .inform-block {
     width: 80%;
+  }
+  .inform {
+    gap: 10px;
   }
   .inform > .inform-block {
     width: 50%;
