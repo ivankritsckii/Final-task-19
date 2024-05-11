@@ -1,9 +1,13 @@
 import { apiCreateCustomer } from "../../apiRequests/apiCreateCustomer";
-import { createInput } from "../../helpers/creators/createInput";
+import { createInputBlock } from "../../helpers/creators/createInputBlock";
 import { checkRegisstrationForm } from "../../helpers/checks/checkRegisstrationForm";
+import { addAdressBlock } from "./adress/adress";
+import { setDateOfBirth } from "../../apiRequests/setDateOfBirth";
+import { apiAddAdress } from "../../apiRequests/apiAddAdress";
+import { route } from "../../router/route";
 const styles = require("./form.module.scss");
 
-export function registrationPage(parent: HTMLElement) {
+export function registrationPage(parent: HTMLElement): void {
   parent.innerHTML = "";
   const form = document.createElement("form");
   form.classList.add("form");
@@ -12,86 +16,109 @@ export function registrationPage(parent: HTMLElement) {
   const legend = document.createElement("legend");
   legend.textContent = "Create account";
 
-  const emailInput = createInput(
-    "text",
-    styles.input_registration,
+  const emailBlock = createInputBlock(
+    "email incorrect, write your email like a: john.doe@example.com",
     "input-email",
-    "input-email",
-    true,
-  );
-  const emailLabel = document.createElement("label");
-  emailLabel.textContent =
-    "email incorrect, write your email like a: john.doe@example.com";
-  emailLabel.classList.add(styles["label-registration"], "emailLabel");
-  emailInput.placeholder = "yourmail@gmail.com";
-  const nameInput = createInput(
     "text",
-    styles.input_registration,
-    "input-name",
-    "input-name",
     true,
+    "yourmail@gmail.com",
   );
-  const nameLabel = document.createElement("label");
-  nameLabel.textContent =
-    "name incorrect! only latin, first letter capitalized, min 3 letters";
-  nameLabel.classList.add(styles["label-registration"], "nameLabel");
-  nameInput.placeholder = "Thomas";
-  const surnameInput = createInput(
+
+  const nameBlock = createInputBlock(
+    "name incorrect! only latin, first letter capitalized, min 3 letters",
+    "input-name",
     "text",
-    styles.input_registration,
-    "input-surname",
-    "input-surname",
     true,
+    "Thomas",
   );
-  surnameInput.placeholder = "Anderson";
-  const surnameLabel = document.createElement("label");
-  surnameLabel.textContent =
-    "surname incorrect! only latin, first letter capitalized, min 3 letters";
-  surnameLabel.classList.add(styles["label-registration"], "surnameLabel");
-  const passwordInput = createInput(
+
+  const surnameBlock = createInputBlock(
+    "surname incorrect! only latin, first letter capitalized, min 3 letters",
+    "input-surname",
+    "text",
+    true,
+    "Anderson",
+  );
+
+  const passwordBlock = createInputBlock(
+    `password incorrect! At least one lowercase and uppercase letter, at least one digit. Minimum length of 8 characters`,
+    "input-password",
     "password",
-    styles.input_registration,
-    "input-password",
-    "input-password",
     true,
+    "password",
   );
-  passwordInput.placeholder = "******";
-  const passwordLabel = document.createElement("label");
-  passwordLabel.innerHTML = `password incorrect! At least one lowercase and uppercase letter, at least one digit. <br> Minimum length of 8 characters`;
-  passwordLabel.classList.add(styles["label-registration"], "passwordLabel");
 
   const buttonForm = document.createElement("button");
   buttonForm.type = "button";
   buttonForm.textContent = "Register";
   buttonForm.classList.add("button-form");
 
+  form.append(fieldset);
+  fieldset.append(legend, emailBlock, nameBlock, surnameBlock, passwordBlock);
+  addAdressBlock(fieldset);
+  fieldset.append(buttonForm);
+  parent.append(form);
+
   form.addEventListener("keypress", function (e) {
     const key = e.code;
+    console.log(key);
     if (key.toString() === "Enter" || key.toString() === "NumpadEnter") {
       buttonForm.click();
     }
   });
 
-  buttonForm.addEventListener("click", () => {
+  const emailInput = document.getElementById("input-email") as HTMLInputElement;
+  const nameInput = document.getElementById("input-name") as HTMLInputElement;
+  const surnameInput = document.getElementById(
+    "input-surname",
+  ) as HTMLInputElement;
+  const passwordInput = document.getElementById(
+    "input-password",
+  ) as HTMLInputElement;
+  buttonForm.addEventListener("click", async () => {
     if (
       checkRegisstrationForm(emailInput, nameInput, surnameInput, passwordInput)
     ) {
-      apiCreateCustomer(emailInput, nameInput, surnameInput, passwordInput);
+      const birthInput = document.getElementById("birth") as HTMLInputElement;
+      const countryInput = document.getElementById(
+        "country",
+      ) as HTMLSelectElement;
+      const cityInput = document.getElementById("city") as HTMLInputElement;
+      const postcodeInput = document.getElementById(
+        "postcode",
+      ) as HTMLInputElement;
+      const streetInput = document.getElementById("street") as HTMLInputElement;
+      const buildingInput = document.getElementById(
+        "building",
+      ) as HTMLInputElement;
+      const apartmentInput = document.getElementById(
+        "apartment",
+      ) as HTMLInputElement;
+      apiCreateCustomer(emailInput, nameInput, surnameInput, passwordInput)
+        .then((json) => {
+          console.log(json);
+          const clientId = json.customer.id;
+          console.log(clientId);
+          setDateOfBirth(clientId, birthInput.value).then(() => {
+            apiAddAdress(
+              clientId,
+              nameInput.value,
+              surnameInput.value,
+              emailInput.value,
+              countryInput.value,
+              cityInput.value,
+              streetInput.value,
+              postcodeInput.value,
+              buildingInput.value,
+              apartmentInput.value,
+            ).then(() => {
+              route(window.location.origin);
+            });
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   });
-
-  form.append(fieldset);
-  fieldset.append(
-    legend,
-    emailInput,
-    emailLabel,
-    nameInput,
-    nameLabel,
-    surnameInput,
-    surnameLabel,
-    passwordInput,
-    passwordLabel,
-    buttonForm,
-  );
-  parent.append(form);
 }
