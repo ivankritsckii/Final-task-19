@@ -1,41 +1,46 @@
+import { checkAdressForm } from "./checkAdressForm";
+
 export function checkRegisstrationForm(
   emailInput: HTMLInputElement,
   nameInput: HTMLInputElement,
   surnameInput: HTMLInputElement,
   passwordInput: HTMLInputElement,
 ): boolean {
+  let result = true;
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const namePattern = /^[A-Z][a-zA-Z]{2,}$/;
   const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-  const emailLabel = document.querySelector(".emailLabel") as HTMLLabelElement;
-  const nameLabel = document.querySelector(".nameLabel") as HTMLLabelElement;
-  const surnameLabel = document.querySelector(
-    ".surnameLabel",
-  ) as HTMLLabelElement;
-  const passwordLabel = document.querySelector(
-    ".passwordLabel",
-  ) as HTMLLabelElement;
+  const labelList = document.querySelectorAll(".label-registration");
 
   if (emailPattern.test(emailInput.value)) {
-    emailLabel.classList.remove("label-registration_active");
+    labelList[0].classList.remove("label-registration_active");
   } else {
-    emailLabel.classList.add("label-registration_active");
+    labelList[0].classList.add("label-registration_active");
+    result = false;
   }
   if (namePattern.test(nameInput.value)) {
-    nameLabel.classList.remove("label-registration_active");
+    labelList[1].classList.remove("label-registration_active");
   } else {
-    nameLabel.classList.add("label-registration_active");
+    labelList[1].classList.add("label-registration_active");
+    result = false;
   }
   if (namePattern.test(surnameInput.value)) {
-    surnameLabel.classList.remove("label-registration_active");
+    labelList[2].classList.remove("label-registration_active");
   } else {
-    surnameLabel.classList.add("label-registration_active");
+    labelList[2].classList.add("label-registration_active");
+    result = false;
   }
   if (passwordPattern.test(passwordInput.value)) {
-    passwordLabel.classList.remove("label-registration_active");
-    return true;
+    labelList[3].classList.remove("label-registration_active");
   } else {
-    passwordLabel.classList.add("label-registration_active");
+    labelList[3].classList.add("label-registration_active");
+    result = false;
   }
-  return false;
+
+  if (result === true) {
+    return checkAdressForm();
+  } else {
+    checkAdressForm();
+    return false;
+  }
 }
