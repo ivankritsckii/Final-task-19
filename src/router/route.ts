@@ -9,7 +9,6 @@ import { isProductPage } from "../helpers/checks/isProductPage";
 import { showProductByUrl } from "../pages/main/content/showProductByUrl";
 
 export const route = (path: string, id?: string): Promise<void> => {
-  console.log("PATH", path);
   return new Promise<void>((resolve) => {
     const content = document.getElementById("content") as HTMLElement;
 
@@ -27,11 +26,6 @@ export const route = (path: string, id?: string): Promise<void> => {
       window.history.pushState({}, "", path);
     };
     if (id) {
-      const location: string = window.location.href;
-      const adress = sessionStorage.getItem("adress");
-      if (adress) {
-        console.log(location.replace(adress, ""));
-      }
       const card = apiGetProductById(id);
       card.then((element) => {
         content.innerHTML = "";
@@ -44,9 +38,14 @@ export const route = (path: string, id?: string): Promise<void> => {
       if (isProductPage(location)) {
         showProductByUrl(window.location.hash.replace("#", ""));
       }
-      const URL = location.replace(origin, "");
-      const used = urlRoutes[URL] || urlRoutes[404];
-      used(content);
+      if (path === window.location.origin) {
+        const startPage = urlRoutes[""];
+        startPage(content);
+      } else {
+        const URL = location.replace(origin, "");
+        const used = urlRoutes[URL] || urlRoutes[404];
+        used(content);
+      }
     }
     urlRoute();
     resolve();
