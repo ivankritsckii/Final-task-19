@@ -1,46 +1,50 @@
-import { checkAdressForm } from "./checkAdressForm";
-
-export function checkRegisstrationForm(
-  emailInput: HTMLInputElement,
-  nameInput: HTMLInputElement,
-  surnameInput: HTMLInputElement,
-  passwordInput: HTMLInputElement,
-): boolean {
-  let result = true;
+export function checkRegisstrationForm(): boolean {
+  const pattern = /^[A-Z][a-zA-Z]{2,}$/;
+  const postcodePattern = /^[a-zA-Z0-9]{4,}$/;
+  const apartmentPattern = /^(\d{1,3})$/;
+  const adressPattern = /^[a-zA-Z0-9\s]{4,}$/;
+  const buildingPattern = /^[a-zA-Z0-9\s]{1,}$/;
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const namePattern = /^[A-Z][a-zA-Z]{2,}$/;
+  const birthPattern =
+    /^(19|20)\d\d[- /.](0[1-9]|1[012])[-/.](0[1-9]|[12][0-9]|3[01])$/;
   const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+  const countrySelect = document.getElementById("country") as HTMLSelectElement;
   const labelList = document.querySelectorAll(".label-registration");
+  const inputsList = document.querySelectorAll(".input-inform_registration");
+  let result = true;
 
-  if (emailPattern.test(emailInput.value)) {
-    labelList[0].classList.remove("label-registration_active");
-  } else {
-    labelList[0].classList.add("label-registration_active");
-    result = false;
-  }
-  if (namePattern.test(nameInput.value)) {
-    labelList[1].classList.remove("label-registration_active");
-  } else {
-    labelList[1].classList.add("label-registration_active");
-    result = false;
-  }
-  if (namePattern.test(surnameInput.value)) {
-    labelList[2].classList.remove("label-registration_active");
-  } else {
-    labelList[2].classList.add("label-registration_active");
-    result = false;
-  }
-  if (passwordPattern.test(passwordInput.value)) {
-    labelList[3].classList.remove("label-registration_active");
-  } else {
-    labelList[3].classList.add("label-registration_active");
+  const inputsToCheck = [
+    { id: "input-email", pattern: emailPattern },
+    { id: "input-name", pattern: pattern },
+    { id: "input-surname", pattern: pattern },
+    { id: "input-password", pattern: passwordPattern },
+    { id: "birth", pattern: birthPattern },
+    { id: "city", pattern: pattern },
+    { id: "postcode", pattern: postcodePattern },
+    { id: "street", pattern: adressPattern },
+    { id: "building", pattern: buildingPattern },
+    { id: "apartment", pattern: apartmentPattern },
+    { id: "street-billing", pattern: adressPattern },
+    { id: "building-billing", pattern: buildingPattern },
+    { id: "apartment-billing", pattern: apartmentPattern },
+  ];
+
+  if (!countrySelect.value) {
     result = false;
   }
 
-  if (result === true) {
-    return checkAdressForm();
-  } else {
-    checkAdressForm();
-    return false;
+  for (let i = 0; i < inputsList.length; i++) {
+    const currentInput = inputsList[i] as HTMLInputElement;
+    inputsToCheck.forEach((input) => {
+      if (currentInput.id === input.id) {
+        if (input.pattern.test(currentInput.value)) {
+          labelList[i].classList.remove("label-registration_active");
+        } else {
+          labelList[i].classList.add("label-registration_active");
+          result = false;
+        }
+      }
+    });
   }
+  return result;
 }

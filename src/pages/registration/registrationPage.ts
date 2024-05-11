@@ -75,9 +75,7 @@ export function registrationPage(parent: HTMLElement): void {
     "input-password",
   ) as HTMLInputElement;
   buttonForm.addEventListener("click", async () => {
-    if (
-      checkRegisstrationForm(emailInput, nameInput, surnameInput, passwordInput)
-    ) {
+    if (checkRegisstrationForm()) {
       const birthInput = document.getElementById("birth") as HTMLInputElement;
       const countryInput = document.getElementById(
         "country",
