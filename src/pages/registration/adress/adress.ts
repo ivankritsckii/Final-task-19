@@ -1,6 +1,7 @@
 import { createElement } from "../../../helpers/creators/createElement";
 import { createInputBlock } from "../../../helpers/creators/createInputBlock";
 import { createSelectCountry } from "../../../helpers/creators/createSelectCountry";
+import { choiseAddress } from "../../../helpers/creators/registration/choiseAddress";
 const styles = require("./adress.module.scss");
 
 export function addAdressBlock(parent: HTMLElement): void {
@@ -91,7 +92,9 @@ export function addAdressBlock(parent: HTMLElement): void {
     "billing adress",
   );
 
-  adressBlock.append(shipping, billing);
+  const choise = choiseAddress();
+
+  adressBlock.append(shipping, choise, billing);
   shipping.append(
     shippingDescription,
     streetBlock,
