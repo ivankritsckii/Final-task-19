@@ -61,7 +61,6 @@ export function registrationPage(parent: HTMLElement): void {
 
   form.addEventListener("keypress", function (e) {
     const key = e.code;
-    console.log(key);
     if (key.toString() === "Enter" || key.toString() === "NumpadEnter") {
       buttonForm.click();
     }
@@ -96,9 +95,7 @@ export function registrationPage(parent: HTMLElement): void {
       ) as HTMLInputElement;
       apiCreateCustomer(emailInput, nameInput, surnameInput, passwordInput)
         .then((json) => {
-          console.log(json);
           const clientId = json.customer.id;
-          console.log(clientId);
           setDateOfBirth(clientId, birthInput.value).then(() => {
             apiAddAdress(
               clientId,
