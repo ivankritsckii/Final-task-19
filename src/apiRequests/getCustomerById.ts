@@ -2,15 +2,12 @@ export async function getCustomerById(idCustomer: string) {
   const myHeaders = new Headers();
   myHeaders.append(
     "Authorization",
-    "Basic MG56NkVJV0dYMWxqMlNpeXc4U2FVNHlFOmVXMFRyemo5MHI0QnZlQnpwT1loZ3ZPaVFHQTAyNDRH",
+    `Bearer ${sessionStorage.getItem("token")}`,
   );
-
-  const raw = "";
 
   const requestOptions = {
     method: "GET",
     headers: myHeaders,
-    body: raw,
     redirect: "follow" as const,
   };
 
@@ -20,7 +17,8 @@ export async function getCustomerById(idCustomer: string) {
       requestOptions,
     );
     const result = await response.text();
-    return result;
+    const json = JSON.parse(result);
+    return json;
   } catch (error) {
     console.error(error);
   }
