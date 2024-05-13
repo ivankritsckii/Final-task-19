@@ -1,12 +1,8 @@
+import { getCustomerById } from "./getCustomerById";
+
 export async function apiAddAdress(
   id: string,
-  name: string,
-  surname: string,
-  email: string,
-  country: string,
-  city: string,
   street: string,
-  postcode: string,
   building: string,
   apartment: string,
 ) {
@@ -16,19 +12,29 @@ export async function apiAddAdress(
     `${sessionStorage.getItem("token-type")} ${sessionStorage.getItem("token")}`,
   );
 
+  const email = document.getElementById("input-email") as HTMLInputElement;
+  const name = document.getElementById("input-name") as HTMLInputElement;
+  const surname = document.getElementById("input-surname") as HTMLInputElement;
+  const country = document.getElementById("country") as HTMLSelectElement;
+  const city = document.getElementById("city") as HTMLInputElement;
+  const postcode = document.getElementById("postcode") as HTMLInputElement;
+
+  const customer = await getCustomerById(id);
+  const VERSION = customer.version;
+
   const raw = JSON.stringify({
-    version: 1,
+    version: VERSION || 1,
     actions: [
       {
         action: "addAddress",
         address: {
-          email: email,
-          firstName: name,
-          lastName: surname,
-          country: country,
-          city: city,
+          email: email.value,
+          firstName: name.value,
+          lastName: surname.value,
+          country: country.value,
+          city: city.value,
+          postalCode: postcode.value,
           streetName: street,
-          postalCode: postcode,
           building: building,
           apartment: apartment,
         },
