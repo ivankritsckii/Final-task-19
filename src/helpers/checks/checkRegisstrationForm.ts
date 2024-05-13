@@ -11,6 +11,8 @@ export function checkRegisstrationForm(): boolean {
   const countrySelect = document.getElementById("country") as HTMLSelectElement;
   const labelList = document.querySelectorAll(".label-registration");
   const inputsList = document.querySelectorAll(".input-inform_registration");
+  const choise = document.getElementById("one-address") as HTMLInputElement;
+
   let result = true;
 
   const inputsToCheck = [
@@ -35,6 +37,13 @@ export function checkRegisstrationForm(): boolean {
 
   for (let i = 0; i < inputsList.length; i++) {
     const currentInput = inputsList[i] as HTMLInputElement;
+    if (
+      choise.checked &&
+      (currentInput.id === "street-billing" ||
+        currentInput.id === "building-billing" ||
+        currentInput.id === "apartment-billing")
+    )
+      continue;
     inputsToCheck.forEach((input) => {
       if (currentInput.id === input.id) {
         if (input.pattern.test(currentInput.value)) {
