@@ -28,7 +28,8 @@ export async function setDateOfBirth(id: string, value: string) {
       requestOptions,
     );
     const result = await response.text();
-    return result;
+    const json = JSON.parse(result);
+    return json;
   } catch (error) {
     console.log(error);
   }
