@@ -2,38 +2,38 @@ import { createElement } from "../createElement";
 import { createInput } from "../createInput";
 
 export function choiseAddress(): HTMLElement {
-  const select = createElement(
-    "select",
-    "default-address",
-    "",
-    "default-address",
-  ) as HTMLSelectElement;
-  const selectLabel = createElement(
-    "label",
-    "default-address__label",
-    "what is the default address?",
-  ) as HTMLLabelElement;
-  selectLabel.htmlFor = "";
-  const optionShipping = createElement(
-    "option",
-    "option",
-    "Shipping",
-  ) as HTMLOptionElement;
-  optionShipping.value = "Shipping";
-  const optionBilling = createElement(
-    "option",
-    "option",
-    "Billing",
-  ) as HTMLOptionElement;
-  optionShipping.value = "Billing";
-  const selectWrapper = createElement("div", "address-wrapper");
+  const shippingInput = createInput(
+    "checkbox",
+    "defaulth-shipping",
+    "defaulth-shipping",
+    "defaulth-shipping",
+    false,
+  );
+  shippingInput.checked = true;
+  const shippingText = createElement(
+    "span",
+    "checkbox-text",
+    "use default shipping address?",
+  );
+  const defaulthShipping = createElement("div", "checkbox-wrapper");
+  defaulthShipping.append(shippingText, shippingInput);
 
-  select.append(optionShipping, optionBilling);
-  selectWrapper.append(selectLabel, select);
+  const billingInput = createInput(
+    "checkbox",
+    "defaulth-billing",
+    "defaulth-billing",
+    "defaulth-billing",
+    false,
+  );
+  billingInput.checked = true;
+  const billingText = createElement(
+    "span",
+    "checkbox-text",
+    "use default billing address?",
+  );
+  const defaulthBilling = createElement("div", "checkbox-wrapper");
+  defaulthBilling.append(billingText, billingInput);
 
-  const oneAddress = createElement("fieldset", "fieldset-address");
-  const oneAddressLegend = createElement("span", "legend-address");
-  oneAddressLegend.textContent = "use one address for billing and shipping?";
   const oneAddressInput = createInput(
     "checkbox",
     "one-address",
@@ -42,10 +42,16 @@ export function choiseAddress(): HTMLElement {
     false,
   );
   oneAddressInput.checked = true;
-  oneAddress.append(oneAddressLegend, oneAddressInput);
+  const oneAddressText = createElement(
+    "span",
+    "checkbox-text",
+    "use one address for billing and shipping?",
+  );
+  const oneAddress = createElement("div", "checkbox-wrapper");
+  oneAddress.append(oneAddressText, oneAddressInput);
 
   const choiseAdress = createElement("div", "choises");
   choiseAdress.classList.add("adress");
-  choiseAdress.append(selectWrapper, oneAddress);
+  choiseAdress.append(defaulthShipping, defaulthBilling, oneAddress);
   return choiseAdress;
 }
