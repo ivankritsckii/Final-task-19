@@ -57,7 +57,7 @@ export function addAdressBlock(parent: HTMLElement): void {
     "min size - 4, numbers or letters",
     "street-billing",
     "text",
-    true,
+    false,
     "Street name",
   );
 
@@ -65,7 +65,7 @@ export function addAdressBlock(parent: HTMLElement): void {
     "min size - 4, numbers or letters",
     "building-billing",
     "text",
-    true,
+    false,
     "House name/number",
   );
 
@@ -73,7 +73,7 @@ export function addAdressBlock(parent: HTMLElement): void {
     "max size - 3, only numbers",
     "apartment-billing",
     "number",
-    true,
+    false,
     "Apartment number",
   );
   const adressBlock = createElement("div", styles.adresses);

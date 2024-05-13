@@ -77,38 +77,14 @@
   gap: 20px;
   padding: 10px;
 }
-.address-wrapper {
+.checkbox-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.default-address {
+.checkbox-text {
   font-size: 0.8rem;
-}
-.default-address__label {
-  font-size: 0.8rem;
-}
-
-.fieldset-address {
-  width: 80%;
-  margin: 0;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  margin-inline: 0;
-  padding-inline: 0;
-  border: 1px solid gray;
-  border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  -ms-border-radius: 20px;
-  -o-border-radius: 20px;
-}
-.legend-address {
-  word-wrap: break-word;
-  font-size: 0.8rem;
-  //line-height: 2px;
 }
 
 @media (max-width: 800px) {
