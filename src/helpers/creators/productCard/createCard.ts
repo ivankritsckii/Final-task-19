@@ -36,6 +36,8 @@ export function createCard(product: Result): HTMLElement {
     current.masterVariant.prices[0].discounted?.value.centAmount;
   const cardPrice = createElement("span", styles.card__price, `${price}$`);
 
+  const priceBlock = createElement("div", "price-block");
+
   if (discountPrice) {
     const cardDiscound = createElement(
       "span",
@@ -44,11 +46,14 @@ export function createCard(product: Result): HTMLElement {
     );
     cardPrice.classList.add(styles.card__price_inactive);
 
-    cardDescr.append(cardNameRU, cardDiscound, cardPrice);
+    priceBlock.append(cardDiscound, cardPrice);
+    cardDescr.append(cardNameRU, priceBlock);
   } else {
-    cardDescr.append(cardNameRU, cardPrice);
+    priceBlock.append(cardPrice);
+    cardDescr.append(cardNameRU, priceBlock);
   }
 
+  cardDescr.append(priceBlock);
   cardBody.append(cardImage, cardDescr);
   return cardLink;
 }

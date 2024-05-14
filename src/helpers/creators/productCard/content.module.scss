@@ -1,43 +1,101 @@
-.card {
-  width: 30vw;
-  height: 40vw;
-}
-
-.card__link {
+.card-link {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  background-color: beige;
+  justify-content: flex-start;
   cursor: pointer;
   text-decoration: none;
+  overflow: hidden;
+}
+.card {
+  width: 30vw;
+  height: fit-content;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
 }
 
 .card__image {
   width: 100%;
-  height: 70%;
+  height: 30vw;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
 }
 
 .card__description {
-  width: 94%;
+  height: fit-content;
   display: flex;
+  flex-direction: column-reverse;
   justify-content: space-between;
   align-items: center;
 }
 
+.card-link:hover .card__name {
+  color: blue;
+}
 .card__name {
   color: black;
+  font-size: 1.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.price-block {
+  width: 100%;
+  padding-left: 15px;
+  display: flex;
+  gap: 15px;
+  font-size: 2rem;
 }
 
 .card__discound {
   color: yellowgreen;
 }
 .card__price {
-  color: red;
+  color: yellowgreen;
 }
 .card__price_inactive {
-  color: black;
+  color: grey;
   text-decoration: line-through;
+}
+
+@media (max-width: 750px) {
+  .card {
+    width: 45vw;
+  }
+  .card__image {
+    height: 45vw;
+  }
+}
+
+@media (max-width: 550px) {
+  .card {
+    width: 80vw;
+  }
+  .card__image {
+    height: 80vw;
+  }
+  .card-link {
+    border: 1px solid gray;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+  }
+  .card__description {
+    padding: 10px;
+  }
+  .card__name {
+    text-align: center;
+  }
 }
