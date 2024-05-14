@@ -3,6 +3,7 @@ import { createMain } from "./pages/main/createMain";
 import { loading } from "./modules/loading/loading";
 import { route } from "./router/route";
 import { createHeader } from "./modules/header/header";
+import { createFooter } from "./modules/footer/footer";
 import { showProductByUrl } from "./pages/main/content/showProductByUrl";
 import { isProductPage } from "./helpers/checks/isProductPage";
 const styles = require("./pages/style.module.scss");
@@ -22,6 +23,7 @@ window.addEventListener("load", async () => {
     const connect = apiInitialization();
     createHeader(body);
     createMain(body);
+    createFooter(body);
 
     connect.then(() => {
       if (isProductPage()) {

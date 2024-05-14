@@ -1,9 +1,9 @@
 import { createElement } from "../../../helpers/creators/createElement";
 import { createLink } from "../../../helpers/creators/createLink";
+import { burgerStatus } from "./burgerStatus";
 import { route } from "../../../router/route";
 
 export function headerBurger(parrent: HTMLElement): void {
-  const body = document.body as HTMLBodyElement;
   const burgerButton = createElement("div", "burger-button");
   const nav = createElement("nav", "nav-burger");
   const list = createElement("ul", "nav-burger__list");
@@ -14,6 +14,7 @@ export function headerBurger(parrent: HTMLElement): void {
   linkMain.textContent = "Main";
   linkMain.addEventListener("click", (event: Event) => {
     event.preventDefault();
+    burgerStatus();
     route(linkMain.href);
   });
 
@@ -23,6 +24,7 @@ export function headerBurger(parrent: HTMLElement): void {
   linkAboutUs.textContent = "About us";
   linkAboutUs.addEventListener("click", (event: Event) => {
     event.preventDefault();
+    burgerStatus();
     route(linkAboutUs.href);
   });
 
@@ -36,6 +38,7 @@ export function headerBurger(parrent: HTMLElement): void {
   linkRegistration.textContent = "Registration";
   linkRegistration.addEventListener("click", (event: Event) => {
     event.preventDefault();
+    burgerStatus();
     route(linkRegistration.href);
   });
 
@@ -45,6 +48,7 @@ export function headerBurger(parrent: HTMLElement): void {
   linkLogin.textContent = "Login";
   linkLogin.addEventListener("click", (event: Event) => {
     event.preventDefault();
+    burgerStatus();
     route(linkLogin.href);
   });
 
@@ -55,13 +59,12 @@ export function headerBurger(parrent: HTMLElement): void {
   linkLogout.textContent = "Logout";
   linkLogout.addEventListener("click", (event: Event) => {
     event.preventDefault();
+    burgerStatus();
     route(linkLogout.href);
   });
+
   burgerButton.addEventListener("click", () => {
-    body.classList.toggle("no-scroll");
-    burgerButton.classList.toggle("burger-button_active");
-    nav.classList.toggle("nav-burger_active");
-    list.classList.toggle("nav-burger__list_active");
+    burgerStatus();
   });
 
   list.append(itemMain, itemAboutUs, itemRegistration, itemLogin, itemLogout);
