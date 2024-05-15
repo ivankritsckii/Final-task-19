@@ -10,6 +10,6 @@ export function createLoading(parrent: HTMLElement): void {
 }
 
 export function loading(): void {
-  const load = document.querySelector(".loading-wrapper");
-  load?.classList.toggle(styles["loading-wrapper__active"]);
+  const load = document.querySelector(".loading-wrapper") as HTMLDivElement;
+  load.classList.toggle(styles["loading-wrapper__active"]);
 }
