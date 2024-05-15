@@ -20,6 +20,7 @@
     "indent": ["error", 2],
     // "quotes": ["error", "single"],
     // "no-console": "warn",
+    "endOfLine": "off",
     "no-unused-vars": "warn",
     "prettier/prettier": "error",
     "@typescript-eslint/no-var-requires": "off"

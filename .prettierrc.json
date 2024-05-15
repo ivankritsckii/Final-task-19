@@ -5,6 +5,7 @@
     "useTabs": false,
     "trailingComma": "all",
     "printWidth": 80,
+    "endOfLine": "auto",
     "overrides": [
         {
         "files": "*.scss.d.ts",

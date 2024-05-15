@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { notPage } from "../pages/404/404";
 import { registrationPage } from "../pages/registration/registrationPage";
 import { apiGetProductById } from "../apiRequests/apiGetProductById";
@@ -7,13 +6,14 @@ import { Result } from "../helpers/interfaces/Results";
 import { createProductsPage } from "../helpers/creators/createProductsPage";
 import { isProductPage } from "../helpers/checks/isProductPage";
 import { showProductByUrl } from "../pages/main/content/showProductByUrl";
+let isPageGoBack = false;
 
 export const route = (path: string, id?: string): Promise<void> => {
   return new Promise<void>((resolve) => {
     const content = document.getElementById("content") as HTMLElement;
 
     // eslint-disable-next-line no-unused-vars
-    const urlRoutes: { [key: string]: (content: any) => void } = {
+    const urlRoutes: { [key: string]: (content: HTMLElement) => void } = {
       404: notPage,
       "": createProductsPage,
       "#registration": registrationPage,
@@ -23,7 +23,17 @@ export const route = (path: string, id?: string): Promise<void> => {
     };
 
     const urlRoute = () => {
-      window.history.pushState({}, "", path);
+      window.addEventListener(
+        "popstate",
+        () => {
+          isPageGoBack = true;
+        },
+        { once: true },
+      );
+      if (!isPageGoBack) {
+        window.history.pushState({}, "", path);
+      }
+      isPageGoBack = false;
     };
     if (id) {
       const card = apiGetProductById(id);
