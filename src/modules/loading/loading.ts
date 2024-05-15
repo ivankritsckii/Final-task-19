@@ -11,5 +11,10 @@ export function createLoading(parrent: HTMLElement): void {
 
 export function loading(): void {
   const load = document.querySelector(".loading-wrapper") as HTMLDivElement;
-  load.classList.toggle(styles["loading-wrapper__active"]);
+  if (!load.classList.contains("loading-wrapper__active")) {
+    load.classList.add("loading-wrapper__active");
+  }
+  setTimeout(() => {
+    load.classList.remove("loading-wrapper__active");
+  }, 300);
 }

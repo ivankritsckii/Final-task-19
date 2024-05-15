@@ -1,6 +1,5 @@
 import { apiInitialization } from "./apiRequests/apiInitialization";
 import { createMain } from "./pages/main/createMain";
-import { loading } from "./modules/loading/loading";
 import { route } from "./router/route";
 import { createHeader } from "./modules/header/header";
 import { createFooter } from "./modules/footer/footer";
@@ -10,14 +9,10 @@ const styles = require("./pages/style.module.scss");
 
 window.addEventListener("load", async () => {
   window.onhashchange = (event) => {
-    loading();
-    const change = route(event.newURL);
-    change.then(async () => {
-      loading();
-    });
+    route(event.newURL);
   };
 
-  const body = document.querySelector("body");
+  const body = document.body as HTMLBodyElement;
   if (body) {
     body?.classList.add(styles.body);
     const connect = apiInitialization();
