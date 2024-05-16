@@ -38,6 +38,10 @@ export async function registrationCustomer() {
     surnameInput,
     passwordInput,
   );
+  if (!createCustomer) {
+    return;
+  }
+  console.log("createCustomer: ", createCustomer);
   const clientId = createCustomer.customer.id;
   setDateOfBirth(clientId, birthInput.value).then(async () => {
     if (choise.checked) {
