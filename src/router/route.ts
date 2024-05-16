@@ -1,12 +1,12 @@
 import { notPage } from "../pages/404/404";
 import { registrationPage } from "../pages/registration/registrationPage";
 import { apiGetProductById } from "../apiRequests/apiGetProductById";
-import { createContent } from "../helpers/creators/productCard/createContent";
 import { Result } from "../helpers/interfaces/Results";
 import { createProductsPage } from "../helpers/creators/createProductsPage";
 import { isProductPage } from "../helpers/checks/isProductPage";
 import { showProductByUrl } from "../pages/main/content/showProductByUrl";
 import { loading } from "../modules/loading/loading";
+import { createSingleProductPage } from "../pages/product/createSingleProductPage";
 let isPageGoBack = false;
 
 export const route = (path: string, id?: string): Promise<void> => {
@@ -40,8 +40,7 @@ export const route = (path: string, id?: string): Promise<void> => {
     if (id) {
       const card = apiGetProductById(id);
       card.then((element) => {
-        content.innerHTML = "";
-        createContent(content, element as Result);
+        createSingleProductPage(element as Result);
       });
     } else {
       const location: string = path;

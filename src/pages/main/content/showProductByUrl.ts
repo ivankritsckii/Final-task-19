@@ -1,5 +1,5 @@
 import { apiGetProducts } from "../../../apiRequests/apiGetProducts";
-import { createCard } from "../../../helpers/creators/productCard/createCard";
+import { createSingleProductPage } from "../../product/createSingleProductPage";
 
 export async function showProductByUrl(url: string): Promise<void> {
   const products = await apiGetProducts();
@@ -11,9 +11,7 @@ export async function showProductByUrl(url: string): Promise<void> {
       if (url === elementUrl) {
         const content = document.getElementById("content");
         if (content) {
-          content.innerHTML = "";
-          const product = createCard(data[i]);
-          content.append(product);
+          createSingleProductPage(data[i]);
           break;
         }
       }
