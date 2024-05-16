@@ -3,7 +3,6 @@
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(113, 114, 114, 0.8);
 }
 .popup_active {
   display: flex;
@@ -25,6 +24,13 @@
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
+  z-index: 2;
+}
+.popup__overFlow{
+  position: absolute;
+  width: 100vw;
+  height: 150vh;
+  background-color: rgba(113, 114, 114, 0.8);
 }
 .popup__header {
   font-size: 1.5rem;

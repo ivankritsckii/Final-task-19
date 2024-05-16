@@ -4,6 +4,7 @@ const styles = require("./popup.module.scss");
 export function emailAlreadyPopup(parent: HTMLElement): void {
   const popup = createElement("div", "popup");
   const popupBody = createElement("div", styles.popup__body);
+  const popupOverflow = createElement("div", styles.popup__overFlow);
   const popupHeader = createElement(
     "h2",
     styles.popup__header,
@@ -19,10 +20,17 @@ export function emailAlreadyPopup(parent: HTMLElement): void {
   buttonClose.textContent = "ok";
   buttonClose.autofocus = true;
 
-  buttonClose.addEventListener("click", () => {
+  const popUpCloser = () => {
     popup.classList.remove("popup_active");
-  });
+    document.body.style.overflow = "";
+  };
+
+  buttonClose.addEventListener("click", popUpCloser);
+  popupOverflow.addEventListener("click", popUpCloser);
+
   popupBody.append(popupHeader, popupDescription, buttonClose);
   popup.append(popupBody);
+  popup.append(popupOverflow);
   parent.append(popup);
+  console.log("popup_create");
 }

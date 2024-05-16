@@ -28,6 +28,13 @@
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
+  transition: all ease 0.5s;
+}
+.nav__item:hover {
+  background-color: #56798A;
+  .nav__link {
+    color: whitesmoke;
+  }
 }
 .nav__item_disable {
   display: none;
@@ -41,6 +48,7 @@
   text-decoration: none;
   color: black;
   cursor: pointer;
+  transition: all ease 0.5s;
 }
 
 .nav-burger {

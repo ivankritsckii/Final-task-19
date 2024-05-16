@@ -31,6 +31,7 @@ export function createHeader(parrent: HTMLElement): void {
   const linkRegistration = createLink("nav__link", "#registration", false);
   itemRegistration.append(linkRegistration);
   linkRegistration.textContent = "Registration";
+  linkRegistration.style.textDecoration = "underline";
   linkRegistration.addEventListener("click", (event: Event) => {
     event.preventDefault();
     route(linkRegistration.href);
@@ -40,6 +41,7 @@ export function createHeader(parrent: HTMLElement): void {
   const linkLogin = createLink("nav__link", "#login", false);
   itemLogin.append(linkLogin);
   linkLogin.textContent = "Login";
+  linkLogin.style.textDecoration = "underline";
   linkLogin.addEventListener("click", (event: Event) => {
     event.preventDefault();
     route(linkLogin.href);
