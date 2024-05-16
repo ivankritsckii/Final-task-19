@@ -6,9 +6,11 @@ import { Result } from "../helpers/interfaces/Results";
 import { createProductsPage } from "../helpers/creators/createProductsPage";
 import { isProductPage } from "../helpers/checks/isProductPage";
 import { showProductByUrl } from "../pages/main/content/showProductByUrl";
+import { loading } from "../modules/loading/loading";
 let isPageGoBack = false;
 
 export const route = (path: string, id?: string): Promise<void> => {
+  loading();
   return new Promise<void>((resolve) => {
     const content = document.getElementById("content") as HTMLElement;
 
@@ -59,5 +61,7 @@ export const route = (path: string, id?: string): Promise<void> => {
     }
     urlRoute();
     resolve();
+  }).finally(() => {
+    loading();
   });
 };
