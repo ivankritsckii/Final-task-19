@@ -26,11 +26,10 @@ export const route = (path: string, id?: string): Promise<void> => {
       window.history.pushState({}, "", path);
     };
     if (id) {
-      const location: string = window.location.href;
+      /*const location: string = window.location.href;
       const adress = sessionStorage.getItem("adress");
       if (adress) {
-        console.log(location.replace(adress, ""));
-      }
+      }*/
       const card = apiGetProductById(id);
       card.then((element) => {
         content.innerHTML = "";
