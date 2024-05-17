@@ -1,4 +1,5 @@
 import { isLoginBtnDisabled } from "./isLoginBtnDisabled";
+import { loginCustomer } from "./loginCustomer";
 import { updateErrorMessage } from "./updateErrorMessage";
 import { validateEmail } from "./validateEmail";
 import { validatePassword } from "./validatePassword";
@@ -31,4 +32,6 @@ export const loginFormValidation = (): void => {
       isLoginBtnDisabled();
     });
   }
+
+  loginCustomer();
 };

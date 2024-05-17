@@ -2,6 +2,8 @@ import "./login.scss";
 import "@fortawesome/fontawesome-free/js/all.js";
 import { loginFormValidation } from "./loginValidation";
 import { showPassword } from "./showPassword";
+import { fillEmail } from "./fillEmail";
+// import { route } from "../../router/route";
 
 export const createLoginForm = (selector?: string): void => {
   const forma: HTMLFormElement = document.createElement("form");
@@ -41,6 +43,7 @@ export const createLoginForm = (selector?: string): void => {
   button.className = "login-btn-grad";
   button.setAttribute("type", "submit");
   button.textContent = "Login";
+  button.disabled = true;
 
   const rememberCheckbox: HTMLInputElement = document.createElement("input");
   rememberCheckbox.setAttribute("type", "checkbox");
@@ -52,14 +55,17 @@ export const createLoginForm = (selector?: string): void => {
   forma.appendChild(rememberLabel);
   forma.appendChild(button);
 
-  const registerLink: HTMLAnchorElement = document.createElement("a");
-  registerLink.innerHTML = `Don't have an account? <span>Register here! </span>`;
-  forma.appendChild(registerLink);
+  const registrationLink: HTMLAnchorElement = document.createElement("a");
+  registrationLink.innerHTML = `Don't have an account? <span>Register here! </span>`;
+  registrationLink.href = "#registration";
+  forma.appendChild(registrationLink);
 
   showPassword();
   loginFormValidation();
+  fillEmail();
 
-  registerLink.addEventListener("click", (event) => {
-    event.preventDefault();
+  registrationLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    // route(registrationLink.href);
   });
 };
