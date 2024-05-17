@@ -1,10 +1,10 @@
 import { apiCreateCustomer } from "../../apiRequests/apiCreateCustomer";
 import { createInput } from "../../helpers/creators/createInput";
 import { checkRegisstrationForm } from "../../helpers/checks/checkRegisstrationForm";
-import { emailAlreadyPopup } from "./popup/emailAlreadyPopup";
 const styles = require("./form.module.scss");
 
 export function registrationPage(parent: HTMLElement) {
+  parent.innerHTML = "";
   const form = document.createElement("form");
   form.classList.add("form");
   const fieldset = document.createElement("fieldset");
@@ -67,7 +67,6 @@ export function registrationPage(parent: HTMLElement) {
 
   form.addEventListener("keypress", function (e) {
     const key = e.code;
-    console.log(key);
     if (key.toString() === "Enter" || key.toString() === "NumpadEnter") {
       buttonForm.click();
     }
@@ -95,5 +94,4 @@ export function registrationPage(parent: HTMLElement) {
     buttonForm,
   );
   parent.append(form);
-  emailAlreadyPopup();
 }

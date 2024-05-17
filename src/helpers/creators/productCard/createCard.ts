@@ -2,27 +2,24 @@ import { Current } from "../../interfaces/Current";
 import { Result } from "../../interfaces/Results";
 import { createElement } from "../createElement";
 import { createImage } from "../createImage";
-import { showProduct } from "../../../pages/main/content/showProduct";
-import { loading } from "../../../modules/loading/loading";
+import { route } from "../../../router/route";
+
 const styles = require("./content.module.scss");
 
 export function createCard(product: Result): HTMLElement {
   const current: Current = product.masterData.current;
-  //const currentUrl = window.location.href + product.slug.en;
-  const cardBody = createElement("div", styles.card, "", product.id);
-  cardBody.addEventListener("click", (event) => {
-    console.log("click");
-    console.log(event);
-    if (event.target instanceof HTMLElement) {
-      loading();
-      if (event.target.classList.contains("card")) {
-        showProduct(event.target);
-      }
-      if (event.target.parentElement?.classList.contains("card")) {
-        showProduct(event.target.parentElement);
-      }
-    }
+  const cardLink = document.createElement("a");
+  cardLink.classList.add("card-link");
+  cardLink.href = `#${product.masterData.current.slug.en}`;
+  cardLink.id = `${product.id}`;
+  cardLink.addEventListener("click", (event: Event) => {
+    event.preventDefault();
+    route(cardLink.href, cardLink.id);
   });
+
+  const cardBody = createElement("div", styles.card);
+
+  cardLink.append(cardBody);
 
   const cardImage = createImage(
     styles.card__image,
@@ -53,5 +50,5 @@ export function createCard(product: Result): HTMLElement {
   }
 
   cardBody.append(cardImage, cardDescr);
-  return cardBody;
+  return cardLink;
 }

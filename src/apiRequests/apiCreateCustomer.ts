@@ -4,7 +4,6 @@ export function apiCreateCustomer(
   surnameInput: HTMLInputElement,
   passwordInput: HTMLInputElement,
 ): void {
-  console.log("apiCreateCustomer");
   const email = emailInput.value;
   const name = nameInput.value;
   const surname = surnameInput.value;
@@ -35,9 +34,7 @@ export function apiCreateCustomer(
     requestOptions,
   )
     .then((response) => {
-      console.log(response);
       if (response.status === 400) {
-        console.log("EMAIL");
         const popup = document.querySelector(".popup");
         const popupButton = document.querySelector(
           ".popup__button",
@@ -45,9 +42,7 @@ export function apiCreateCustomer(
         popup?.classList.add("popup_active");
         popupButton.focus();
       }
-      console.log(response.text());
     })
-    //.then((result) => console.log(result))
     .catch((error) => {
       console.error("error: ", error);
     });

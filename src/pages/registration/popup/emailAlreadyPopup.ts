@@ -1,7 +1,7 @@
 import { createElement } from "../../../helpers/creators/createElement";
 const styles = require("./popup.module.scss");
 
-export function emailAlreadyPopup(): void {
+export function emailAlreadyPopup(parent: HTMLElement): void {
   const popup = createElement("div", "popup");
   const popupBody = createElement("div", styles.popup__body);
   const popupHeader = createElement(
@@ -24,6 +24,5 @@ export function emailAlreadyPopup(): void {
   });
   popupBody.append(popupHeader, popupDescription, buttonClose);
   popup.append(popupBody);
-  const body = document.querySelector("body") as HTMLBodyElement;
-  body.append(popup);
+  parent.append(popup);
 }
