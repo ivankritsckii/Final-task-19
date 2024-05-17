@@ -9,7 +9,6 @@ import { isProductPage } from "../helpers/checks/isProductPage";
 import { showProductByUrl } from "../pages/main/content/showProductByUrl";
 
 export const route = (path: string, id?: string): Promise<void> => {
-  console.log("PATH", path);
   return new Promise<void>((resolve) => {
     const content = document.getElementById("content") as HTMLElement;
 
