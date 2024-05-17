@@ -144,10 +144,11 @@
 }
 
 .login-form a {
+  text-decoration: none;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-  background: #fff;
+  color: #fff;
   padding: 5px 0;
   position: relative;
   background-clip: text;
