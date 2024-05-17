@@ -15,7 +15,7 @@ export async function createSingleProductPage(product: Result): Promise<void> {
   const categoriesBlock = createCategoriesBlock(product);
   const imageBlock = createImageBlock(product);
   const textBlock = createTextBlock(product);
-  const priceBlock = createPriceBlock(product);
+  const priceBlock = await createPriceBlock(product);
 
   productWrapper.append(categoriesBlock, imageBlock, priceBlock, textBlock);
   content.append(productWrapper);

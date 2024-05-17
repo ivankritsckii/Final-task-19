@@ -1,7 +1,8 @@
 import { Result } from "../../../helpers/interfaces/Results";
 import { createElement } from "../../../helpers/creators/createElement";
+import { getProductDiscountById } from "../../../apiRequests/getProductDiscountById";
 
-export function createPriceBlock(product: Result): HTMLElement {
+export async function createPriceBlock(product: Result): Promise<HTMLElement> {
   const current = product.masterData.current;
 
   const priceBlock = createElement("div", "price-block");
@@ -14,18 +15,25 @@ export function createPriceBlock(product: Result): HTMLElement {
   const buttonSend = createElement("button", "product__button", "SEND");
 
   if (current.masterVariant.prices[0].discounted) {
-    const cost =
-      current.masterVariant.prices[0].value.centAmount -
-      current.masterVariant.prices[0].discounted.value.centAmount;
+    const discoundId = current.masterVariant.prices[0].discounted.discount.id;
+    const discoundResult = await getProductDiscountById(discoundId);
+    const discundDescription = createElement(
+      "span",
+      "price__description",
+      "(" + discoundResult.description.en + ")",
+    );
+
     const discoundPrice = createElement(
       "span",
       "price",
-      String(cost / 100) + "$",
+      String(
+        current.masterVariant.prices[0].discounted.value.centAmount / 100,
+      ) + "$",
     );
     discoundPrice.classList.add("price_discound");
     price.classList.add("price_irrelevant");
 
-    pricesText.append(discoundPrice, price);
+    pricesText.append(discoundPrice, price, discundDescription);
   } else {
     pricesText.append(price);
   }
