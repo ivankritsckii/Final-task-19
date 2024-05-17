@@ -7,7 +7,7 @@ const styles = require("./header.module.scss");
 
 export function createHeader(parrent: HTMLElement): void {
   parrent.innerHTML = ``;
-  console.log("create Header", localStorage);
+
   const header = createElement("header", styles.header);
   const nav = createElement("nav", "nav");
   const list = createElement("ul", "nav__list");
