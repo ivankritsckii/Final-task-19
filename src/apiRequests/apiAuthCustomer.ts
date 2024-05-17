@@ -35,8 +35,8 @@ export const apiAuthorizeUser = async (email: string, password: string) => {
       throw new Error(`Error: ${response.status} ${response.statusText} - ${errorText}`);
     }
     const result = await response.json();
-    sessionStorage.setItem("access_token", result.access_token);
-    sessionStorage.setItem("refresh_token", result.refresh_token);
+    localStorage.setItem("access_token", result.access_token);
+    localStorage.setItem("refresh_token", result.refresh_token);
     await loginUser(result.access_token, email, password);
     return result;
   } catch (error) {
