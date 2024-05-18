@@ -1,7 +1,7 @@
 import "./notification.scss";
 import "@fortawesome/fontawesome-free/js/all.js";
 
-export const createNotification = (type: string, message: string, selector = "body") => {
+export const createNotification = (type: string, message: string, selector = ".content") => {
   const notificationWrapper = document.createElement("div");
   notificationWrapper.className = `notification ${type}`;
 
@@ -37,8 +37,9 @@ export const createNotification = (type: string, message: string, selector = "bo
     notificationWrapper.classList.remove("show");
     setTimeout(() => {
       if (targetElement) {
-        targetElement.removeChild(notificationWrapper);
+        notificationWrapper.innerHTML = "";
+        // targetElement.removeChild(notificationWrapper);
       }
     }, 500);
-  }, 5000);
+  }, 4000);
 };
