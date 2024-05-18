@@ -2,7 +2,8 @@ export async function apiCreateCustomer(
   emailInput: HTMLInputElement,
   nameInput: HTMLInputElement,
   surnameInput: HTMLInputElement,
-  passwordInput: HTMLInputElement,) {
+  passwordInput: HTMLInputElement,
+) { 
   const email = emailInput.value;
   const name = nameInput.value;
   const surname = surnameInput.value;
@@ -45,7 +46,20 @@ export async function apiCreateCustomer(
       popup?.classList.add("popup_active");
       popupButton.focus();
     }
+try {
+    const response = await fetch(
+      "https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/customers",
+      requestOptions,
+    );
 
+    if (response.status === 400) {
+      const popup = document.querySelector(".popup");
+      const popupButton = document.querySelector(
+        ".popup__button",
+      ) as HTMLButtonElement;
+      popup?.classList.add("popup_active");
+      popupButton.focus();
+    }
     if (response.status === 201) {
       const result = await response.text();
       const json = JSON.parse(result);
@@ -54,3 +68,4 @@ export async function apiCreateCustomer(
   } catch (error) {
     console.error(error);
   }
+   }
