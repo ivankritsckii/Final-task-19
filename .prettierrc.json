@@ -4,5 +4,14 @@
     "tabWidth": 2,
     "useTabs": false,
     "trailingComma": "all",
-    "printWidth": 120
+    "printWidth": 120,
+  "endOfLine": "auto",
+    "overrides": [
+        {
+        "files": "*.scss.d.ts",
+        "options": {
+            "parser": "typescript"
+        }
+        }
+    ]
 }
