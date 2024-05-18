@@ -10,11 +10,7 @@ export function emailAlreadyPopup(parent: HTMLElement): void {
     styles.popup__header,
     "There is already an existing customer with the provided email.",
   );
-  const popupDescription = createElement(
-    "span",
-    styles.popup__description,
-    "please write another email",
-  );
+  const popupDescription = createElement("span", styles.popup__description, "please write another email");
   const buttonClose = document.createElement("button");
   buttonClose.classList.add(styles.popup__button);
   buttonClose.textContent = "ok";

@@ -29,11 +29,7 @@ export function headerBurger(parrent: HTMLElement): void {
   });
 
   const itemRegistration = createElement("li", "nav-burger__item");
-  const linkRegistration = createLink(
-    "nav-burger__link",
-    "#registration",
-    false,
-  );
+  const linkRegistration = createLink("nav-burger__link", "#registration", false);
   itemRegistration.append(linkRegistration);
   linkRegistration.textContent = "Registration";
   linkRegistration.addEventListener("click", (event: Event) => {

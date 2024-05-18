@@ -32,8 +32,7 @@ export function createHeader(parrent: HTMLElement): void {
 
   const itemRegistration = createElement("li", "nav__item");
   itemRegistration.classList.add("registration__btn");
-  if (localStorage.getItem("currentUserID"))
-    itemRegistration.classList.add("nav__item_disable");
+  if (localStorage.getItem("currentUserID")) itemRegistration.classList.add("nav__item_disable");
   const linkRegistration = createLink("nav__link", "#registration", false);
   itemRegistration.append(linkRegistration);
   linkRegistration.textContent = "Registration";
@@ -45,8 +44,7 @@ export function createHeader(parrent: HTMLElement): void {
 
   const itemLogin = createElement("li", "nav__item");
   itemLogin.classList.add("logIn__bth");
-  if (localStorage.getItem("currentUserID"))
-    itemLogin.classList.add("nav__item_disable");
+  if (localStorage.getItem("currentUserID")) itemLogin.classList.add("nav__item_disable");
   const linkLogin = createLink("nav__link", "#login", false);
   itemLogin.append(linkLogin);
   linkLogin.textContent = "Login";
@@ -58,8 +56,7 @@ export function createHeader(parrent: HTMLElement): void {
 
   const itemLogout = createElement("li", "nav__item");
   itemLogout.classList.add("logOut__bth");
-  if (!localStorage.getItem("currentUserID"))
-    itemLogout.classList.add("nav__item_disable");
+  if (!localStorage.getItem("currentUserID")) itemLogout.classList.add("nav__item_disable");
   const linkLogout = createLink("nav__link", "#logout", false);
   itemLogout.append(linkLogout);
   linkLogout.textContent = "Logout";

@@ -3,10 +3,7 @@ import { Result } from "../helpers/interfaces/Results";
 export async function apiGetProductById(idProduct: string) {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
-  myHeaders.append(
-    "Authorization",
-    `${sessionStorage.getItem("token-type")} ${sessionStorage.getItem("token")}`,
-  );
+  myHeaders.append("Authorization", `${sessionStorage.getItem("token-type")} ${sessionStorage.getItem("token")}`);
 
   const requestOptions = {
     method: "GET",

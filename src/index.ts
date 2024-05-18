@@ -11,10 +11,10 @@ const styles = require("./pages/style.module.scss");
 createLoginForm();
 window.addEventListener("load", async () => {
   window.onhashchange = (event) => {
-  route(event.newURL);
+    route(event.newURL);
   };
 
-  const body = document.body as HTMLBodyElement;  
+  const body = document.body as HTMLBodyElement;
   if (body) {
     body?.classList.add(styles.body);
     const connect = apiInitialization();
@@ -31,4 +31,3 @@ window.addEventListener("load", async () => {
     });
   }
 });
-

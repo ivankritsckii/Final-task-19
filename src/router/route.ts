@@ -17,7 +17,6 @@ export const route = (path: string, id?: string): Promise<void> => {
 
     // eslint-disable-next-line no-unused-vars
     const urlRoutes: { [key: string]: (content: HTMLElement) => void } = {
-
       404: notPage,
       "": createProductsPage,
       "#registration": registrationPage,
@@ -63,6 +62,6 @@ export const route = (path: string, id?: string): Promise<void> => {
     urlRoute();
     resolve();
   }).finally(() => {
-    loading();  
+    loading();
   });
 };

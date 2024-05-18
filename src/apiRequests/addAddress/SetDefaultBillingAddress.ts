@@ -2,10 +2,7 @@ import { getCustomerById } from "../getCustomerById";
 
 export async function SetDefaultBillingAddress(id: string, addressId: string) {
   const myHeaders = new Headers();
-  myHeaders.append(
-    "Authorization",
-    `${sessionStorage.getItem("token-type")} ${sessionStorage.getItem("token")}`,
-  );
+  myHeaders.append("Authorization", `${sessionStorage.getItem("token-type")} ${sessionStorage.getItem("token")}`);
 
   const customer = await getCustomerById(id);
   const VERSION = customer.version;

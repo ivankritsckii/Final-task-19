@@ -3,10 +3,7 @@ import { getCustomerById } from "../getCustomerById";
 
 export async function AddShippingAddressId(id: string, addressId: string) {
   const myHeaders = new Headers();
-  myHeaders.append(
-    "Authorization",
-    `${sessionStorage.getItem("token-type")} ${sessionStorage.getItem("token")}`,
-  );
+  myHeaders.append("Authorization", `${sessionStorage.getItem("token-type")} ${sessionStorage.getItem("token")}`);
 
   const customer = await getCustomerById(id);
   const VERSION = customer.version;
@@ -35,9 +32,7 @@ export async function AddShippingAddressId(id: string, addressId: string) {
     );
     const result = await response.text();
     const json = JSON.parse(result);
-    const useDefaulth = document.getElementById(
-      "defaulth-shipping",
-    ) as HTMLInputElement;
+    const useDefaulth = document.getElementById("defaulth-shipping") as HTMLInputElement;
     if (useDefaulth.checked) {
       const setDefaulth = SetDefaultShippingAddress(id, addressId);
       try {

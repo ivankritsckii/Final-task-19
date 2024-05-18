@@ -1,16 +1,8 @@
 import { getCustomerById } from "./getCustomerById";
 
-export async function apiAddAdress(
-  id: string,
-  street: string,
-  building: string,
-  apartment: string,
-) {
+export async function apiAddAdress(id: string, street: string, building: string, apartment: string) {
   const myHeaders = new Headers();
-  myHeaders.append(
-    "Authorization",
-    `${sessionStorage.getItem("token-type")} ${sessionStorage.getItem("token")}`,
-  );
+  myHeaders.append("Authorization", `${sessionStorage.getItem("token-type")} ${sessionStorage.getItem("token")}`);
 
   const email = document.getElementById("input-email") as HTMLInputElement;
   const name = document.getElementById("input-name") as HTMLInputElement;

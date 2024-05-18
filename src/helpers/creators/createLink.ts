@@ -1,8 +1,4 @@
-export function createLink(
-  className: string,
-  href: string,
-  targetBlank: boolean,
-): HTMLAnchorElement {
+export function createLink(className: string, href: string, targetBlank: boolean): HTMLAnchorElement {
   const link = document.createElement("a");
   link.classList.add(className);
   link.href = href;

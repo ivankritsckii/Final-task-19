@@ -1,4 +1,3 @@
-
 import { createRegistrationForm } from "../../helpers/creators/registration/createRegistrationForm";
 import { createFormHandlers } from "../../helpers/creators/registration/createFormHandlers";
 import { changeStateBilling } from "../../helpers/creators/registration/changeStateBilling";

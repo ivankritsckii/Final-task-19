@@ -22,8 +22,6 @@ export async function createSingleProductPage(product: Result): Promise<void> {
 
   const firstImg = document.querySelector(".image") as HTMLImageElement;
   firstImg.classList.add("image__active");
-  const firstImgCurrent = document.querySelector(
-    ".image-current",
-  ) as HTMLImageElement;
+  const firstImgCurrent = document.querySelector(".image-current") as HTMLImageElement;
   firstImgCurrent.classList.add("image-current__active");
 }
