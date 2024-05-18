@@ -1,4 +1,4 @@
-import { createLoginForm } from "./loginPage/createLoginPage";
+//import { createLoginForm } from "./loginPage/createLoginPage";
 import { apiInitialization } from "./apiRequests/apiInitialization";
 import { createMain } from "./pages/main/createMain";
 import { route } from "./router/route";
@@ -8,13 +8,13 @@ import { showProductByUrl } from "./pages/main/content/showProductByUrl";
 import { isProductPage } from "./helpers/checks/isProductPage";
 const styles = require("./pages/style.module.scss");
 
-createLoginForm();
+//createLoginForm();
 window.addEventListener("load", async () => {
   window.onhashchange = (event) => {
-  route(event.newURL);
+    route(event.newURL);
   };
 
-  const body = document.body as HTMLBodyElement;  
+  const body = document.body as HTMLBodyElement;
   if (body) {
     body?.classList.add(styles.body);
     const connect = apiInitialization();
@@ -31,4 +31,3 @@ window.addEventListener("load", async () => {
     });
   }
 });
-

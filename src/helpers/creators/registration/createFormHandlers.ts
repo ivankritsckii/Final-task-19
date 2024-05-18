@@ -4,9 +4,7 @@ import { registrationCustomer } from "./registrationCustomer";
 
 export function createFormHandlers(): void {
   const form = document.querySelector(".form") as HTMLFormElement;
-  const buttonForm = document.querySelector(
-    ".button-form",
-  ) as HTMLButtonElement;
+  const buttonForm = document.querySelector(".button-form") as HTMLButtonElement;
   form.addEventListener("keypress", function (e) {
     const key = e.code;
     if (key.toString() === "Enter" || key.toString() === "NumpadEnter") {

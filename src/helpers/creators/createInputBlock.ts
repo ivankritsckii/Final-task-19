@@ -9,21 +9,12 @@ export function createInputBlock(
   placeholder?: string,
 ): HTMLElement {
   const block = createElement("div", "inform-block");
-  const label = createElement(
-    "label",
-    "label-registration",
-  ) as HTMLLabelElement;
+  const label = createElement("label", "label-registration") as HTMLLabelElement;
   label.classList.add(`label-${idInput}`);
   label.htmlFor = idInput;
   label.textContent = labelText;
 
-  const input = createInput(
-    inputType,
-    "input-inform_registration",
-    idInput,
-    idInput,
-    requireq,
-  );
+  const input = createInput(inputType, "input-inform_registration", idInput, idInput, requireq);
   input.classList.add(`input__${idInput}`);
   if (placeholder) {
     input.placeholder = placeholder;

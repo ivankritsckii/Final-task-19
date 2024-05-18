@@ -5,8 +5,7 @@ export function checkRegisstrationForm(): boolean {
   const adressPattern = /^[a-zA-Z0-9\s]{4,}$/;
   const buildingPattern = /^[a-zA-Z0-9\s]{1,}$/;
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const birthPattern =
-    /^(19|20)\d\d[- /.](0[1-9]|1[012])[-/.](0[1-9]|[12][0-9]|3[01])$/;
+  const birthPattern = /^(19|20)\d\d[- /.](0[1-9]|1[012])[-/.](0[1-9]|[12][0-9]|3[01])$/;
   const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
   const countrySelect = document.getElementById("country") as HTMLSelectElement;
   const labelList = document.querySelectorAll(".label-registration");

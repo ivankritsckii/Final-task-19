@@ -1,9 +1,6 @@
 export async function getCustomerById(idCustomer: string) {
   const myHeaders = new Headers();
-  myHeaders.append(
-    "Authorization",
-    `Bearer ${sessionStorage.getItem("token")}`,
-  );
+  myHeaders.append("Authorization", `Bearer ${sessionStorage.getItem("token")}`);
 
   const requestOptions = {
     method: "GET",

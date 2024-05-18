@@ -8,21 +8,13 @@ export function notPage() {
   content.innerHTML = "";
 
   const container = createElement("div", styles["notPage-container"]);
-  const title = createElement(
-    "h1",
-    styles["notPage-title"],
-    "This page does not exist",
-  );
+  const title = createElement("h1", styles["notPage-title"], "This page does not exist");
   const description = createElement(
     "p",
     styles["notPage-description"],
     "No signal here! We can't find this page that you are looking for.",
   );
-  const descriptionNav = createElement(
-    "p",
-    styles["notPage-description"],
-    "Please follow the links below:",
-  );
+  const descriptionNav = createElement("p", styles["notPage-description"], "Please follow the links below:");
 
   const navigation = createNavigationNotPage();
 

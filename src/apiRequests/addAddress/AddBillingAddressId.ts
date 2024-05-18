@@ -3,10 +3,7 @@ import { SetDefaultBillingAddress } from "./SetDefaultBillingAddress";
 
 export async function AddBillingAddressId(id: string, addressId: string) {
   const myHeaders = new Headers();
-  myHeaders.append(
-    "Authorization",
-    `${sessionStorage.getItem("token-type")} ${sessionStorage.getItem("token")}`,
-  );
+  myHeaders.append("Authorization", `${sessionStorage.getItem("token-type")} ${sessionStorage.getItem("token")}`);
   const customer = await getCustomerById(id);
   const VERSION = customer.version;
 
@@ -34,9 +31,7 @@ export async function AddBillingAddressId(id: string, addressId: string) {
     );
     const result = await response.text();
     const json = JSON.parse(result);
-    const useDefaulth = document.getElementById(
-      "defaulth-billing",
-    ) as HTMLInputElement;
+    const useDefaulth = document.getElementById("defaulth-billing") as HTMLInputElement;
     if (useDefaulth.checked) {
       const setDefaulth = SetDefaultBillingAddress(id, addressId);
       try {

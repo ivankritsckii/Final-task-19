@@ -2,12 +2,8 @@ export function changeActiveImage(target: HTMLElement): void {
   const wrapper = document.querySelector(".images-small") as HTMLDivElement;
   const images = document.querySelectorAll(".image");
   const imagesCurrent = document.querySelectorAll(".image-current");
-  const activeImg = document.querySelector(
-    ".image__active",
-  ) as HTMLImageElement;
-  const activeImgCurrent = document.querySelector(
-    ".image-current__active",
-  ) as HTMLImageElement;
+  const activeImg = document.querySelector(".image__active") as HTMLImageElement;
+  const activeImgCurrent = document.querySelector(".image-current__active") as HTMLImageElement;
 
   if (target === activeImg || target === wrapper) {
     return;

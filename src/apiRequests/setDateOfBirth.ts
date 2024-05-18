@@ -1,9 +1,6 @@
 export async function setDateOfBirth(id: string, value: string) {
   const myHeaders = new Headers();
-  myHeaders.append(
-    "Authorization",
-    `${sessionStorage.getItem("token-type")} ${sessionStorage.getItem("token")}`,
-  );
+  myHeaders.append("Authorization", `${sessionStorage.getItem("token-type")} ${sessionStorage.getItem("token")}`);
 
   const raw = JSON.stringify({
     version: 1,

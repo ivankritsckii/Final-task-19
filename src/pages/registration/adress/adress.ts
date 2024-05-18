@@ -7,12 +7,7 @@ const styles = require("./adress.module.scss");
 export function addAdressBlock(parent: HTMLElement): void {
   const informBlock = createElement("div", styles.inform);
 
-  const birthBlock = createInputBlock(
-    "please select your date of birth",
-    "birth",
-    "date",
-    true,
-  );
+  const birthBlock = createInputBlock("please select your date of birth", "birth", "date", true);
   const countryBlock = createSelectCountry();
   const cityBlock = createInputBlock(
     "only latin, first letter capitalized, min 3 letters",
@@ -21,21 +16,9 @@ export function addAdressBlock(parent: HTMLElement): void {
     true,
     "City",
   );
-  const postcodeBlock = createInputBlock(
-    "min size - 4, numbers or letters",
-    "postcode",
-    "text",
-    true,
-    "your postcode",
-  );
+  const postcodeBlock = createInputBlock("min size - 4, numbers or letters", "postcode", "text", true, "your postcode");
 
-  const streetBlock = createInputBlock(
-    "min size - 4, numbers or letters",
-    "street",
-    "text",
-    true,
-    "Street name",
-  );
+  const streetBlock = createInputBlock("min size - 4, numbers or letters", "street", "text", true, "Street name");
 
   const buildingBlock = createInputBlock(
     "min size - 4, numbers or letters",
@@ -79,41 +62,17 @@ export function addAdressBlock(parent: HTMLElement): void {
   const adressBlock = createElement("div", styles.adresses);
   const shipping = createElement("div", "shipping");
   shipping.classList.add(styles.adress);
-  const shippingDescription = createElement(
-    "span",
-    "shipping__description",
-    "shipping adress",
-  );
+  const shippingDescription = createElement("span", "shipping__description", "shipping adress");
   const billing = createElement("div", "billing");
   billing.classList.add(styles.adress);
-  const billingDescription = createElement(
-    "span",
-    "billing__description",
-    "billing adress",
-  );
+  const billingDescription = createElement("span", "billing__description", "billing adress");
 
   const choise = choiseAddress();
 
   adressBlock.append(shipping, choise, billing);
-  shipping.append(
-    shippingDescription,
-    streetBlock,
-    buildingBlock,
-    apartmentBlock,
-  );
-  billing.append(
-    billingDescription,
-    streetBlockBilling,
-    buildingBlockBilling,
-    apartmentBlockBilling,
-  );
+  shipping.append(shippingDescription, streetBlock, buildingBlock, apartmentBlock);
+  billing.append(billingDescription, streetBlockBilling, buildingBlockBilling, apartmentBlockBilling);
 
-  informBlock.append(
-    countryBlock,
-    birthBlock,
-    cityBlock,
-    postcodeBlock,
-    adressBlock,
-  );
+  informBlock.append(countryBlock, birthBlock, cityBlock, postcodeBlock, adressBlock);
   parent.append(informBlock);
 }
