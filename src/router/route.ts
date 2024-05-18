@@ -38,6 +38,10 @@ export const route = (path: string, id?: string): Promise<void> => {
       isPageGoBack = false;
     };
     if (id) {
+     /*const location: string = window.location.href;
+      const adress = sessionStorage.getItem("adress");
+      if (adress) {
+      }*/  
       const card = apiGetProductById(id);
       card.then((element) => {
         content.innerHTML = "";

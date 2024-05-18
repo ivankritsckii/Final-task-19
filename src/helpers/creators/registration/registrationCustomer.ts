@@ -41,7 +41,6 @@ export async function registrationCustomer() {
   if (!createCustomer) {
     return;
   }
-
   const clientId = createCustomer.customer.id;
   setDateOfBirth(clientId, birthInput.value).then(async () => {
     if (choise.checked) {

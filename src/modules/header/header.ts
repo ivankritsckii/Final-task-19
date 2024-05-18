@@ -7,7 +7,6 @@ const styles = require("./header.module.scss");
 
 export function createHeader(parrent: HTMLElement): void {
   parrent.innerHTML = ``;
-
   const header = createElement("header", styles.header);
   const nav = createElement("nav", "nav");
   const list = createElement("ul", "nav__list");
@@ -37,7 +36,7 @@ export function createHeader(parrent: HTMLElement): void {
   const linkRegistration = createLink("nav__link", "#registration", false);
   itemRegistration.append(linkRegistration);
   linkRegistration.textContent = "Registration";
-  linkRegistration.style.textDecoration = "underline";
+  linkRegistration.style.textDecoration = "underline"; 
   linkRegistration.addEventListener("click", (event: Event) => {
     event.preventDefault();
     route(linkRegistration.href);
