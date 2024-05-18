@@ -91,6 +91,7 @@
   opacity: 1;
 }
 .nav-burger__item {
+  display: flex;
   width: 200px;
   height: 50px;
   border: 1px solid grey;
@@ -99,6 +100,9 @@
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
+}
+.nav-burger__item_disable {
+  display: none;
 }
 .nav-burger__link {
   width: 100%;
