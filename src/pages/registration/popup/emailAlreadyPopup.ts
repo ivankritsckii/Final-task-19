@@ -27,5 +27,4 @@ export function emailAlreadyPopup(parent: HTMLElement): void {
   popup.append(popupBody);
   popup.append(popupOverflow);
   parent.append(popup);
-  console.log("popup_create");
 }
