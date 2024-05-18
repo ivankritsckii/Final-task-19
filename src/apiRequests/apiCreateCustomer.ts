@@ -38,7 +38,6 @@ export async function apiCreateCustomer(
       "https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/customers",
       requestOptions,
     );
-
     if (response.status === 400) {
       const popup = document.querySelector(".popup");
       const popupButton = document.querySelector(".popup__button") as HTMLButtonElement;
