@@ -1,9 +1,10 @@
+import { LogOutBtnRender } from "../helpers/changer/changerLogInOutUser";
 export async function apiCreateCustomer(
   emailInput: HTMLInputElement,
   nameInput: HTMLInputElement,
   surnameInput: HTMLInputElement,
   passwordInput: HTMLInputElement,
-) {    
+) {     
   const email = emailInput.value;
   const name = nameInput.value;
   const surname = surnameInput.value;
@@ -61,23 +62,33 @@ try {
       "https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/customers",
       requestOptions,
     );
-if (response.status === 400) {
+try {
+    const response = await fetch(
+      "https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/customers",
+      requestOptions,
+    );
+
+    if (response.status === 400) {
       const popup = document.querySelector(".popup");
       const popupButton = document.querySelector(
         ".popup__button",
       ) as HTMLButtonElement;
       popup?.classList.add("popup_active");
+      window.scrollTo(0, 0);
+      document.body.style.overflow = "hidden";
       popupButton.focus();
+      return false;
     }
 
     if (response.status === 201) {
       const result = await response.text();
       const json = JSON.parse(result);
+      localStorage.setItem("currentUserID", json.customer.id);
+      LogOutBtnRender();  
       return json;
     }
   } catch (error) {
     console.error(error);
   }
-  
 }
 

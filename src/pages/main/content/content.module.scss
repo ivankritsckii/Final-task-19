@@ -3,7 +3,7 @@
   height: auto;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   flex-wrap: wrap;
   gap: 2%;
   overflow-x: scroll;
@@ -11,15 +11,23 @@
 
 .content {
   width: 100%;
-  padding: 20px 0;
   height: auto;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 2%;
- }
+  }
+.content > * {
+  margin: 20px 0;
+}
 
 .no-scroll {
   overflow: hidden;
-} 
+}
+@media (max-width: 750px) {
+  .content > * {
+    margin: 40px 0;
+  }
+}
+
 

@@ -14,7 +14,7 @@ export function headerBurger(parrent: HTMLElement): void {
   linkMain.textContent = "Main";
   linkMain.addEventListener("click", (event: Event) => {
     event.preventDefault();
-  burgerStatus();  
+    burgerStatus();
     route(linkMain.href);
   });
 
