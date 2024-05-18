@@ -1,11 +1,10 @@
 import { LogOutBtnRender } from "../helpers/changer/changerLogInOutUser";
-
 export async function apiCreateCustomer(
   emailInput: HTMLInputElement,
   nameInput: HTMLInputElement,
   surnameInput: HTMLInputElement,
   passwordInput: HTMLInputElement,
- ) {  
+) {     
   const email = emailInput.value;
   const name = nameInput.value;
   const surname = surnameInput.value;
@@ -85,7 +84,7 @@ try {
       const result = await response.text();
       const json = JSON.parse(result);
       localStorage.setItem("currentUserID", json.customer.id);
-      LogOutBtnRender();
+      LogOutBtnRender();  
       return json;
     }
   } catch (error) {

@@ -19,8 +19,7 @@ export function emailAlreadyPopup(parent: HTMLElement): void {
   buttonClose.classList.add(styles.popup__button);
   buttonClose.textContent = "ok";
   buttonClose.autofocus = true;
-
-  const popUpCloser = () => {
+const popUpCloser = () => {
     popup.classList.remove("popup_active");
     document.body.style.overflow = "";
   };

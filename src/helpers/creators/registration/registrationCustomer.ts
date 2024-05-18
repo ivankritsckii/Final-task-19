@@ -38,7 +38,7 @@ export async function registrationCustomer() {
     surnameInput,
     passwordInput,
   );
-  if (!createCustomer) {
+   if (!createCustomer) {
     return;
   }
   const clientId = createCustomer.customer.id;
