@@ -21,7 +21,6 @@ export async function apiInitialization() {
       requestOptions,
     );
     const result = await response.text();
-    console.log("apiInitialization result: ", result);
 
     const token = JSON.parse(result).access_token;
     const tokenType = JSON.parse(result).token_type;
