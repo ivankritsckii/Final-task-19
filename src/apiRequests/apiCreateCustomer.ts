@@ -3,7 +3,7 @@ export async function apiCreateCustomer(
   nameInput: HTMLInputElement,
   surnameInput: HTMLInputElement,
   passwordInput: HTMLInputElement,
-) {   
+) {    
   const email = emailInput.value;
   const name = nameInput.value;
   const surname = surnameInput.value;
@@ -61,8 +61,7 @@ try {
       "https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/customers",
       requestOptions,
     );
-
-    if (response.status === 400) {
+if (response.status === 400) {
       const popup = document.querySelector(".popup");
       const popupButton = document.querySelector(
         ".popup__button",
@@ -79,5 +78,6 @@ try {
   } catch (error) {
     console.error(error);
   }
+  
 }
 
