@@ -4,7 +4,7 @@ export async function apiCreateCustomer(
   nameInput: HTMLInputElement,
   surnameInput: HTMLInputElement,
   passwordInput: HTMLInputElement,
-) {   
+) {
   const email = emailInput.value;
   const name = nameInput.value;
   const surname = surnameInput.value;
@@ -33,40 +33,6 @@ export async function apiCreateCustomer(
     body: raw,
     redirect: "follow" as const,
   };
-   try {
-    const response = await fetch(
-      "https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/customers",
-      requestOptions,
-    );
-
-    if (response.status === 400) {
-      const popup = document.querySelector(".popup");
-      const popupButton = document.querySelector(
-        ".popup__button",
-      ) as HTMLButtonElement;
-      popup?.classList.add("popup_active");
-      popupButton.focus();
-    }
-try {
-    const response = await fetch(
-      "https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/customers",
-      requestOptions,
-    );
-try {
-    const response = await fetch(
-      "https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/customers",
-      requestOptions,
-    );
-try {
-    const response = await fetch(
-      "https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/customers",
-      requestOptions,
-    );
-try {
-    const response = await fetch(
-      "https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/customers",
-      requestOptions,
-    );
   try {
     const response = await fetch(
       "https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/customers",
@@ -74,9 +40,7 @@ try {
     );
     if (response.status === 400) {
       const popup = document.querySelector(".popup");
-      const popupButton = document.querySelector(
-        ".popup__button",
-      ) as HTMLButtonElement;
+      const popupButton = document.querySelector(".popup__button") as HTMLButtonElement;
       popup?.classList.add("popup_active");
       window.scrollTo(0, 0);
       document.body.style.overflow = "hidden";
@@ -95,4 +59,3 @@ try {
     console.error(error);
   }
 }
-
