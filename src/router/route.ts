@@ -9,6 +9,7 @@ import { showProductByUrl } from "../pages/main/content/showProductByUrl";
 import { loading } from "../modules/loading/loading";
 import { createSingleProductPage } from "../pages/product/createSingleProductPage";
 import { createLoginForm } from "../loginPage/createLoginPage";
+import { isLogin } from "../loginPage/isLogin";
 let isPageGoBack = false;
 
 export const route = (path: string, id?: string): Promise<void> => {
@@ -21,7 +22,13 @@ export const route = (path: string, id?: string): Promise<void> => {
       404: notPage,
       "": createProductsPage,
       "#registration": registrationPage,
-      "#login": createLoginForm,
+      "#login": (content: HTMLElement) => {
+        if (isLogin()) {
+          window.location.href = window.location.origin;
+        } else {
+          createLoginForm(content);
+        }
+      },
       //"#about": aboutPage,
       //"#profile": profilePage,
     };
