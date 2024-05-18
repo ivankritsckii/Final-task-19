@@ -1,31 +1,36 @@
 import { apiInitialization } from "./apiRequests/apiInitialization";
-import { apiGetProducts } from "./apiRequests/apiGetProducts";
 import { createMain } from "./pages/main/createMain";
 import { loading } from "./modules/loading/loading";
-//import { registrationPage } from "./pages/registration/registrationPage";
+import { route } from "./router/route";
+import { createHeader } from "./modules/header/header";
+import { createFooter } from "./modules/footer/footer";
+import { showProductByUrl } from "./pages/main/content/showProductByUrl";
+import { isProductPage } from "./helpers/checks/isProductPage";
+const styles = require("./pages/style.module.scss");
 
 window.addEventListener("load", async () => {
-  const body = document.querySelector("body");
-  if (body) {
-    const connect = apiInitialization();
-    createMain(body);
+  window.onhashchange = (event) => {
     loading();
-    // show products
-    connect.then(async () => {
-      apiGetProducts().then(() => {
-        loading();
-      });
-    });
-
-    // show registration form
-    /*
-    connect.then(async () => {
-      const content = document.querySelector(".content") as HTMLElement;
-      if (content) {
-        registrationPage(content);
-      }
+    const change = route(event.newURL);
+    change.then(async () => {
       loading();
     });
-    */
+  };
+
+  const body = document.querySelector("body");
+  if (body) {
+    body?.classList.add(styles.body);
+    const connect = apiInitialization();
+    createHeader(body);
+    createMain(body);
+    createFooter(body);
+
+    connect.then(() => {
+      if (isProductPage()) {
+        showProductByUrl(window.location.hash.replace("#", ""));
+      } else {
+        route(window.location.hash);
+      }
+    });
   }
 });
