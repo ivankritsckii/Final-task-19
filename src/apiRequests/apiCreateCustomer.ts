@@ -4,7 +4,6 @@ export function apiCreateCustomer(
   surnameInput: HTMLInputElement,
   passwordInput: HTMLInputElement,
 ): void {
-  console.log("apiCreateCustomer");
   const email = emailInput.value;
   const name = nameInput.value;
   const surname = surnameInput.value;
@@ -35,6 +34,5 @@ export function apiCreateCustomer(
     requestOptions,
   )
     .then((response) => response.text())
-    .then((result) => console.log(result))
     .catch((error) => console.error(error));
 }
