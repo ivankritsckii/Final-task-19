@@ -1,3 +1,4 @@
+import { createLoginForm } from "./loginPage/createLoginPage";
 import { apiInitialization } from "./apiRequests/apiInitialization";
 import { createMain } from "./pages/main/createMain";
 import { route } from "./router/route";
@@ -7,6 +8,7 @@ import { showProductByUrl } from "./pages/main/content/showProductByUrl";
 import { isProductPage } from "./helpers/checks/isProductPage";
 const styles = require("./pages/style.module.scss");
 
+createLoginForm();
 window.addEventListener("load", async () => {
   window.onhashchange = (event) => {
   route(event.newURL);
@@ -29,3 +31,4 @@ window.addEventListener("load", async () => {
     });
   }
 });
+
