@@ -4,8 +4,7 @@ import { createNavigationNotPage } from "../../helpers/creators/createNavigation
 const styles = require("./404.module.scss");
 
 export function notPage() {
- const content = document.getElementById("content") as HTMLDivElement; 
-
+  const content = document.getElementById("content") as HTMLDivElement;
   content.innerHTML = "";
 
   const container = createElement("div", styles["notPage-container"]);
