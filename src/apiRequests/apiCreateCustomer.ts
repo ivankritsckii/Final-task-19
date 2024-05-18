@@ -2,8 +2,7 @@ export async function apiCreateCustomer(
   emailInput: HTMLInputElement,
   nameInput: HTMLInputElement,
   surnameInput: HTMLInputElement,
-  passwordInput: HTMLInputElement,
-) {
+  passwordInput: HTMLInputElement,) {
   const email = emailInput.value;
   const name = nameInput.value;
   const surname = surnameInput.value;
@@ -32,8 +31,7 @@ export async function apiCreateCustomer(
     body: raw,
     redirect: "follow" as const,
   };
-
-  try {
+   try {
     const response = await fetch(
       "https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/customers",
       requestOptions,
@@ -56,4 +54,3 @@ export async function apiCreateCustomer(
   } catch (error) {
     console.error(error);
   }
-}
