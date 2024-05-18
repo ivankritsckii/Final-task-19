@@ -16,7 +16,8 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 2%;
-  }
+  overflow-x: hidden;
+}
 .content > * {
   margin: 20px 0;
 }
@@ -24,10 +25,10 @@
 .no-scroll {
   overflow: hidden;
 }
+
 @media (max-width: 750px) {
   .content > * {
     margin: 40px 0;
   }
-}
-
+ } 
 

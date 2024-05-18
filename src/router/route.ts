@@ -1,13 +1,13 @@
-
 import { notPage } from "../pages/404/404";
 import { registrationPage } from "../pages/registration/registrationPage";
 import { apiGetProductById } from "../apiRequests/apiGetProductById";
-import { createContent } from "../helpers/creators/productCard/createContent";
+
 import { Result } from "../helpers/interfaces/Results";
 import { createProductsPage } from "../helpers/creators/createProductsPage";
 import { isProductPage } from "../helpers/checks/isProductPage";
 import { showProductByUrl } from "../pages/main/content/showProductByUrl";
 import { loading } from "../modules/loading/loading";
+import { createSingleProductPage } from "../pages/product/createSingleProductPage";
 let isPageGoBack = false;
 
 export const route = (path: string, id?: string): Promise<void> => {
@@ -16,7 +16,8 @@ export const route = (path: string, id?: string): Promise<void> => {
     const content = document.getElementById("content") as HTMLElement;
 
     // eslint-disable-next-line no-unused-vars
-   const urlRoutes: { [key: string]: (content: HTMLElement) => void } = { 
+    const urlRoutes: { [key: string]: (content: HTMLElement) => void } = {
+
       404: notPage,
       "": createProductsPage,
       "#registration": registrationPage,
@@ -39,14 +40,9 @@ export const route = (path: string, id?: string): Promise<void> => {
       isPageGoBack = false;
     };
     if (id) {
-     /*const location: string = window.location.href;
-      const adress = sessionStorage.getItem("adress");
-      if (adress) {
-      }*/  
       const card = apiGetProductById(id);
       card.then((element) => {
-        content.innerHTML = "";
-        createContent(content, element as Result);
+        createSingleProductPage(element as Result);
       });
     } else {
       const location: string = path;
@@ -66,7 +62,7 @@ export const route = (path: string, id?: string): Promise<void> => {
     }
     urlRoute();
     resolve();
-   }).finally(() => {
-    loading(); 
+  }).finally(() => {
+    loading();  
   });
 };
