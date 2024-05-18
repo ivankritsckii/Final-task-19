@@ -32,7 +32,9 @@ export const apiAuthorizeUser = async (email: string, password: string) => {
     const response = await fetch(url, requestOptions);
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`Error: ${response.status} ${response.statusText} - ${errorText}`);
+      throw new Error(
+        `Error: ${response.status} ${response.statusText} - ${errorText} Customer account with the given credentials not found`,
+      );
     }
     const result = await response.json();
     localStorage.setItem("access_token", result.access_token);

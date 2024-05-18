@@ -3,19 +3,14 @@ import "@fortawesome/fontawesome-free/js/all.js";
 import { loginFormValidation } from "./loginValidation";
 import { showPassword } from "./showPassword";
 import { fillEmail } from "./fillEmail";
-// import { route } from "../../router/route";
+import { route } from "../router/route";
 
-export const createLoginForm = (selector?: string): void => {
+export const createLoginForm = (content: HTMLElement): void => {
+  content.innerHTML = "";
   const forma: HTMLFormElement = document.createElement("form");
   forma.className = "login-form";
 
-  const targetElement: HTMLElement | null = selector
-    ? document.querySelector(selector)
-    : document.querySelector("body");
-
-  if (targetElement) {
-    targetElement.appendChild(forma);
-  }
+  content.appendChild(forma);
 
   const loginTitle: HTMLHeadingElement = document.createElement("h2");
   loginTitle.textContent = "Sign in and start shopping";
@@ -66,6 +61,6 @@ export const createLoginForm = (selector?: string): void => {
 
   registrationLink.addEventListener("click", (e) => {
     e.preventDefault();
-    // route(registrationLink.href);
+    route(registrationLink.href);
   });
 };

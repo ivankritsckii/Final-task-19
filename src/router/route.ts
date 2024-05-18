@@ -8,6 +8,7 @@ import { isProductPage } from "../helpers/checks/isProductPage";
 import { showProductByUrl } from "../pages/main/content/showProductByUrl";
 import { loading } from "../modules/loading/loading";
 import { createSingleProductPage } from "../pages/product/createSingleProductPage";
+import { createLoginForm } from "../loginPage/createLoginPage";
 let isPageGoBack = false;
 
 export const route = (path: string, id?: string): Promise<void> => {
@@ -20,7 +21,7 @@ export const route = (path: string, id?: string): Promise<void> => {
       404: notPage,
       "": createProductsPage,
       "#registration": registrationPage,
-      //"#login": loginPage,
+      "#login": createLoginForm,
       //"#about": aboutPage,
       //"#profile": profilePage,
     };
