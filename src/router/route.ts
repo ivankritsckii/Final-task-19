@@ -1,6 +1,7 @@
 import { notPage } from "../pages/404/404";
 import { registrationPage } from "../pages/registration/registrationPage";
 import { apiGetProductById } from "../apiRequests/apiGetProductById";
+
 import { Result } from "../helpers/interfaces/Results";
 import { createProductsPage } from "../helpers/creators/createProductsPage";
 import { isProductPage } from "../helpers/checks/isProductPage";
@@ -16,6 +17,7 @@ export const route = (path: string, id?: string): Promise<void> => {
 
     // eslint-disable-next-line no-unused-vars
     const urlRoutes: { [key: string]: (content: HTMLElement) => void } = {
+
       404: notPage,
       "": createProductsPage,
       "#registration": registrationPage,
@@ -61,6 +63,6 @@ export const route = (path: string, id?: string): Promise<void> => {
     urlRoute();
     resolve();
   }).finally(() => {
-    loading();
+    loading();  
   });
 };
