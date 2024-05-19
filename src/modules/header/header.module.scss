@@ -126,11 +126,11 @@
   width: 50px;
   height: 5px;
   background-color: black;
-  transition: width 0.5s ease;
-  -webkit-transition: width 0.5s ease;
-  -moz-transition: width 0.5s ease;
-  -ms-transition: width 0.5s ease;
-  -o-transition: width 0.5s ease;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
 }
 .burger-button::after {
   position: absolute;
@@ -160,7 +160,7 @@
 }
 
 .burger-button_active {
-  width: 0;
+  background-color: transparent;
 }
 .burger-button_active::after {
   top: 0;
