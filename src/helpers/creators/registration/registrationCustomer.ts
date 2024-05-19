@@ -3,6 +3,7 @@ import { setDateOfBirth } from "../../../apiRequests/setDateOfBirth";
 import { apiAddAdress } from "../../../apiRequests/apiAddAdress";
 import { AddShippingAddressId } from "../../../apiRequests/addAddress/AddShippingAddressId";
 import { AddBillingAddressId } from "../../../apiRequests/addAddress/AddBillingAddressId";
+import { apiAuthorizeUser } from "../../../apiRequests/apiAuthCustomer";
 import { route } from "../../../router/route";
 
 export async function registrationCustomer() {
@@ -24,7 +25,6 @@ export async function registrationCustomer() {
   if (!createCustomer) {
     return;
   }
-  console.log("createCustomer: ", createCustomer);
 
   const clientId = createCustomer.customer.id;
   setDateOfBirth(clientId, birthInput.value).then(async () => {
@@ -38,6 +38,7 @@ export async function registrationCustomer() {
       const addBilling = await apiAddAdress(clientId, streetBilling.value, houseBilling.value, apartmentBilling.value);
       await AddBillingAddressId(clientId, addBilling.addresses[1].id);
     }
+    await apiAuthorizeUser();
     await route(window.location.origin);
   });
 }
