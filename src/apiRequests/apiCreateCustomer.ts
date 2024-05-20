@@ -1,3 +1,5 @@
+import { createNotification } from "../notification/createNotificationElem";
+
 export async function apiCreateCustomer(
   emailInput: HTMLInputElement,
   nameInput: HTMLInputElement,
@@ -51,6 +53,8 @@ export async function apiCreateCustomer(
       const result = await response.text();
       const json = JSON.parse(result);
       localStorage.setItem("currentUserID", json.customer.id);
+      window.scrollTo(0, 0);
+      createNotification("success", "Registration successful! Welcome! You will now be redirected to the main page.");
       return json;
     }
   } catch (error) {
