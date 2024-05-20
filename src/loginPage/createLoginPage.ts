@@ -77,10 +77,10 @@ export function createLoginForm(): void {
   showPassword();
   fillEmail();
 
-  registrationLink.addEventListener("click", (e) => {
+  /*registrationLink.addEventListener("click", (e) => {
     e.preventDefault();
     route(registrationLink.href);
-  });
+      });
 
   forma.append(rememberCheckbox, rememberLabel, button, registrationLink);
   content.append(forma);
