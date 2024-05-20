@@ -31,7 +31,7 @@
   transition: all ease 0.5s;
 }
 .nav__item:hover {
-  background-color: #56798A;
+  background-color: #56798a;
   .nav__link {
     color: whitesmoke;
   }
@@ -71,7 +71,7 @@
   height: 100vh;
 }
 .nav-burger__list {
- display: none; 
+  display: none;
   width: 100%;
   height: 100%;
   flex-direction: column;
@@ -115,13 +115,24 @@
   color: black;
 }
 .nav-burger__link:hover {
-  box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.3), 0 1px 0px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 15px 10px -10px rgba(0, 0, 0, 0.3),
+    0 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.burger-button-parent {
+  position: relative;
+  left: 5vw;
+  width: 60px;
+  height: 100%;
+  background-color: rgb(86, 86, 137);
+  border:none
 }
 
 .burger-button {
   display: none;
-  position: relative;
-  left: 5vw;
+  position: absolute;
+  // left: 5vw;
   top: calc(5vh - 5px);
   width: 50px;
   height: 5px;

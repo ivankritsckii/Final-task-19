@@ -5,6 +5,7 @@ import { clearLocalStorage } from "../../../helpers/clearLocalStorage";
 import { route } from "../../../router/route";
 
 export function headerBurger(parrent: HTMLElement): void {
+  const burgerButtonParent = createElement("button", "burger-button-parent");
   const burgerButton = createElement("div", "burger-button");
   const nav = createElement("nav", "nav-burger");
   const list = createElement("ul", "nav-burger__list");
@@ -63,12 +64,13 @@ export function headerBurger(parrent: HTMLElement): void {
     route(window.location.href);
   });
 
-  burgerButton.addEventListener("click", () => {
+  burgerButtonParent.addEventListener("click", () => {
     burgerStatus();
   });
 
   list.append(itemMain, itemAboutUs, itemRegistration, itemLogin, itemLogout);
   nav.append(list);
-  parrent.append(burgerButton);
+  parrent.append(burgerButtonParent);
+  burgerButtonParent.append(burgerButton);
   parrent.append(nav);
 }
