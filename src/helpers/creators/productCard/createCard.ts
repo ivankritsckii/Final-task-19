@@ -29,8 +29,8 @@ export function createCard(product: Result): HTMLElement {
     current.masterVariant.images[0].dimensions.h,
   );
   const cardDescr = createElement("div", styles.card__description);
-  const nameRU = current.name.ru;
-  const cardNameRU = createElement("span", styles.card__name, nameRU);
+  const nameEN = current.name.en;
+  const cardNameRU = createElement("span", styles.card__name, nameEN);
   const price = current.masterVariant.prices[0].value.centAmount / 100;
   const discountPrice = current.masterVariant.prices[0].discounted?.value.centAmount;
   const cardPrice = createElement("span", styles.card__price, `${price}$`);
