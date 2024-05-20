@@ -1,6 +1,7 @@
 //import { createElement } from "../createElement";
 import { createInputBlock } from "../createInputBlock";
 import { addAdressBlock } from "../../../pages/registration/adress/adress";
+import { route } from "../../../router/route";
 const styles = require("./form.module.scss");
 
 export function createRegistrationForm(parent: HTMLElement): void {
@@ -43,6 +44,18 @@ export function createRegistrationForm(parent: HTMLElement): void {
     true,
     "password",
   );
+  /*Добавить ссылку на страницу логина*/
+  const LogInDiv: HTMLElement = document.createElement("div");
+  LogInDiv.classList.add("div_link_to_logIn_page");
+  const LogInLink: HTMLAnchorElement = document.createElement("a");
+  LogInLink.classList.add("link_to_logIn_page");
+  LogInLink.innerHTML = `If you have account <span>Log In here! </span>`;
+  LogInLink.href = "#login";
+
+  LogInLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    route(LogInLink.href);
+  });
 
   const buttonForm = document.createElement("button");
   buttonForm.type = "button";
@@ -54,4 +67,6 @@ export function createRegistrationForm(parent: HTMLElement): void {
   addAdressBlock(fieldset);
   fieldset.append(buttonForm);
   parent.append(form);
+  LogInDiv.append(LogInLink);
+  fieldset.append(LogInDiv);
 }

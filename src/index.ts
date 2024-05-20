@@ -1,4 +1,3 @@
-
 import { apiInitialization } from "./apiRequests/apiInitialization";
 import { createMain } from "./pages/main/createMain";
 import { route } from "./router/route";
