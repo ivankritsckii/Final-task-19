@@ -52,10 +52,10 @@ export function createLoginForm(): void {
     if (validateEmail().isValid && validatePassword().isValid) {
       apiAuthorizeUser()
         .then((authorize) => {
-          createNotification("success", "Login successful! Welcome back.");
-          console.log(authorize);
           if (authorize) {
             // rememberEmail();
+            createNotification("success", "Login successful! Welcome back.");
+            console.log(authorize);
             setTimeout(() => route(window.location.origin), 2000);
           }
         })
