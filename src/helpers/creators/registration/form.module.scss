@@ -62,9 +62,25 @@
   -ms-transition: background-color 1s ease;
   -o-transition: background-color 1s ease;
 }
+.div_link_to_logIn_page{
+  width: 100%;
+}
+.link_to_logIn_page{
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  transition: all ease 0.5s;
+  width: 100%;
+  &:hover{
+    color: #646cff;
+  }
+}
 
 @media (max-width: 800px) {
   .fieldset {
     flex-direction: column;
+  }
+  .link_to_logIn_page{
+    font-size: 5vw;
   }
 }

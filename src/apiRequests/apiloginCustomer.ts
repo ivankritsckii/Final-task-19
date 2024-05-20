@@ -1,7 +1,6 @@
 import { createNotification } from "../notification/createNotificationElem";
 import { route } from "../router/route";
 
-
 export const loginUser = async (accessToken: string, email: string, password: string) => {
   const apiHost = "https://api.us-central1.gcp.commercetools.com";
   const projectKey = "rsschool-asdaasd";
