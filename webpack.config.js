@@ -1,5 +1,6 @@
 const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 
 module.exports = {
@@ -45,6 +46,9 @@ module.exports = {
     }),
     new ESLintPlugin({
       extensions: ["js", "jsx", "ts", "tsx"],
+    }),
+    new CopyWebpackPlugin({
+      patterns: [{ from: "public/shopping.svg", to: "shopping.svg" }],
     }),
   ],
   devServer: {
