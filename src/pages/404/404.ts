@@ -1,6 +1,7 @@
 import { createElement } from "../../helpers/creators/createElement";
 import { createImage } from "../../helpers/creators/createImage";
 import { createNavigationNotPage } from "../../helpers/creators/createNavigationNotPage";
+import { isLoggedIn } from "../../helpers/checks/isLoggedIn";
 const styles = require("./404.module.scss");
 
 export function notPage() {
@@ -28,4 +29,5 @@ export function notPage() {
 
   container.append(title, description, descriptionNav, navigation, image);
   content.append(container);
+  isLoggedIn();
 }

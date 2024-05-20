@@ -1,15 +1,18 @@
-export const validatePassword = (password: string) => {
+export const validatePassword = () => {
+  const loginForm = document.querySelector(".login-form") as HTMLFormElement;
+  const passwordInput = loginForm.querySelector('input[placeholder="Password"]') as HTMLInputElement;
+
   const minLength = 8;
-  const hasUpperCase = /[A-Z]/.test(password);
-  const hasLowerCase = /[a-z]/.test(password);
-  const hasDigit = /[0-9]/.test(password);
-  const hasSpecialChar = /[!@#$%^&*]/.test(password);
+  const hasUpperCase = /[A-Z]/.test(passwordInput.value);
+  const hasLowerCase = /[a-z]/.test(passwordInput.value);
+  const hasDigit = /[0-9]/.test(passwordInput.value);
+  const hasSpecialChar = /[!@#$%^&*]/.test(passwordInput.value);
 
   return {
-    isValid: password.length >= minLength && hasUpperCase && hasLowerCase && hasDigit,
+    isValid: passwordInput.value.length >= minLength && hasUpperCase && hasLowerCase && hasDigit,
     errors: {
       messageStart: "Your password should:",
-      minLengthError: password.length < minLength ? "Be at least 8 characters long." : "",
+      minLengthError: passwordInput.value.length < minLength ? "Be at least 8 characters long." : "",
       upperCaseError: !hasUpperCase ? "Contain at least one uppercase letter." : "",
       lowerCaseError: !hasLowerCase ? "Contain at least one  lowercase letter." : "",
       digitError: !hasDigit ? "Contain at least one digit." : "",

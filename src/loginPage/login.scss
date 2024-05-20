@@ -1,10 +1,8 @@
 .login-form {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  position: relative;
+  margin: 4% auto;
   max-width: 450px;
   padding: 30px;
-  transform: translate(-50%, -50%);
   background: #646cff;
   color: #fff;
   box-sizing: border-box;
@@ -38,10 +36,10 @@
 .input-box span {
   color: #2724dc;
   position: absolute;
-  right: 40px;
+  right: 13%;
   font-size: 20px;
   z-index: 100;
-  margin-top: 20px;
+  margin-top: 3.7%;
 }
 
 .input-box .password-icon {
@@ -204,6 +202,9 @@
 
   .login-form h2 {
     font-size: 25px;
+  }
+  .input-box span {
+    margin-top: 5%;
   }
 }
 

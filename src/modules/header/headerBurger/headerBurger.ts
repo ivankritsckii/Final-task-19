@@ -1,6 +1,7 @@
 import { createElement } from "../../../helpers/creators/createElement";
 import { createLink } from "../../../helpers/creators/createLink";
 import { burgerStatus } from "./burgerStatus";
+import { clearLocalStorage } from "../../../helpers/clearLocalStorage";
 import { route } from "../../../router/route";
 
 export function headerBurger(parrent: HTMLElement): void {
@@ -29,6 +30,7 @@ export function headerBurger(parrent: HTMLElement): void {
   });
 
   const itemRegistration = createElement("li", "nav-burger__item");
+  itemRegistration.classList.add("nav-burger__item_registration");
   const linkRegistration = createLink("nav-burger__link", "#registration", false);
   itemRegistration.append(linkRegistration);
   linkRegistration.textContent = "Registration";
@@ -39,6 +41,7 @@ export function headerBurger(parrent: HTMLElement): void {
   });
 
   const itemLogin = createElement("li", "nav-burger__item");
+  itemLogin.classList.add("nav-burger__item_login");
   const linkLogin = createLink("nav-burger__link", "#login", false);
   itemLogin.append(linkLogin);
   linkLogin.textContent = "Login";
@@ -49,14 +52,15 @@ export function headerBurger(parrent: HTMLElement): void {
   });
 
   const itemLogout = createElement("li", "nav-burger__item");
-  itemLogout.classList.add("nav-burger__item_disable");
+  itemLogout.classList.add("nav-burger__item_logout", "nav-burger__item_disable");
   const linkLogout = createLink("nav-burger__link", "#logout", false);
   itemLogout.append(linkLogout);
   linkLogout.textContent = "Logout";
   linkLogout.addEventListener("click", (event: Event) => {
     event.preventDefault();
     burgerStatus();
-    route(linkLogout.href);
+    clearLocalStorage();
+    route(window.location.href);
   });
 
   burgerButton.addEventListener("click", () => {

@@ -1,6 +1,8 @@
+import { isOlderThan13 } from "./checkBirth";
+
 export function checkRegisstrationForm(): boolean {
   const pattern = /^[A-Z][a-zA-Z]{2,}$/;
-  const postcodePattern = /^[a-zA-Z0-9]{4,}$/;
+  const postcodePattern = /^\d{6}$/;
   const apartmentPattern = /^(\d{1,3})$/;
   const adressPattern = /^[a-zA-Z0-9\s]{4,}$/;
   const buildingPattern = /^[a-zA-Z0-9\s]{1,}$/;
@@ -11,6 +13,7 @@ export function checkRegisstrationForm(): boolean {
   const labelList = document.querySelectorAll(".label-registration");
   const inputsList = document.querySelectorAll(".input-inform_registration");
   const choise = document.getElementById("one-address") as HTMLInputElement;
+  const birth = document.getElementById("birth") as HTMLInputElement;
 
   let result = true;
 
@@ -53,6 +56,10 @@ export function checkRegisstrationForm(): boolean {
         }
       }
     });
+  }
+  if (!isOlderThan13(birth.value)) {
+    labelList[4].classList.add("label-registration_active");
+    result = false;
   }
   return result;
 }
