@@ -3,14 +3,22 @@ import "@fortawesome/fontawesome-free/js/all.js";
 import { loginFormValidation } from "./loginValidation";
 import { showPassword } from "./showPassword";
 import { fillEmail } from "./fillEmail";
+import { apiAuthorizeUser } from "../apiRequests/apiAuthCustomer";
+import { rememberEmail } from "./rememberCustomer";
+import { validateEmail } from "./validateEmail";
+import { validatePassword } from "./validatePassword";
+import { isLoggedIn } from "../helpers/checks/isLoggedIn";
 import { route } from "../router/route";
 
-export const createLoginForm = (content: HTMLElement): void => {
-  content.innerHTML = "";
+export function createLoginForm(): void {
+  if (isLoggedIn()) {
+    route(window.location.origin);
+  }
+
   const forma: HTMLFormElement = document.createElement("form");
   forma.className = "login-form";
-
-  content.appendChild(forma);
+  const content = document.getElementById("content") as HTMLDivElement;
+  content.innerHTML = "";
 
   const loginTitle: HTMLHeadingElement = document.createElement("h2");
   loginTitle.textContent = "Sign in and start shopping";
@@ -38,7 +46,22 @@ export const createLoginForm = (content: HTMLElement): void => {
   button.className = "login-btn-grad";
   button.setAttribute("type", "submit");
   button.textContent = "Login";
-  button.disabled = true;
+  button.addEventListener("click", async (e) => {
+    e.preventDefault();
+    if (validateEmail().isValid && validatePassword().isValid) {
+      apiAuthorizeUser()
+        .then((authorize) => {
+          console.log(authorize);
+          if (authorize) {
+            rememberEmail();
+            route(window.location.origin);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  });
 
   const rememberCheckbox: HTMLInputElement = document.createElement("input");
   rememberCheckbox.setAttribute("type", "checkbox");
@@ -46,21 +69,20 @@ export const createLoginForm = (content: HTMLElement): void => {
   const rememberLabel: HTMLLabelElement = document.createElement("label");
   rememberLabel.textContent = "Remember me";
   rememberLabel.setAttribute("for", "rememberCheckbox");
-  forma.appendChild(rememberCheckbox);
-  forma.appendChild(rememberLabel);
-  forma.appendChild(button);
 
   const registrationLink: HTMLAnchorElement = document.createElement("a");
   registrationLink.innerHTML = `Don't have an account? <span>Register here! </span>`;
   registrationLink.href = "#registration";
-  forma.appendChild(registrationLink);
 
   showPassword();
-  loginFormValidation();
   fillEmail();
 
   registrationLink.addEventListener("click", (e) => {
     e.preventDefault();
     route(registrationLink.href);
   });
-};
+
+  forma.append(rememberCheckbox, rememberLabel, button, registrationLink);
+  content.append(forma);
+  loginFormValidation();
+}

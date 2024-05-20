@@ -1,7 +1,6 @@
 import { notPage } from "../pages/404/404";
 import { registrationPage } from "../pages/registration/registrationPage";
 import { apiGetProductById } from "../apiRequests/apiGetProductById";
-
 import { Result } from "../helpers/interfaces/Results";
 import { createProductsPage } from "../helpers/creators/createProductsPage";
 import { isProductPage } from "../helpers/checks/isProductPage";
@@ -9,7 +8,7 @@ import { showProductByUrl } from "../pages/main/content/showProductByUrl";
 import { loading } from "../modules/loading/loading";
 import { createSingleProductPage } from "../pages/product/createSingleProductPage";
 import { createLoginForm } from "../loginPage/createLoginPage";
-import { isLogin } from "../loginPage/isLogin";
+import { isLoggedIn } from "../helpers/checks/isLoggedIn";
 let isPageGoBack = false;
 
 export const route = (path: string, id?: string): Promise<void> => {
@@ -22,13 +21,7 @@ export const route = (path: string, id?: string): Promise<void> => {
       404: notPage,
       "": createProductsPage,
       "#registration": registrationPage,
-      "#login": (content: HTMLElement) => {
-        if (isLogin()) {
-          window.location.href = window.location.origin;
-        } else {
-          createLoginForm(content);
-        }
-      },
+      "#login": createLoginForm,
       //"#about": aboutPage,
       //"#profile": profilePage,
     };
@@ -70,6 +63,7 @@ export const route = (path: string, id?: string): Promise<void> => {
     urlRoute();
     resolve();
   }).finally(() => {
+    isLoggedIn();
     loading();
   });
 };

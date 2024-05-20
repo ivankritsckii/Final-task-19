@@ -2,12 +2,11 @@ import { headerBurger } from "./headerBurger/headerBurger";
 import { createElement } from "../../helpers/creators/createElement";
 import { createLink } from "../../helpers/creators/createLink";
 import { route } from "../../router/route";
-import { LogOutBtnRender } from "../../helpers/changer/changerLogInOutUser";
+import { clearLocalStorage } from "../../helpers/clearLocalStorage";
 const styles = require("./header.module.scss");
 
 export function createHeader(parrent: HTMLElement): void {
   parrent.innerHTML = ``;
-  console.log("create Header", localStorage);
   const header = createElement("header", styles.header);
   const nav = createElement("nav", "nav");
   const list = createElement("ul", "nav__list");
@@ -63,8 +62,8 @@ export function createHeader(parrent: HTMLElement): void {
   linkLogout.style.textDecoration = "underline";
   linkLogout.addEventListener("click", (event: Event) => {
     event.preventDefault();
-    localStorage.setItem("currentUserID", "");
-    LogOutBtnRender();
+    clearLocalStorage();
+    route(window.location.href);
   });
 
   list.append(itemMain, itemAboutUs, itemRegistration, itemLogin, itemLogout);
