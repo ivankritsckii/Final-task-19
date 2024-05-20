@@ -7,7 +7,12 @@ const styles = require("./adress.module.scss");
 export function addAdressBlock(parent: HTMLElement): void {
   const informBlock = createElement("div", styles.inform);
 
-  const birthBlock = createInputBlock("please select your date of birth", "birth", "date", true);
+  const birthBlock = createInputBlock(
+    "please select your date of birth, you must be over 13 years old",
+    "birth",
+    "date",
+    true,
+  );
   const countryBlock = createSelectCountry();
   const cityBlock = createInputBlock(
     "only latin, first letter capitalized, min 3 letters",
@@ -16,7 +21,7 @@ export function addAdressBlock(parent: HTMLElement): void {
     true,
     "City",
   );
-  const postcodeBlock = createInputBlock("min size - 4, numbers or letters", "postcode", "text", true, "your postcode");
+  const postcodeBlock = createInputBlock("size - 6, only number", "postcode", "number", true, "your postcode");
 
   const streetBlock = createInputBlock("min size - 4, numbers or letters", "street", "text", true, "Street name");
 
