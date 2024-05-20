@@ -1,5 +1,5 @@
 import { createNotification } from "../notification/createNotificationElem";
-import { route } from "../router/route";
+// import { route } from "../router/route";
 
 export const loginUser = async (accessToken: string, email: string, password: string) => {
   const apiHost = "https://api.us-central1.gcp.commercetools.com";
@@ -31,7 +31,7 @@ export const loginUser = async (accessToken: string, email: string, password: st
     }
     const result = await response.json();
     createNotification("success", "Login successful! Welcome back.");
-    setTimeout(() => route(""), 3000);
+    // setTimeout(() => route(""), 3000);
     return result;
   } catch (error) {
     createNotification("error", "Authentication failed. Verify your Email and Password and  try again.");
