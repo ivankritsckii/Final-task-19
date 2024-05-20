@@ -9,6 +9,7 @@ import { validateEmail } from "./validateEmail";
 import { validatePassword } from "./validatePassword";
 import { isLoggedIn } from "../helpers/checks/isLoggedIn";
 import { route } from "../router/route";
+import { createNotification } from "../notification/createNotificationElem";
 
 export function createLoginForm(): void {
   if (isLoggedIn()) {
@@ -51,10 +52,11 @@ export function createLoginForm(): void {
     if (validateEmail().isValid && validatePassword().isValid) {
       apiAuthorizeUser()
         .then((authorize) => {
+          createNotification("success", "Login successful! Welcome back.");
           console.log(authorize);
           if (authorize) {
-            rememberEmail();
-            route(window.location.origin);
+            // rememberEmail();
+            setTimeout(() => route(window.location.origin), 2000);
           }
         })
         .catch((error) => {
@@ -74,9 +76,6 @@ export function createLoginForm(): void {
   registrationLink.innerHTML = `Don't have an account? <span>Register here! </span>`;
   registrationLink.href = "#registration";
 
-  showPassword();
-  fillEmail();
-
   registrationLink.addEventListener("click", (e) => {
     e.preventDefault();
     route(registrationLink.href);
@@ -84,5 +83,9 @@ export function createLoginForm(): void {
 
   forma.append(rememberCheckbox, rememberLabel, button, registrationLink);
   content.append(forma);
+
+  showPassword();
+  fillEmail();
+  rememberEmail();
   loginFormValidation();
 }
