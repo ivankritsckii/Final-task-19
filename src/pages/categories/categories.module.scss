@@ -1,0 +1,38 @@
+.categoriesPage {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30PX;
+}
+.categoriesPage__title {
+  text-align: center;
+}
+.category {
+  width: 80%;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 20px;
+  border: 1px solid grey;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+.category__name {
+  text-align: center;
+  text-transform: uppercase;
+  color: black;
+}
+.category__description {
+  color: gray;
+}
+.products {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
