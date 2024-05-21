@@ -11,6 +11,12 @@ export function createNavigationNotPage(): HTMLElement {
   linkMain.textContent = "Main";
   itemMain.append(linkMain);
 
+  const itemCategories = createElement("li", "notPage-item");
+  itemCategories.classList.add("notPage-item");
+  const linkCategories = createLink("notPage-link", "#categories", false);
+  linkCategories.textContent = "Categories";
+  itemCategories.append(linkCategories);
+
   const itemLogin = createElement("li", "notPage-item");
   itemLogin.classList.add("notPage-item_login");
   const linkLogin = createLink("notPage-link", "#login", false);
@@ -38,7 +44,7 @@ export function createNavigationNotPage(): HTMLElement {
   const linkAboutUs = createLink("notPage-link", "#aboutUs", false);
   linkAboutUs.textContent = "About us";
   itemAboutUs.append(linkAboutUs);
-  list.append(itemMain, itemLogin, itemRegistration, itemAboutUs, itemLogout);
+  list.append(itemMain, itemCategories, itemLogin, itemRegistration, itemAboutUs, itemLogout);
   navigation.append(list);
   return navigation;
 }
