@@ -4,7 +4,7 @@ import { apiGetProducts } from "../../../apiRequests/apiGetProducts";
 import { Result } from "../../../helpers/interfaces/Results";
 import { Current } from "../../../helpers/interfaces/Current";
 import { TypeId } from "../../../helpers/interfaces/TypeId";
-import { createContent } from "../../../helpers/creators/productCard/createContent";
+import { createCard } from "../../../helpers/creators/productCard/createCard";
 const styles = require("./category.module.scss");
 
 export async function createCategoryPage() {
@@ -32,7 +32,8 @@ export async function createCategoryPage() {
 
       categories.forEach((category) => {
         if (category.id === categoryPage.id) {
-          createContent(categoryProducts, result);
+          const cardProduct = createCard(result);
+          categoryProducts.append(cardProduct);
         }
       });
     }
