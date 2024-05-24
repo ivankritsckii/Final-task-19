@@ -16,7 +16,6 @@ export async function apiQueryCategories() {
     );
     const result = await response.text();
     const json = JSON.parse(result);
-    console.log(json);
     return json;
   } catch (error) {
     console.log(error);
