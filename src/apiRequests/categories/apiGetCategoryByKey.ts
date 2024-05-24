@@ -18,7 +18,6 @@ export async function apiGetCategoryByKey(key: string) {
     );
     const result = await response.text();
     const json = JSON.parse(result) as Category;
-    console.log("category: ", json);
     return json;
   } catch (error) {
     console.log(error);
