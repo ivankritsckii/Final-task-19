@@ -2,10 +2,11 @@ import { Current } from "./Current";
 import { Image } from "./Image";
 import { Prices } from "./Prices";
 import { Lang } from "./Lang";
+import { Attribute } from "./Attribute";
 
 export interface Product {
   assets: [];
-  attributes: [];
+  attributes: [Attribute];
   id: number;
   images: [Image];
   key: string;

@@ -26,9 +26,18 @@
   overflow: hidden;
 }
 
+.productsMain {
+  position: relative;
+  width: 96%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
 @media (max-width: 750px) {
   .content > * {
     margin: 40px 0;
   }
- } 
+}
 
