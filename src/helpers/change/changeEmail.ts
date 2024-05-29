@@ -1,6 +1,6 @@
 import { apiChangeEmail } from "../../apiRequests/change/apiChangeEmail";
 
-export async function checkEmail(email: string): Promise<boolean> {
+export async function changeEmail(email: string): Promise<boolean> {
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   let result = true;
   if (!emailPattern.test(email)) {
