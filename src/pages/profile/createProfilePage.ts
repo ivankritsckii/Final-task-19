@@ -17,7 +17,7 @@ export async function createProfilePage() {
   const emailBlock = profileChangeBlock("email", "inform__email", customer.email);
 
   const nameBlock = profileChangeBlock("text", "inform__name", customer.firstName);
-  const surnameBlock = profileChangeBlock("text", "inform__surname", customer.lastName);
+  const surnameBlock = profileChangeBlock("text", "inform__lastName", customer.lastName);
   const birthBlock = profileChangeBlock("date", "inform__birth", customer.dateOfBirth);
   const passwordBlock = profileChangeBlock("password", "inform__password", customer.password);
 
