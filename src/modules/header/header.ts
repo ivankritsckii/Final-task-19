@@ -38,6 +38,20 @@ export function createHeader(parrent: HTMLElement): void {
     route(linkAboutUs.href);
   });
 
+  const itemProfile = createElement("li", "nav__item");
+  itemProfile.classList.add("profile__btn");
+  if (!localStorage.getItem("customerId")) {
+    itemProfile.classList.add("nav__item_disable");
+  }
+  const linkProfile = createLink("nav__link", "#profile", false);
+  itemProfile.append(linkProfile);
+  linkProfile.textContent = "Profile";
+  linkProfile.style.textDecoration = "underline";
+  linkProfile.addEventListener("click", (event: Event) => {
+    event.preventDefault();
+    route(linkProfile.href);
+  });
+
   const itemRegistration = createElement("li", "nav__item");
   itemRegistration.classList.add("registration__btn");
   if (localStorage.getItem("currentUserID")) itemRegistration.classList.add("nav__item_disable");
@@ -75,7 +89,7 @@ export function createHeader(parrent: HTMLElement): void {
     route(window.location.href);
   });
 
-  list.append(itemMain, itemCategories, itemAboutUs, itemRegistration, itemLogin, itemLogout);
+  list.append(itemMain, itemCategories, itemAboutUs, itemProfile, itemRegistration, itemLogin, itemLogout);
   nav.append(list);
   header.append(nav);
   parrent.append(header);
