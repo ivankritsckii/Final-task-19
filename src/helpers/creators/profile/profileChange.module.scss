@@ -1,0 +1,87 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.profile-inform {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+.profile-inform_address {
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 2px solid grey;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+.profile-inform-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-inform__edit {
+  width: 70px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+.profile-inform__save {
+  cursor: pointer;
+  width: 70px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid greenyellow;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+.profile-inform__save_disable {
+  cursor: default;
+  border: 1px solid grey;
+  background-color: grey;
+}
+.profile-inform-address__save_disable {
+  cursor: default;
+  border: 1px solid grey;
+  background-color: grey;
+}
+
+.isDefaulth {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+.isDefaulth_Shipping {
+  border: 2px solid green;
+}
+.isDefaulth_Billing {
+  border: 2px solid brown;
+}
