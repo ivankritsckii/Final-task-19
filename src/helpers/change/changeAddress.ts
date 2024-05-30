@@ -7,6 +7,7 @@ export async function changeAddress(addressBlock: HTMLElement): Promise<boolean>
   const buildingPattern = /^[a-zA-Z0-9\s]{1,}$/;
 
   const idAddress = addressBlock.getAttribute("name");
+  const country = addressBlock.querySelector("select") as HTMLSelectElement;
   const city = addressBlock.querySelector("input[name='inform__city']") as HTMLInputElement;
   const postcode = addressBlock.querySelector("input[name='inform__postcode']") as HTMLInputElement;
   const street = addressBlock.querySelector("input[name='inform__street']") as HTMLInputElement;
@@ -42,6 +43,15 @@ export async function changeAddress(addressBlock: HTMLElement): Promise<boolean>
   if (!idAddress) return false;
 
   //TODO: добавить уведомление об ошибке(какой?*) и успешной смене адреса
-  await apiChangeAddress(customerId, idAddress, city.value, postcode.value, street.value, house.value, apartment.value);
+  await apiChangeAddress(
+    customerId,
+    idAddress,
+    country.value,
+    city.value,
+    postcode.value,
+    street.value,
+    house.value,
+    apartment.value,
+  );
   return true;
 }

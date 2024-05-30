@@ -1,11 +1,13 @@
 import { changeAddress } from "../../change/changeAddress";
 import { createElement } from "../createElement";
 import { createInput } from "../createInput";
+import { createSelectCountry } from "../createSelectCountry";
 import { activateInput } from "./activateInput";
 
 export function profileChangeAddress(
   addressId: string,
   wrapperClass: string,
+  country: string,
   city: string,
   postcode: string,
   street: string,
@@ -13,8 +15,18 @@ export function profileChangeAddress(
   apartment: string,
 ): HTMLElement {
   const wrapper = createElement("div", "profile-inform");
-  wrapper.classList.add("profile-inform_address", wrapperClass);
+  wrapper.classList.add("profile-inform_address", wrapperClass, "profile-inform_disable");
   wrapper.setAttribute("name", addressId);
+
+  const countryBlock = createSelectCountry();
+  const options = countryBlock.options;
+  for (let i = 0; i < options.length; i++) {
+    if (options[i].value === country) {
+      options[i].selected = true;
+      break;
+    }
+  }
+  countryBlock.disabled = true;
 
   const cityInput = createInput("text", "profile-inform__input", "inform__city", "", false);
   cityInput.value = city;
@@ -48,13 +60,6 @@ export function profileChangeAddress(
   const saveButton = createElement("div", "profile-inform__save", "save");
   buttonsBlock.append(editButton, saveButton);
 
-  wrapper.append(
-    cityInput,
-    postcodeInput,
-    streetInput,
-    houseInput,
-    apartmentInput,
-    buttonsBlock,
-  );
+  wrapper.append(countryBlock, cityInput, postcodeInput, streetInput, houseInput, apartmentInput, buttonsBlock);
   return wrapper;
 }
