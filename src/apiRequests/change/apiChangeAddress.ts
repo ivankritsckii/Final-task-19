@@ -3,6 +3,7 @@ import { getCustomerById } from "../getCustomerById";
 export async function apiChangeAddress(
   idCustomer: string,
   addressId: string,
+  country: string,
   city: string,
   postcode: string,
   street: string,
@@ -25,7 +26,7 @@ export async function apiChangeAddress(
           email: customer.email,
           firstName: customer.firstName,
           lastName: customer.lastName,
-          country: customer.addresses[0].country,
+          country: country,
           city: city,
           postalCode: postcode,
           streetName: street,
