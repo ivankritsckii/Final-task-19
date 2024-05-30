@@ -40,6 +40,7 @@
   justify-content: center;
   border: 1px solid black;
   border-radius: 20px;
+  cursor: pointer;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
@@ -60,7 +61,7 @@
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
 }
-.profile-inform__save_disable {
+.profile-inform__save_disable, .disable_btn {
   cursor: default;
   border: 1px solid grey;
   background-color: grey;
@@ -114,4 +115,15 @@
 }
 .option-address {
 text-align: center;
+}
+.profile_save_modal_window{
+  position: absolute;
+  width: 200px;
+  height: 300px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 100px;
+  border-radius: 20px;
 }

@@ -35,15 +35,18 @@ export function passwordWrapper(): HTMLElement {
 
   const editButton = createElement("div", "profile-inform__edit", "edit");
   editButton.addEventListener("click", () => {
+    if (editButton.classList.contains("disable_btn")) return;
     activateInput(passwordInput);
     activateInput(newPasswordInput);
-    saveButton.classList.toggle("profile-inform__save_disable");
+    editButton.classList.add("disable_btn");
+    saveButton.classList.remove("profile-inform__save_disable");
   });
   const saveButton = createElement("div", "profile-inform__save", "save");
   saveButton.classList.add("profile-inform__save_disable");
   saveButton.addEventListener("click", () => {
     if (saveButton.classList.contains("profile-inform__save_disable")) return;
-    console.log(passwordInput.id);
+    editButton.classList.remove("disable_btn");
+    saveButton.classList.add("profile-inform__save_disable");
     changeImformation(passwordInput.id);
   });
 

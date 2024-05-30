@@ -1,8 +1,4 @@
-export function ProfileChangeModalWindow(
-  isSucsessCahnge: boolean,
-  title: string,
-  textMessage: string,
-) {
+export function ProfileChangeModalWindow(isSucsessCahnge: boolean, title: string, textMessage: string) {
   const modalWindow = document.createElement("div");
   modalWindow.classList.add("profile_save_modal_window");
   if (isSucsessCahnge) {

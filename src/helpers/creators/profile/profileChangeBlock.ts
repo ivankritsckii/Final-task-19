@@ -5,20 +5,10 @@ import { activateInput } from "./activateInput";
 
 const styles = require("./profileChange.module.scss");
 
-export function profileChangeBlock(
-  typeInput: string,
-  nameInput: string,
-  contentInput: string,
-): HTMLElement {
+export function profileChangeBlock(typeInput: string, nameInput: string, contentInput: string): HTMLElement {
   const wrapper = createElement("div", styles["profile-inform"]);
 
-  const currentInput = createInput(
-    typeInput,
-    "profile-inform__input",
-    nameInput,
-    nameInput,
-    false,
-  );
+  const currentInput = createInput(typeInput, "profile-inform__input", nameInput, nameInput, false);
   currentInput.value = contentInput;
   currentInput.disabled = true;
 

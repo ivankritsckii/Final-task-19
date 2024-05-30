@@ -1,4 +1,5 @@
 import { apiChangeAddress } from "../../apiRequests/change/apiChangeAddress";
+import { ProfileChangeModalWindow } from "../creators/profile/profileChangeModalWindow";
 
 export async function changeAddress(addressBlock: HTMLElement): Promise<boolean> {
   const postcodePattern = /^\d{6}$/;
@@ -16,23 +17,23 @@ export async function changeAddress(addressBlock: HTMLElement): Promise<boolean>
 
   let result = true;
   if (!adressPattern.test(city.value)) {
-    console.log("город введен неверно");
+    ProfileChangeModalWindow(false, "Changes were not saved", "Enter the correct city");
     result = false;
   }
   if (!postcodePattern.test(postcode.value)) {
-    console.log("postcode введен неверно");
+    ProfileChangeModalWindow(false, "Changes were not saved", "Enter the correct postcode");
     result = false;
   }
   if (!adressPattern.test(street.value)) {
-    console.log("street введен неверно");
+    ProfileChangeModalWindow(false, "Changes were not saved", "Enter the correct street");
     result = false;
   }
   if (!buildingPattern.test(house.value)) {
-    console.log("house введен неверно");
+    ProfileChangeModalWindow(false, "Changes were not saved", "Enter the correct house number");
     result = false;
   }
   if (!apartmentPattern.test(apartment.value)) {
-    console.log("apartment введен неверно");
+    ProfileChangeModalWindow(false, "Changes were not saved", "Enter the correct apartment number");
     result = false;
   }
 
@@ -53,5 +54,6 @@ export async function changeAddress(addressBlock: HTMLElement): Promise<boolean>
     house.value,
     apartment.value,
   );
+  ProfileChangeModalWindow(result, "Changes saved", "");
   return true;
 }

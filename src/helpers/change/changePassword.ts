@@ -1,4 +1,5 @@
 import { apiChangePassword } from "../../apiRequests/change/apiChangePassword";
+import { ProfileChangeModalWindow } from "../creators/profile/profileChangeModalWindow";
 
 export async function changePassword(password: string): Promise<boolean> {
   const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
@@ -7,12 +8,16 @@ export async function changePassword(password: string): Promise<boolean> {
   let result = true;
   if (!passwordPattern.test(password)) {
     //TODO: добавить уведомление, что старый пароль не подходит под паттерн
-    console.log("старый пароль не подходит под паттерн");
+    ProfileChangeModalWindow(false, "Changes were not saved", "You entered the wrong password");
     result = false;
   }
   if (!passwordPattern.test(newPasswordInput.value)) {
     //TODO: добавить уведомление, что новый пароль не подходит под паттерн
-    console.log("новый пароль не подходит под паттерн");
+    ProfileChangeModalWindow(
+      false,
+      "Changes were not saved",
+      "The new password must be at least 8 characters. Must include uppercase and lowercase letters of the English alphabet",
+    );
     result = false;
   }
 
@@ -21,5 +26,6 @@ export async function changePassword(password: string): Promise<boolean> {
 
   if (!result) return result;
   await apiChangePassword(customerId, password, newPasswordInput.value);
+  ProfileChangeModalWindow(result, "Changes saved", "");
   return result;
 }
