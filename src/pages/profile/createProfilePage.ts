@@ -14,6 +14,7 @@ export async function createProfilePage() {
   const customerId = localStorage.getItem("customerId");
   if (!customerId) return;
   const customer = await getCustomerById(customerId);
+  console.log(customer);
 
   const emailBlock = profileChangeBlock("email", "inform__email", customer.email);
 
@@ -35,7 +36,8 @@ export async function createProfilePage() {
     let billingAddress;
     if (shippingAddresses.includes(element.id)) {
       shippingAddress = profileChangeAddress(
-        "shipping-address",
+        element.id,
+        "profile-inform_shippingAddress",
         element.city,
         element.postalCode,
         element.streetName,
@@ -50,7 +52,8 @@ export async function createProfilePage() {
     }
     if (billingAddresses.includes(element.id)) {
       billingAddress = profileChangeAddress(
-        "billing-address",
+        element.id,
+        "profile-inform_billingAddress",
         element.city,
         element.postalCode,
         element.streetName,
