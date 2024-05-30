@@ -9,11 +9,7 @@ export async function changeEmail(email: string): Promise<boolean> {
   }
 
   if (!result) {
-    ProfileChangeModalWindow(
-      result,
-      "Changes were not saved",
-      "Write true e-mail",
-    );
+    ProfileChangeModalWindow(result, "Changes were not saved", "Write true e-mail");
     return result;
   }
 
@@ -23,11 +19,7 @@ export async function changeEmail(email: string): Promise<boolean> {
   const newEmail = await apiChangeEmail(customerId, email);
   //TODO: добавить уведомление об занятом email
   if (newEmail.statusCode === 400) {
-    ProfileChangeModalWindow(
-      false,
-      "Changes were not saved",
-      "This email is already in use",
-    );
+    ProfileChangeModalWindow(false, "Changes were not saved", "This email is already in use");
   } else {
     ProfileChangeModalWindow(result, "Changes saved", "");
   }
