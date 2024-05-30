@@ -3,6 +3,7 @@ import { profileChangeAddress } from "../../helpers/creators/profile/profileChan
 import { getCustomerById } from "../../apiRequests/getCustomerById";
 import { createElement } from "../../helpers/creators/createElement";
 import { Address } from "../../helpers/interfaces/Address";
+import { passwordWrapper } from "../../helpers/creators/profile/passwordWrapper";
 
 export async function createProfilePage() {
   const content = document.querySelector(".content") as HTMLDivElement;
@@ -19,9 +20,10 @@ export async function createProfilePage() {
   const nameBlock = profileChangeBlock("text", "inform__name", customer.firstName);
   const surnameBlock = profileChangeBlock("text", "inform__lastName", customer.lastName);
   const birthBlock = profileChangeBlock("date", "inform__birth", customer.dateOfBirth);
-  const passwordBlock = profileChangeBlock("password", "inform__password", customer.password);
 
-  profileWrapper.append(emailBlock, nameBlock, surnameBlock, birthBlock, passwordBlock);
+  const passportBlock = passwordWrapper();
+
+  profileWrapper.append(emailBlock, nameBlock, surnameBlock, birthBlock, passportBlock);
   content.append(profileWrapper);
 
   const allAdresses = customer.addresses;
