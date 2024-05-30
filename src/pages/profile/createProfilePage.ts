@@ -3,6 +3,7 @@ import { profileChangeAddress } from "../../helpers/creators/profile/profileChan
 import { getCustomerById } from "../../apiRequests/getCustomerById";
 import { createElement } from "../../helpers/creators/createElement";
 import { Address } from "../../helpers/interfaces/Address";
+import { passwordWrapper } from "../../helpers/creators/profile/passwordWrapper";
 
 export async function createProfilePage() {
   const content = document.querySelector(".content") as HTMLDivElement;
@@ -13,15 +14,17 @@ export async function createProfilePage() {
   const customerId = localStorage.getItem("customerId");
   if (!customerId) return;
   const customer = await getCustomerById(customerId);
+  console.log(customer);
 
   const emailBlock = profileChangeBlock("email", "inform__email", customer.email);
 
   const nameBlock = profileChangeBlock("text", "inform__name", customer.firstName);
   const surnameBlock = profileChangeBlock("text", "inform__lastName", customer.lastName);
   const birthBlock = profileChangeBlock("date", "inform__birth", customer.dateOfBirth);
-  const passwordBlock = profileChangeBlock("password", "inform__password", customer.password);
 
-  profileWrapper.append(emailBlock, nameBlock, surnameBlock, birthBlock, passwordBlock);
+  const passportBlock = passwordWrapper();
+
+  profileWrapper.append(emailBlock, nameBlock, surnameBlock, birthBlock, passportBlock);
   content.append(profileWrapper);
 
   const allAdresses = customer.addresses;
@@ -33,7 +36,8 @@ export async function createProfilePage() {
     let billingAddress;
     if (shippingAddresses.includes(element.id)) {
       shippingAddress = profileChangeAddress(
-        "shipping-address",
+        element.id,
+        "profile-inform_shippingAddress",
         element.city,
         element.postalCode,
         element.streetName,
@@ -48,7 +52,8 @@ export async function createProfilePage() {
     }
     if (billingAddresses.includes(element.id)) {
       billingAddress = profileChangeAddress(
-        "billing-address",
+        element.id,
+        "profile-inform_billingAddress",
         element.city,
         element.postalCode,
         element.streetName,

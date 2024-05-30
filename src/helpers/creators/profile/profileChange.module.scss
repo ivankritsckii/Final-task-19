@@ -85,3 +85,21 @@
 .isDefaulth_Billing {
   border: 2px solid brown;
 }
+
+.password-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.password-block {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.password-title {
+  width: 30%;
+}

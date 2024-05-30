@@ -2,7 +2,7 @@ export function createInput(
   type: string,
   className: string,
   name: string,
-  id: string,
+  id?: string,
   required = true,
   minLength = 0,
   title = "",
@@ -11,7 +11,7 @@ export function createInput(
   input.classList.add(className);
   input.type = type;
   input.name = name;
-  input.id = id;
+  if (id) input.id = id;
   input.required = required;
   if (minLength) {
     input.minLength = minLength;
