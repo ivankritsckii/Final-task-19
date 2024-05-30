@@ -41,17 +41,20 @@ export function profileChangeAddress(
   const editButton = createElement("div", "profile-inform__edit", "edit");
   editButton.classList.add("profile-inform-address__edit");
   editButton.addEventListener("click", () => {
-    saveButton.classList.toggle("profile-inform-address__save_disable");
+    if (editButton.classList.contains("disable_btn")) return;
     activateInput(buttonsBlock);
+    editButton.classList.add("disable_btn");
   });
   const saveButton = createElement("div", "profile-inform__save", "save");
-  saveButton.classList.add("profile-inform-address__save", "profile-inform-address__save_disable");
-  saveButton.addEventListener("click", () => {
-    if (saveButton.classList.contains("profile-inform-address__save_disable")) return;
-    changeAddress(wrapper);
-  });
   buttonsBlock.append(editButton, saveButton);
 
-  wrapper.append(cityInput, postcodeInput, streetInput, houseInput, apartmentInput, buttonsBlock);
+  wrapper.append(
+    cityInput,
+    postcodeInput,
+    streetInput,
+    houseInput,
+    apartmentInput,
+    buttonsBlock,
+  );
   return wrapper;
 }
