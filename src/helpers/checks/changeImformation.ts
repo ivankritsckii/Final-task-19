@@ -6,8 +6,7 @@ import { changePassword } from "../change/changePassword";
 
 export function changeImformation(idInput: string): void {
   const input = document.getElementById(idInput) as HTMLInputElement;
-  console.log(idInput);
-  //TODO: добавить другие команды к инпутам
+
   const comands = {
     inform__email: () => changeEmail(input.value),
     inform__name: () => changeName(input.value),
@@ -15,6 +14,6 @@ export function changeImformation(idInput: string): void {
     inform__birth: () => changeBirth(input.value),
     inform__password: () => changePassword(input.value),
   } as unknown as { [key: string]: () => boolean };
-  console.log(comands[idInput]);
+
   comands[idInput] && comands[idInput]();
 }
