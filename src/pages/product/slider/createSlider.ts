@@ -11,12 +11,12 @@ export function createSlider(data: Array<{ url: string }>): HTMLElement {
     img.className = i === 0 ? "slides active" : "slides";
     sliderWrapper.appendChild(img);
     const controller = document.createElement("input");
-    controller.id = `controller${i + 1}`;
+    controller.id = `controller${i + 1 + Math.random()}`;
     controller.className = "controller";
     controller.type = "radio";
     if (i === 0) controller.checked = true;
     const label = document.createElement("label");
-    label.setAttribute("for", `controller${i + 1}`);
+    label.setAttribute("for", `${controller.id}`);
     sliderControllerWrapper.append(controller, label);
   });
 

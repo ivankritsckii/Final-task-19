@@ -26,8 +26,9 @@ export async function createSingleProductPage(product: Result): Promise<void> {
   const priceBlock = await createPriceBlock(product);
 
   productPage.append(categoriesBlock, productPageWrapper, priceBlock);
+  const sliderModal = createSlider(product.masterData.current.masterVariant.images);
   content.append(productPage);
   changeSlide();
-  createSliderModal();
+  createSliderModal(sliderModal);
   openSliderModal();
 }
