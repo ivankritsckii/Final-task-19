@@ -15,7 +15,7 @@ export async function createProfilePage() {
   const customerId = localStorage.getItem("customerId");
   if (!customerId) return;
   const customer = await getCustomerById(customerId);
-
+  console.log(customer);
   const emailBlock = profileChangeBlock("email", "inform__email", customer.email);
 
   const nameBlock = profileChangeBlock("text", "inform__name", customer.firstName);
@@ -65,10 +65,13 @@ export async function createProfilePage() {
         element.streetName,
         element.building,
         element.apartment,
+        customer.defaultShippingAddressId,
+        customer.id,
       );
       if (element.id === customer.defaultShippingAddressId) {
         const defaulthShipping = createElement("div", "isDefaulth", "this is the default shipping address");
         defaulthShipping.classList.add("isDefaulth_Shipping");
+        shippingAddress.classList.add("isDefaulth_Shipping");
         shippingAddress.prepend(defaulthShipping);
       }
     }
@@ -82,10 +85,13 @@ export async function createProfilePage() {
         element.streetName,
         element.building,
         element.apartment,
+        customer.defaultBillingAddressId,
+        customer.id,
       );
       if (element.id === customer.defaultBillingAddressId) {
         const defaulthBilling = createElement("div", "isDefaulth", "this is the default billing address");
         defaulthBilling.classList.add("isDefaulth_Billing");
+        billingAddress.classList.add("isDefaulth_Billing");
         billingAddress.prepend(defaulthBilling);
       }
     }

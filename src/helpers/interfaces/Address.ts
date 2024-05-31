@@ -9,4 +9,8 @@ export interface Address {
   lastName: string;
   postalCode: string;
   streetName: string;
+  shippingAddressIds: string[];
+  billingAddressIds: string[];
+  defaultShippingAddressId: string;
+  defaultBillingAddressId: string;
 }

@@ -32,7 +32,7 @@
   justify-content: center;
 }
 
-.profile-inform__edit {
+.profile-inform__edit, .profile-add__default {
   width: 70px;
   height: 30px;
   display: flex;
@@ -45,6 +45,10 @@
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
+}
+
+.profile-add__default{
+  width: 100px;
 }
 
 .profile-inform__save {

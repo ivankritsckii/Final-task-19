@@ -2,6 +2,10 @@ import { createElement } from "../createElement";
 import { createInput } from "../createInput";
 import { createSelectCountry } from "../createSelectCountry";
 import { activateInput } from "./activateInput";
+import { changeAddress } from "../../change/changeAddress";
+import { SetDefaultBillingAddress } from "../../../apiRequests/addAddress/SetDefaultBillingAddress";
+import { SetDefaultShippingAddress } from "../../../apiRequests/addAddress/SetDefaultShippingAddress";
+import { ProfileChangeModalWindow } from "../../creators/profile/profileChangeModalWindow";
 
 export function profileChangeAddress(
   addressId: string,
@@ -12,6 +16,8 @@ export function profileChangeAddress(
   street: string,
   house: string,
   apartment: string,
+  defaultAddressID: string,
+  customerId: string,
 ): HTMLElement {
   const wrapper = createElement("div", "profile-inform");
   wrapper.classList.add("profile-inform_address", wrapperClass, "profile-inform_disable");
@@ -59,7 +65,38 @@ export function profileChangeAddress(
   });
   const saveButton = createElement("div", "profile-inform__save", "save");
   saveButton.classList.add("profile-inform__save_disable");
-  buttonsBlock.append(editButton, saveButton);
+
+  const addDefaultAddress = createElement("div", "profile-add__default", "use as default");
+
+  if (defaultAddressID === addressId) addDefaultAddress.classList.add("profile-inform__save_disable");
+  addDefaultAddress.addEventListener("click", () => {
+    if (
+      wrapper.classList.contains("profile-inform_shippingAddress") &&
+      !addDefaultAddress.classList.contains("profile-inform__save_disable")
+    ) {
+      SetDefaultShippingAddress(customerId, addressId);
+      ProfileChangeModalWindow(true, "Changes saved", "Now you use this addres as default shipping");
+      addDefaultAddress.classList.add("profile-inform__save_disable");
+      const defaulthShipping = createElement("div", "isDefaulth", "this is the default shipping address");
+      defaulthShipping.classList.add("isDefaulth_Shipping");
+      wrapper.classList.add("isDefaulth_Shipping");
+      wrapper.prepend(defaulthShipping);
+    } else if (
+      wrapper.classList.contains("profile-inform_billingAddress") &&
+      !addDefaultAddress.classList.contains("profile-inform__save_disable")
+    ) {
+      console.log("billing_address_now");
+      SetDefaultBillingAddress(customerId, addressId);
+      ProfileChangeModalWindow(true, "Changes saved", "Now you use this addres as default billing");
+      addDefaultAddress.classList.add("profile-inform__save_disable");
+      const defaulthBilling = createElement("div", "isDefaulth", "this is the default billing address");
+      defaulthBilling.classList.add("isDefaulth_Billing");
+      wrapper.classList.add("isDefaulth_Billing");
+      wrapper.prepend(defaulthBilling);
+    }
+  });
+
+  buttonsBlock.append(editButton, saveButton, addDefaultAddress);
 
   wrapper.append(countryBlock, cityInput, postcodeInput, streetInput, houseInput, apartmentInput, buttonsBlock);
   saveButton.addEventListener("click", () => {
