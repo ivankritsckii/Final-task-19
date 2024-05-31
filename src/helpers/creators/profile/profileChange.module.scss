@@ -32,7 +32,7 @@
   justify-content: center;
 }
 
-.profile-inform__edit, .profile-add__default {
+.profile-inform__edit, .profile-add__default, .shipping-address__add, .billing-address__add {
   width: 70px;
   height: 30px;
   display: flex;
@@ -45,6 +45,10 @@
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
+}
+
+.shipping-address__add, .billing-address__add{
+  width: 150px;
 }
 
 .profile-add__default{
@@ -132,6 +136,10 @@ text-align: center;
   border-radius: 20px;
 }
 
+.addressesBtn-wrapper{
+  display: flex;
+  justify-content: space-around;
+}
 @media screen and (max-width: 500px) {
   .profile-inform {
     flex-direction: column;

@@ -43,7 +43,6 @@ export async function changeAddress(addressBlock: HTMLElement): Promise<boolean>
   if (!customerId) return false;
   if (!idAddress) return false;
 
-  //TODO: добавить уведомление об ошибке(какой?*) и успешной смене адреса
   await apiChangeAddress(
     customerId,
     idAddress,
