@@ -8,7 +8,8 @@ export async function createPriceBlock(product: Result): Promise<HTMLElement> {
   const priceBlock = createElement("div", "price-block");
   const pricesText = createElement("div", "prices");
   const price = createElement("span", "price", String(current.masterVariant.prices[0].value.centAmount / 100) + "$");
-  const buttonSend = createElement("button", "product__button", "SEND");
+  // const buttonSend = createElement("button", "product__button", "SEND");
+  const buttonSend = createElement("button", "login-btn-grad", "SEND");
 
   if (current.masterVariant.prices[0].discounted) {
     const discoundId = current.masterVariant.prices[0].discounted.discount.id;

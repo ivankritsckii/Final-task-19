@@ -13,6 +13,7 @@ export function changeActiveImage(target: HTMLElement): void {
     if (images[i] === target) {
       activeImg.classList.remove("image__active");
       activeImgCurrent.classList.remove("image-current__active");
+      console.log("ddd");
 
       images[i].classList.add("image__active");
       imagesCurrent[i].classList.add("image-current__active");

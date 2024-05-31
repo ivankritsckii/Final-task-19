@@ -7,6 +7,7 @@ export function createTextBlock(product: Result): HTMLElement {
   const description = createElement("p", "product__description", product.masterData.current.description.en);
 
   textBlock.append(name, description);
+  console.log("txt");
 
   return textBlock;
 }

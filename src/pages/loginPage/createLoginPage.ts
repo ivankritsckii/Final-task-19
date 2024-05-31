@@ -3,13 +3,13 @@ import "@fortawesome/fontawesome-free/js/all.js";
 import { loginFormValidation } from "./loginValidation";
 import { showPassword } from "./showPassword";
 import { fillEmail } from "./fillEmail";
-import { apiAuthorizeUser } from "../apiRequests/apiAuthCustomer";
+import { apiAuthorizeUser } from "../../apiRequests/apiAuthCustomer";
 import { rememberEmail } from "./rememberCustomer";
 import { validateEmail } from "./validateEmail";
 import { validatePassword } from "./validatePassword";
-import { isLoggedIn } from "../helpers/checks/isLoggedIn";
-import { route } from "../router/route";
-import { createNotification } from "../notification/createNotificationElem";
+import { isLoggedIn } from "../../helpers/checks/isLoggedIn";
+import { route } from "../../router/route";
+import { createNotification } from "../../notification/createNotificationElem";
 
 export function createLoginForm(): void {
   if (isLoggedIn()) {

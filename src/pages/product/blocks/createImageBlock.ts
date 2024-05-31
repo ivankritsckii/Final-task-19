@@ -4,6 +4,8 @@ import { createImage } from "../../../helpers/creators/createImage";
 import { changeActiveImage } from "../changeActiveImage";
 
 export function createImageBlock(product: Result): HTMLElement {
+  console.log(product);
+
   const current = product.masterData.current;
   const images = current.masterVariant.images;
   const imageBlock = createElement("div", "image-block");
