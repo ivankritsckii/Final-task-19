@@ -5,6 +5,7 @@ import { activateInput } from "./activateInput";
 import { changeAddress } from "../../change/changeAddress";
 import { SetDefaultBillingAddress } from "../../../apiRequests/addAddress/SetDefaultBillingAddress";
 import { SetDefaultShippingAddress } from "../../../apiRequests/addAddress/SetDefaultShippingAddress";
+import { deleteAddressId } from "../../../apiRequests/addAddress/deleteAddressId";
 import { ProfileChangeModalWindow } from "../../creators/profile/profileChangeModalWindow";
 
 export function profileChangeAddress(
@@ -69,6 +70,7 @@ export function profileChangeAddress(
   const addDefaultAddress = createElement("div", "profile-add__default", "use as default");
 
   if (defaultAddressID === addressId) addDefaultAddress.classList.add("profile-inform__save_disable");
+
   addDefaultAddress.addEventListener("click", () => {
     if (
       wrapper.classList.contains("profile-inform_shippingAddress") &&
@@ -95,8 +97,19 @@ export function profileChangeAddress(
       wrapper.prepend(defaulthBilling);
     }
   });
+  const deleteAddres = createElement("div", "profile-add__default", "delete");
+  const allAddreses = document.querySelectorAll(".profile-inform_address");
+  console.log(allAddreses);
+  if (allAddreses.length < 1) {
+    deleteAddres.classList.add("disable_btn");
+  } else {
+    deleteAddres.addEventListener("click", () => {
+      deleteAddressId(customerId, addressId);
+      wrapper.innerHTML = `Address was deleted`;
+    });
+  }
 
-  buttonsBlock.append(editButton, saveButton, addDefaultAddress);
+  buttonsBlock.append(editButton, saveButton, addDefaultAddress, deleteAddres);
 
   wrapper.append(countryBlock, cityInput, postcodeInput, streetInput, houseInput, apartmentInput, buttonsBlock);
   saveButton.addEventListener("click", () => {

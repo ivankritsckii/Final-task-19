@@ -131,3 +131,12 @@ text-align: center;
   top: 100px;
   border-radius: 20px;
 }
+
+@media screen and (max-width: 500px) {
+  .profile-inform {
+    flex-direction: column;
+  }
+  .profile-inform-buttons{
+    flex-wrap: wrap;
+  }
+}
