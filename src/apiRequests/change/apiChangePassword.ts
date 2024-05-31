@@ -1,4 +1,5 @@
 import { getCustomerById } from "../getCustomerById";
+import { ProfileChangeModalWindow } from "../../helpers/creators/profile/profileChangeModalWindow";
 
 export async function apiChangePassword(idCustomer: string, password: string, newPassword: string) {
   const myHeaders = new Headers();
@@ -31,8 +32,9 @@ export async function apiChangePassword(idCustomer: string, password: string, ne
     const result = await response.text();
     const json = JSON.parse(result);
     if (json.statusCode === 400) {
-      //TODO: добавить уведомление, что старый пароль неверно указан
-      console.log("старый пароль неверный");
+      ProfileChangeModalWindow(false, "Changes were not saved", "Enter your password");
+    } else {
+      ProfileChangeModalWindow(true, "Changes saved", "");
     }
     return json;
   } catch (error) {

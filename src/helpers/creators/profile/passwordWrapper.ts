@@ -45,6 +45,8 @@ export function passwordWrapper(): HTMLElement {
   saveButton.classList.add("profile-inform__save_disable");
   saveButton.addEventListener("click", () => {
     if (saveButton.classList.contains("profile-inform__save_disable")) return;
+    activateInput(passwordInput);
+    activateInput(newPasswordInput);
     editButton.classList.remove("disable_btn");
     saveButton.classList.add("profile-inform__save_disable");
     changeImformation(passwordInput.id);

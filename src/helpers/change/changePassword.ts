@@ -26,6 +26,5 @@ export async function changePassword(password: string): Promise<boolean> {
 
   if (!result) return result;
   await apiChangePassword(customerId, password, newPasswordInput.value);
-  ProfileChangeModalWindow(result, "Changes saved", "");
   return result;
 }
