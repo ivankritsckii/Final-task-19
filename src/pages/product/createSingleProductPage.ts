@@ -1,27 +1,34 @@
 import { Result } from "../../helpers/interfaces/Results";
-import { createElement } from "../../helpers/creators/createElement";
-import { createImageBlock } from "./blocks/createImageBlock";
 import { createCategoriesBlock } from "./blocks/createCategoriesBlock";
-import { createTextBlock } from "./blocks/createTextBlock";
 import { createPriceBlock } from "./blocks/createPriceBlock";
-const styles = require("./singleProductPage.module.scss");
+import { createSlider } from "./slider/createSlider";
+import { changeSlide } from "./slider/changeSlide";
+import { createProductDescr } from "./productDescr/createProductDescr";
+import { openSliderModal } from "./sliderModal/openSliderModal";
+import { createSliderModal } from "./sliderModal/createSliderModal";
+import "./singleProductPage.module.scss";
 
 export async function createSingleProductPage(product: Result): Promise<void> {
   const content = document.querySelector(".content") as HTMLDivElement;
   content.innerHTML = "";
 
-  const productWrapper = createElement("div", styles.product);
+  const productPage: HTMLDivElement = document.createElement("div");
+  productPage.className = "productPage";
+
+  const productPageWrapper: HTMLDivElement = document.createElement("div");
+  productPageWrapper.className = "productPageWrapper";
+
+  const slider = createSlider(product.masterData.current.masterVariant.images);
+  const description = createProductDescr(product);
+  productPageWrapper.append(slider, description);
 
   const categoriesBlock = createCategoriesBlock(product);
-  const imageBlock = createImageBlock(product);
-  const textBlock = createTextBlock(product);
   const priceBlock = await createPriceBlock(product);
 
-  productWrapper.append(categoriesBlock, imageBlock, priceBlock, textBlock);
-  content.append(productWrapper);
-
-  const firstImg = document.querySelector(".image") as HTMLImageElement;
-  firstImg.classList.add("image__active");
-  const firstImgCurrent = document.querySelector(".image-current") as HTMLImageElement;
-  firstImgCurrent.classList.add("image-current__active");
+  productPage.append(categoriesBlock, productPageWrapper, priceBlock);
+  const sliderModal = createSlider(product.masterData.current.masterVariant.images);
+  content.append(productPage);
+  changeSlide();
+  createSliderModal(sliderModal);
+  openSliderModal();
 }
