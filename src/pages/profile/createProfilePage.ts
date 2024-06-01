@@ -5,6 +5,7 @@ import { createElement } from "../../helpers/creators/createElement";
 import { Address } from "../../helpers/interfaces/Address";
 import { passwordWrapper } from "../../helpers/creators/profile/passwordWrapper";
 import { showAddress } from "../../helpers/creators/profile/showAddress";
+import { modalCreateNewAddress } from "../../helpers/creators/profile/modalCreateNewAddress";
 
 export async function createProfilePage() {
   const content = document.querySelector(".content") as HTMLDivElement;
@@ -29,6 +30,11 @@ export async function createProfilePage() {
   });
   const addressesWrapper = createElement("div", "addresses-wrapper");
 
+  const createNewAddressButton = createElement("div", "create-address", "create new address?", "create-address");
+  createNewAddressButton.addEventListener("click", () => {
+    modalCreateNewAddress();
+  });
+
   profileWrapper.append(
     emailBlock,
     nameBlock,
@@ -37,6 +43,7 @@ export async function createProfilePage() {
     passwortBlock,
     addresessesSelect,
     addressesWrapper,
+    createNewAddressButton,
   );
   content.append(profileWrapper);
 
