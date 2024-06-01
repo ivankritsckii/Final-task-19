@@ -9,6 +9,9 @@ import { loading } from "../modules/loading/loading";
 import { createSingleProductPage } from "../pages/product/createSingleProductPage";
 import { createLoginForm } from "../pages/loginPage/createLoginPage";
 import { isLoggedIn } from "../helpers/checks/isLoggedIn";
+import { createCategoriesPage } from "../pages/categories/createCategoriesPage";
+import { createCategoryPage } from "../pages/categories/category/categoryPage";
+import { createProfilePage } from "../pages/profile/createProfilePage";
 let isPageGoBack = false;
 
 export const route = (path: string, id?: string): Promise<void> => {
@@ -22,8 +25,13 @@ export const route = (path: string, id?: string): Promise<void> => {
       "": createProductsPage,
       "#registration": registrationPage,
       "#login": createLoginForm,
+      "#categories": createCategoriesPage,
+      "#chocolate": createCategoryPage,
+      "#milk-chocolate": createCategoryPage,
+      "#dark-chocolate": createCategoryPage,
+      "#assorted": createCategoryPage,
       //"#about": aboutPage,
-      //"#profile": profilePage,
+      "#profile": createProfilePage,
     };
 
     const urlRoute = () => {

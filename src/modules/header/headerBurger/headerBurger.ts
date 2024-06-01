@@ -20,6 +20,16 @@ export function headerBurger(parrent: HTMLElement): void {
     route(linkMain.href);
   });
 
+  const itemCategories = createElement("li", "nav-burger__item");
+  const linkCategories = createLink("nav-burger__link", "#categories", false);
+  itemCategories.append(linkCategories);
+  linkCategories.textContent = "Categories";
+  linkCategories.addEventListener("click", (event: Event) => {
+    event.preventDefault();
+    burgerStatus();
+    route(linkCategories.href);
+  });
+
   const itemAboutUs = createElement("li", "nav-burger__item");
   const linkAboutUs = createLink("nav-burger__link", "#aboutUs", false);
   itemAboutUs.append(linkAboutUs);
@@ -28,6 +38,20 @@ export function headerBurger(parrent: HTMLElement): void {
     event.preventDefault();
     burgerStatus();
     route(linkAboutUs.href);
+  });
+
+  const itemProfile = createElement("li", "nav-burger__item");
+  itemProfile.classList.add("nav-burger__item_profile");
+  if (!localStorage.getItem("customerId")) {
+    itemProfile.classList.add("nav-burger__item_disable");
+  }
+  const linkProfile = createLink("nav-burger__link", "#profile", false);
+  itemProfile.append(linkProfile);
+  linkProfile.textContent = "Profile";
+  linkProfile.addEventListener("click", (event: Event) => {
+    event.preventDefault();
+    burgerStatus();
+    route(linkProfile.href);
   });
 
   const itemRegistration = createElement("li", "nav-burger__item");
@@ -68,7 +92,7 @@ export function headerBurger(parrent: HTMLElement): void {
     burgerStatus();
   });
 
-  list.append(itemMain, itemAboutUs, itemRegistration, itemLogin, itemLogout);
+  list.append(itemMain, itemCategories, itemAboutUs, itemProfile, itemRegistration, itemLogin, itemLogout);
   nav.append(list);
   parrent.append(burgerButtonParent);
   burgerButtonParent.append(burgerButton);

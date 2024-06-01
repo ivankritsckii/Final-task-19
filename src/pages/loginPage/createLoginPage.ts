@@ -14,6 +14,7 @@ import { createNotification } from "../../notification/createNotificationElem";
 export function createLoginForm(): void {
   if (isLoggedIn()) {
     route(window.location.origin);
+    return;
   }
 
   const forma: HTMLFormElement = document.createElement("form");
@@ -55,7 +56,6 @@ export function createLoginForm(): void {
           if (authorize) {
             // rememberEmail();
             createNotification("success", "Login successful! Welcome back.");
-            console.log(authorize);
             setTimeout(() => route(window.location.origin), 2000);
           }
         })

@@ -31,7 +31,7 @@ export const loginUser = async (accessToken: string, email: string, password: st
     }
     const result = await response.json();
     createNotification("success", "Login successful! Welcome back.");
-    // setTimeout(() => route(""), 3000);
+    localStorage.setItem("customerId", result.customer.id);
     return result;
   } catch (error) {
     createNotification("error", "Authentication failed. Verify your Email and Password and  try again.");
