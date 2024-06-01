@@ -16,4 +16,10 @@ export function createSliderModal(slider: HTMLElement): void {
   closeModal.addEventListener("click", () => {
     modalWrapper.classList.remove("active");
   });
+
+  modalWrapper.addEventListener("click", (event) => {
+    if (event.target === modalWrapper) {
+      modalWrapper.classList.remove("active");
+    }
+  });
 }

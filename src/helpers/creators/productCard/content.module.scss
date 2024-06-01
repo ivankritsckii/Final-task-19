@@ -6,15 +6,20 @@
   cursor: pointer;
   text-decoration: none;
   overflow: hidden;
+  border-radius: 20px;
 }
 .card {
   width: 30vw;
   height: fit-content;
+  // min-height: 550px;
   border-radius: 20px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
+  border: 2px solid #646cff;
+  // box-shadow: 0 0 5px #646cff;
+  background-color: #1c26427f;
 }
 
 .card__image {
@@ -25,6 +30,8 @@
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
+  box-shadow: 0 0 10px #646cff;
+  border-color: #646cff;
 }
 
 .card__description {
@@ -36,15 +43,21 @@
 }
 
 .card-link:hover .card__name {
-  color: blue;
+  color: #646cff;
 }
+
+.card-link:hover {
+  box-shadow: 0 0 20px #646cff;
+}
+
 .card__name {
-  color: black;
+  color: #d1d1d1;
   font-size: 1.5rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  text-align: center;
   text-overflow: ellipsis;
   width: 100%;
 }
@@ -58,13 +71,13 @@
 }
 
 .card__discound {
-  color: yellowgreen;
+  color: #646cff;
 }
 .card__price {
-  color: yellowgreen;
+  color: #646cff;
 }
 .card__price_inactive {
-  color: grey;
+  color: #fb8500;
   text-decoration: line-through;
 }
 

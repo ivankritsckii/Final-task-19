@@ -5,19 +5,24 @@
   align-items: center;
   justify-content: space-around;
   font-size: 2rem;
-  background-color: rgb(86, 86, 137);
+  // background-color: rgb(86, 86, 137);
+  background-color: #1b263b;
 }
 .creators {
   display: flex;
   gap: 20px;
-  color: aliceblue;
+  color: #646cff;
 }
 .creator {
-  color: aliceblue;
+  color: #d1d1d1;
   text-decoration: none;
 }
 .year {
-  color: aliceblue;
+  color: #646cff;
+}
+
+.creator:hover {
+  color: #454ef8;
 }
 
 @media (max-width: 600px) {
