@@ -11,7 +11,7 @@ export function AddNewAddres(
   addressParent: HTMLElement,
   countAddresses: number,
   clientId: string,
-) {
+): void {
   const addShippingAddres = createElement("div", "shipping-address__add", "Add Shiping Addres");
   addShippingAddres.classList.add("profile-inform-address__edit");
   const addBillingAddres = createElement("div", "billing-address__add", "Add Billing Addres");
@@ -23,17 +23,17 @@ export function AddNewAddres(
   parent.append(addShippingAddres, addBillingAddres);
 
   const select = document.getElementById("select-address") as HTMLSelectElement;
-  addShippingAddres.addEventListener("click", () => {
-    const newShippindAddres = profileChangeAddress(
+  addShippingAddres.addEventListener("click", async () => {
+    const newShippindAddres = await profileChangeAddress(
       "",
-      "profile-inform_shippingAddress",
-      "",
-      "",
+      //"profile-inform_shippingAddress",
       "",
       "",
       "",
       "",
       "",
+      "",
+      //"",
       "",
     );
     console.log(newShippindAddres);
@@ -99,8 +99,8 @@ export function AddNewAddres(
     });
     showAddress();
   });
-  addBillingAddres.addEventListener("click", () => {
-    const newShippindAddres = profileChangeAddress("", "profile-inform_billingAddress", "", "", "", "", "", "", "", "");
+  addBillingAddres.addEventListener("click", async () => {
+    const newShippindAddres = await profileChangeAddress("", "", "", "", "", "", "", "");
     console.log(newShippindAddres);
     const addressOption = createElement(
       "option",
