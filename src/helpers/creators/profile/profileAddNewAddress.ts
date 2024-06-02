@@ -92,7 +92,9 @@ export function AddNewAddres(
           apartment.value,
         );
         ProfileChangeModalWindow(true, "Changes saved", "You add new shipping addres");
-        await AddShippingAddressId(clientId, address.addresses[countAddresses - 2].id);
+        if (address.addresses[countAddresses - 2]) {
+          await AddShippingAddressId(clientId, address.addresses[countAddresses - 2].id);
+        }
       }
     });
     showAddress();
@@ -153,7 +155,9 @@ export function AddNewAddres(
           apartment.value,
         );
         ProfileChangeModalWindow(true, "Changes saved", "You add new billing addres");
-        await AddBillingAddressId(clientId, address.addresses[countAddresses - 2].id);
+        if (address.addresses[countAddresses - 2]) {
+          await AddBillingAddressId(clientId, address.addresses[countAddresses - 2].id);
+        }
       }
     });
     showAddress();
