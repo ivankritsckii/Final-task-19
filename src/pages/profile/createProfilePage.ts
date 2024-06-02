@@ -5,6 +5,7 @@ import { createElement } from "../../helpers/creators/createElement";
 import { Address } from "../../helpers/interfaces/Address";
 import { passwordWrapper } from "../../helpers/creators/profile/passwordWrapper";
 import { showAddress } from "../../helpers/creators/profile/showAddress";
+import { AddNewAddres } from "../../helpers/creators/profile/profileAddNewAddress";
 
 export async function createProfilePage() {
   const content = document.querySelector(".content") as HTMLDivElement;
@@ -27,6 +28,7 @@ export async function createProfilePage() {
   addresessesSelect.addEventListener("change", () => {
     showAddress();
   });
+  const addAddressButtonWraper = createElement("div", "addressesBtn-wrapper");
   const addressesWrapper = createElement("div", "addresses-wrapper");
 
   profileWrapper.append(
@@ -36,6 +38,7 @@ export async function createProfilePage() {
     birthBlock,
     passwortBlock,
     addresessesSelect,
+    addAddressButtonWraper,
     addressesWrapper,
   );
   content.append(profileWrapper);
@@ -103,4 +106,5 @@ export async function createProfilePage() {
   });
 
   showAddress();
+  AddNewAddres(addAddressButtonWraper, addressesWrapper, countAddresses, customerId);
 }
