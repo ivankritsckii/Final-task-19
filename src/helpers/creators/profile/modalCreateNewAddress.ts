@@ -1,3 +1,5 @@
+import { createNewAddress } from "../../../apiRequests/addAddress/createNewAddress";
+import { createProfilePage } from "../../../pages/profile/createProfilePage";
 import { checkCreateAddressForm } from "../../checks/checkCreateAddressForm";
 import { createElement } from "../createElement";
 import { createInput } from "../createInput";
@@ -5,6 +7,8 @@ import { createSelectCountry } from "../createSelectCountry";
 
 export function modalCreateNewAddress(): void {
   const content = document.getElementById("content") as HTMLDivElement;
+  const customerId = localStorage.getItem("customerId");
+  if (!customerId) return; //заглушка
 
   const modalWrapper = createElement("div", "create-wrapper");
   modalWrapper.addEventListener("click", (event: Event) => {
@@ -86,8 +90,12 @@ export function modalCreateNewAddress(): void {
   apartmentBlock.append(apartmentInput, apartmentLabel);
 
   const saveButton = createElement("div", "create-inform__save", "save");
-  saveButton.addEventListener("click", () => {
+  saveButton.addEventListener("click", async () => {
     checkCreateAddressForm();
+    if (checkCreateAddressForm()) {
+      await createNewAddress(customerId);
+      createProfilePage();
+    }
   });
 
   modalBody.append(countryBlock, cityBlock, postcodeBlock, streetBlock, houseBlock, apartmentBlock, saveButton);
