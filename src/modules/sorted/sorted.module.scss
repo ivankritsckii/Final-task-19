@@ -39,18 +39,30 @@
   align-items: center;
   gap: 20px;
   padding: 5px 5px 20px 5px;
-  background-color: aliceblue;
-  border: 2px solid grey;
+  // background-color: aliceblue;
+  background-color: #454ef8;
+  border: 2px solid #2724dc;
   border-radius: 20px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
-  transition: width 1s, height 1s;
-  -webkit-transition: width 1s, height 1s;
-  -moz-transition: width 1s, height 1s;
-  -ms-transition: width 1s, height 1s;
-  -o-transition: width 1s, height 1s;
+  transition:
+    width 1s,
+    height 1s;
+  -webkit-transition:
+    width 1s,
+    height 1s;
+  -moz-transition:
+    width 1s,
+    height 1s;
+  -ms-transition:
+    width 1s,
+    height 1s;
+  -o-transition:
+    width 1s,
+    height 1s;
+  color: white;
 }
 .filterFinder_hide {
   width: 0;
@@ -90,4 +102,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.reset-filters {
+  background-color: #2724dc;
+  color: white;
+  font-weight: bold;
+  border: radius 20px;
 }
