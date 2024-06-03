@@ -21,7 +21,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 60px;
+  //gap: 60px;
 }
 
 .prices {
@@ -202,6 +202,7 @@
 .productPage .price_irrelevant {
   color: #fb8500;
   text-decoration: line-through;
+  font-size: 1.5rem;
 }
 
 .productPage .price__description {

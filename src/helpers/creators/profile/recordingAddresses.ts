@@ -35,13 +35,11 @@ export async function recordingAddresses(select: HTMLElement): Promise<HTMLEleme
         if (element.id === customer.defaultShippingAddressId) {
           const defaulthShipping = createElement("div", "isDefaulth", "this is the default shipping address");
           defaulthShipping.classList.add("isDefaulth_Shipping");
-          address.classList.add("isDefaulth_Shipping");
           address.prepend(defaulthShipping);
         }
         if (element.id === customer.defaultBillingAddressId) {
           const defaulthBilling = createElement("div", "isDefaulth", "this is the default billing address");
           defaulthBilling.classList.add("isDefaulth_Billing");
-          address.classList.add("isDefaulth_Billing");
           address.prepend(defaulthBilling);
         }
 
