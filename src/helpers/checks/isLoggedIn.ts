@@ -9,6 +9,8 @@ export function isLoggedIn(): boolean {
   const notPageLogin = document.querySelector(".notPage-item_login") as HTMLLIElement;
   const notPageLogout = document.querySelector(".notPage-item_logout") as HTMLLIElement;
   const notPageRegistration = document.querySelector(".notPage-item_registration") as HTMLLIElement;
+  const profile = document.querySelector(".profile__btn") as HTMLLIElement;
+  const burgerProfile = document.querySelector(".nav-burger__item_profile") as HTMLLIElement;
 
   if (access) {
     logIn?.classList.add("nav__item_disable");
@@ -21,6 +23,8 @@ export function isLoggedIn(): boolean {
     logOut?.classList.remove("nav__item_disable");
     burgerLogout?.classList.remove("nav-burger__item_disable");
     notPageLogout?.classList.remove("notPage-item_disable");
+    profile.classList.remove("nav__item_disable");
+    burgerProfile.classList.remove("nav-burger__item_disable");
     return true;
   } else {
     logIn?.classList.remove("nav__item_disable");
@@ -33,6 +37,8 @@ export function isLoggedIn(): boolean {
     logOut?.classList.add("nav__item_disable");
     burgerLogout?.classList.add("nav-burger__item_disable");
     notPageLogout?.classList.add("notPage-item_disable");
+    profile.classList.add("nav__item_disable");
+    burgerProfile.classList.add("nav-burger__item_disable");
     return false;
   }
 }

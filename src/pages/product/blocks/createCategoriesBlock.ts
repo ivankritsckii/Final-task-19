@@ -13,7 +13,11 @@ export function createCategoriesBlock(product: Result): HTMLElement {
       if (href) {
         const category = createLink("category-link", "#" + href, false);
         category.textContent = href;
-        categoriesBlock.append(category);
+        if (href === "chocolate") {
+          categoriesBlock.prepend(category);
+        } else {
+          categoriesBlock.append(category);
+        }
       }
     });
   });
