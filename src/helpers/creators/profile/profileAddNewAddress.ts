@@ -27,7 +27,7 @@ export async function AddNewAddres(parent: HTMLElement, addressParent: HTMLEleme
       return;
     addShippingAddres.classList.add("disable_btn");
     addBillingAddres.classList.add("disable_btn");
-    const newShippindAddres = await profileChangeAddress(clientId, "", "", "", "", "", "", "");
+    const newShippindAddres = await profileChangeAddress(clientId, "", "", "", "", "", "", "", [""]);
     console.log(newShippindAddres);
     const addressOption = createElement(
       "option",
@@ -99,7 +99,7 @@ export async function AddNewAddres(parent: HTMLElement, addressParent: HTMLEleme
       return;
     addShippingAddres.classList.add("disable_btn");
     addBillingAddres.classList.add("disable_btn");
-    const newShippindAddres = await profileChangeAddress(clientId, "", "", "", "", "", "", "");
+    const newShippindAddres = await profileChangeAddress(clientId, "", "", "", "", "", "", "", [""]);
     console.log(newShippindAddres);
     const addressOption = createElement(
       "option",

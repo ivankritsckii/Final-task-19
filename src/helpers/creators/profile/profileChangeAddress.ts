@@ -15,6 +15,7 @@ export async function profileChangeAddress(
   street: string,
   house: string,
   apartment: string,
+  allAddreses: [string],
 ): Promise<HTMLElement> {
   const wrapper = createElement("div", "profile-inform");
   wrapper.classList.add("profile-inform_address", "profile-inform_disable");
@@ -66,13 +67,16 @@ export async function profileChangeAddress(
   saveButton.classList.add("profile-inform__save_disable");
 
   const deleteAddres = createElement("div", "profile-add__default", "delete");
-  const allAddreses = document.querySelectorAll(".profile-inform_address");
-  if (allAddreses.length < 1) {
+  if (allAddreses.length <= 1) {
     deleteAddres.classList.add("disable_btn");
   } else {
     deleteAddres.addEventListener("click", () => {
       deleteAddressId(customerId, addressId);
       wrapper.innerHTML = `Address was deleted`;
+      allAddreses.splice(allAddreses.length - 1, 1);
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
     });
   }
 
