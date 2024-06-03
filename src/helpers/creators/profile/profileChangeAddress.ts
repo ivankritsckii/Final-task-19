@@ -32,22 +32,27 @@ export async function profileChangeAddress(
   countryBlock.disabled = true;
 
   const cityInput = createInput("text", "profile-inform__input", "inform__city", "", false);
+  cityInput.placeholder = "Enter City";
   cityInput.value = city;
   cityInput.disabled = true;
 
   const postcodeInput = createInput("number", "profile-inform__input", "inform__postcode", "", false);
+  postcodeInput.placeholder = "Enter Postcode";
   postcodeInput.value = postcode;
   postcodeInput.disabled = true;
 
   const streetInput = createInput("text", "profile-inform__input", "inform__street", "", false);
+  streetInput.placeholder = "Enter Street";
   streetInput.value = street;
   streetInput.disabled = true;
 
   const houseInput = createInput("text", "profile-inform__input", "inform__house", "", false);
+  houseInput.placeholder = "Enter Building Number";
   houseInput.value = house;
   houseInput.disabled = true;
 
   const apartmentInput = createInput("number", "profile-inform__input", "inform__apartment", "", false);
+  apartmentInput.placeholder = "Enter Apartment Number";
   apartmentInput.value = apartment;
   apartmentInput.disabled = true;
 
@@ -92,13 +97,14 @@ export async function profileChangeAddress(
     checkboxWrapper,
     buttonsBlock,
   );
-  saveButton.addEventListener("click", () => {
+  saveButton.addEventListener("click", async () => {
     if (saveButton.classList.contains("profile-inform__save_disable")) return;
     console.log(wrapper);
-    changeAddress(wrapper);
+    await changeAddress(wrapper);
     activateInput(buttonsBlock);
     saveButton.classList.add("profile-inform__save_disable");
     editButton.classList.remove("disable_btn");
+    setTimeout(() => location.reload(), 1000);
   });
   return wrapper;
 }
