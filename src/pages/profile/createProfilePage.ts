@@ -3,8 +3,7 @@ import { getCustomerById } from "../../apiRequests/getCustomerById";
 import { createElement } from "../../helpers/creators/createElement";
 import { passwordWrapper } from "../../helpers/creators/profile/passwordWrapper";
 import { showAddress } from "../../helpers/creators/profile/showAddress";
-import { recordingAddresses } from "../../helpers/creators/profile/recordingAddresses";
-import { AddNewAddres } from "../../helpers/creators/profile/profileAddNewAddress";
+import { modalCreateNewAddress } from "../../helpers/creators/profile/modalCreateNewAddress";
 
 export async function createProfilePage(): Promise<void> {
   const content = document.querySelector(".content") as HTMLDivElement;
@@ -30,6 +29,11 @@ export async function createProfilePage(): Promise<void> {
   const addressesWrapper = createElement("div", "addresses-wrapper");
   const resultAddresses = await recordingAddresses(addresessesSelect);
 
+  const createNewAddressButton = createElement("div", "create-address", "create new address?", "create-address");
+  createNewAddressButton.addEventListener("click", () => {
+    modalCreateNewAddress();
+  });
+
   profileWrapper.append(
     emailBlock,
     nameBlock,
@@ -40,6 +44,7 @@ export async function createProfilePage(): Promise<void> {
     addAddressButtonWraper,
     resultAddresses,
     addressesWrapper,
+    createNewAddressButton,
   );
   content.append(profileWrapper);
   showAddress();
