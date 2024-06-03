@@ -28,7 +28,6 @@ export async function AddNewAddres(parent: HTMLElement, addressParent: HTMLEleme
     addShippingAddres.classList.add("disable_btn");
     addBillingAddres.classList.add("disable_btn");
     const newShippindAddres = await profileChangeAddress(clientId, "", "", "", "", "", "", "");
-    console.log(newShippindAddres);
     const addressOption = createElement(
       "option",
       "option-address",
@@ -73,7 +72,6 @@ export async function AddNewAddres(parent: HTMLElement, addressParent: HTMLEleme
         ProfileChangeModalWindow(false, "Changes were not saved", "Enter the correct apartment number");
         result = false;
       }
-      console.log(result);
       if (result) {
         const address = await apiAddFullAdress(
           clientId,
@@ -100,7 +98,6 @@ export async function AddNewAddres(parent: HTMLElement, addressParent: HTMLEleme
     addShippingAddres.classList.add("disable_btn");
     addBillingAddres.classList.add("disable_btn");
     const newShippindAddres = await profileChangeAddress(clientId, "", "", "", "", "", "", "");
-    console.log(newShippindAddres);
     const addressOption = createElement(
       "option",
       "option-address",

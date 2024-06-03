@@ -5,6 +5,7 @@ import { activateInput } from "./activateInput";
 import { changeAddress } from "../../change/changeAddress";
 import { deleteAddressId } from "../../../apiRequests/addAddress/deleteAddressId";
 import { checkboxBlock } from "./checkboxBlock";
+import { createProfilePage } from "../../../pages/profile/createProfilePage";
 
 export async function profileChangeAddress(
   customerId: string,
@@ -88,12 +89,13 @@ export async function profileChangeAddress(
     checkboxWrapper,
     buttonsBlock,
   );
-  saveButton.addEventListener("click", () => {
+  saveButton.addEventListener("click", async () => {
     if (saveButton.classList.contains("profile-inform__save_disable")) return;
-    changeAddress(wrapper);
+    await changeAddress(wrapper);
     activateInput(buttonsBlock);
     saveButton.classList.add("profile-inform__save_disable");
     editButton.classList.remove("disable_btn");
+    createProfilePage();
   });
   return wrapper;
 }

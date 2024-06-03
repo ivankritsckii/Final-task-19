@@ -42,7 +42,6 @@ export async function AddShippingAddressId(id: string, addressId: string) {
         console.log(error);
       }
     }
-    console.log(json);
     return json;
   } catch (error) {
     console.log(error);

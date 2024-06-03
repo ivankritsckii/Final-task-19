@@ -6,7 +6,6 @@ export async function checkboxBlock(customerId: string, addressId: string): Prom
   const customer = await getCustomerById(customerId);
   const shippingAddresses: [string] = customer.shippingAddressIds;
   const billingAddresses: [string] = customer.billingAddressIds;
-  console.log(shippingAddresses, addressId);
 
   const checkboxWrapper = createElement("div", "profile-inform__checkboxes");
   const checkboxShipping = createInput("checkbox", "profile-inform__checkbox", "checkbox-shipping", "", false);

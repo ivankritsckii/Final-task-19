@@ -49,7 +49,6 @@ export async function apiChangeAddress(
       `https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/customers/${idCustomer}`,
       requestOptions,
     );
-    console.log(response);
     const result = await response.text();
     const json = JSON.parse(result);
     return json;
