@@ -20,6 +20,15 @@ export function createHeader(parrent: HTMLElement): void {
     route(linkMain.href);
   });
 
+  const itemCategories = createElement("li", "nav__item");
+  const linkCategories = createLink("nav__link", "#categories", false);
+  itemCategories.append(linkCategories);
+  linkCategories.textContent = "Categories";
+  linkCategories.addEventListener("click", (event: Event) => {
+    event.preventDefault();
+    route(linkCategories.href);
+  });
+
   const itemAboutUs = createElement("li", "nav__item");
   const linkAboutUs = createLink("nav__link", "#aboutUs", false);
   itemAboutUs.append(linkAboutUs);
@@ -27,6 +36,20 @@ export function createHeader(parrent: HTMLElement): void {
   linkAboutUs.addEventListener("click", (event: Event) => {
     event.preventDefault();
     route(linkAboutUs.href);
+  });
+
+  const itemProfile = createElement("li", "nav__item");
+  itemProfile.classList.add("profile__btn");
+  if (!localStorage.getItem("customerId")) {
+    itemProfile.classList.add("nav__item_disable");
+  }
+  const linkProfile = createLink("nav__link", "#profile", false);
+  itemProfile.append(linkProfile);
+  linkProfile.textContent = "Profile";
+  linkProfile.style.textDecoration = "underline";
+  linkProfile.addEventListener("click", (event: Event) => {
+    event.preventDefault();
+    route(linkProfile.href);
   });
 
   const itemRegistration = createElement("li", "nav__item");
@@ -63,10 +86,10 @@ export function createHeader(parrent: HTMLElement): void {
   linkLogout.addEventListener("click", (event: Event) => {
     event.preventDefault();
     clearLocalStorage();
-    route(window.location.href);
+    route(window.location.origin);
   });
 
-  list.append(itemMain, itemAboutUs, itemRegistration, itemLogin, itemLogout);
+  list.append(itemMain, itemCategories, itemAboutUs, itemProfile, itemRegistration, itemLogin, itemLogout);
   nav.append(list);
   header.append(nav);
   parrent.append(header);

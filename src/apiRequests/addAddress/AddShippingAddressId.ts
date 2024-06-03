@@ -33,7 +33,7 @@ export async function AddShippingAddressId(id: string, addressId: string) {
     const result = await response.text();
     const json = JSON.parse(result);
     const useDefaulth = document.getElementById("defaulth-shipping") as HTMLInputElement;
-    if (useDefaulth.checked) {
+    if (useDefaulth && useDefaulth.checked) {
       const setDefaulth = SetDefaultShippingAddress(id, addressId);
       try {
         await setDefaulth;

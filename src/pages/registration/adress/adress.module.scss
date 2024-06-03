@@ -7,7 +7,9 @@
   justify-content: space-around;
   gap: 20px;
   padding: 10px 0;
-  border: 2px solid burlywood;
+  // border: 2px solid burlywood;
+  box-shadow: 0 0 5px #454ef8;
+  border-color: #454ef8;
   border-radius: 20px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
@@ -31,13 +33,14 @@
   height: 50%;
   padding: 0 30px;
   font-size: 1rem;
-  border: 1px solid saddlebrown;
+  border: 2px solid #454ef8;
+  background-color: beige;
   border-radius: 20px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
-  background-color: transparent;
+  // background-color: transparent;
 }
 
 .inform > .inform-block {
@@ -59,7 +62,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid gray;
+  border: 1px solid #2724dc;
   border-radius: 20px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
