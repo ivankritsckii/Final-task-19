@@ -4,6 +4,7 @@ import { createElement } from "../../helpers/creators/createElement";
 import { passwordWrapper } from "../../helpers/creators/profile/passwordWrapper";
 import { showAddress } from "../../helpers/creators/profile/showAddress";
 import { modalCreateNewAddress } from "../../helpers/creators/profile/modalCreateNewAddress";
+import { recordingAddresses } from "../../helpers/creators/profile/recordingAddresses";
 
 export async function createProfilePage(): Promise<void> {
   const content = document.querySelector(".content") as HTMLDivElement;
@@ -48,5 +49,5 @@ export async function createProfilePage(): Promise<void> {
   );
   content.append(profileWrapper);
   showAddress();
-  AddNewAddres(addAddressButtonWraper, addressesWrapper, customerId);
+  //AddNewAddres(addAddressButtonWraper, addressesWrapper, customerId);
 }
