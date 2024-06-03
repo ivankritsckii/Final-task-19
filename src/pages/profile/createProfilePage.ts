@@ -4,7 +4,7 @@ import { createElement } from "../../helpers/creators/createElement";
 import { passwordWrapper } from "../../helpers/creators/profile/passwordWrapper";
 import { showAddress } from "../../helpers/creators/profile/showAddress";
 import { recordingAddresses } from "../../helpers/creators/profile/recordingAddresses";
-//import { AddNewAddres } from "../../helpers/creators/profile/profileAddNewAddress";
+import { AddNewAddres } from "../../helpers/creators/profile/profileAddNewAddress";
 
 export async function createProfilePage(): Promise<void> {
   const content = document.querySelector(".content") as HTMLDivElement;
@@ -26,8 +26,8 @@ export async function createProfilePage(): Promise<void> {
   addresessesSelect.addEventListener("change", () => {
     showAddress();
   });
-  /*const addAddressButtonWraper = createElement("div", "addressesBtn-wrapper");
-  const addressesWrapper = createElement("div", "addresses-wrapper");*/
+  const addAddressButtonWraper = createElement("div", "addressesBtn-wrapper");
+  const addressesWrapper = createElement("div", "addresses-wrapper");
   const resultAddresses = await recordingAddresses(addresessesSelect);
 
   profileWrapper.append(
@@ -37,11 +37,11 @@ export async function createProfilePage(): Promise<void> {
     birthBlock,
     passwortBlock,
     addresessesSelect,
+    addAddressButtonWraper,
     resultAddresses,
-    /*addAddressButtonWraper,
-    addressesWrapper,*/
+    addressesWrapper,
   );
   content.append(profileWrapper);
   showAddress();
-  //AddNewAddres(addAddressButtonWraper, addressesWrapper, countAddresses, customerId);
+  AddNewAddres(addAddressButtonWraper, addressesWrapper, customerId);
 }
