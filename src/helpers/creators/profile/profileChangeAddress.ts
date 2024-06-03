@@ -94,6 +94,7 @@ export async function profileChangeAddress(
   );
   saveButton.addEventListener("click", () => {
     if (saveButton.classList.contains("profile-inform__save_disable")) return;
+    console.log(wrapper);
     changeAddress(wrapper);
     activateInput(buttonsBlock);
     saveButton.classList.add("profile-inform__save_disable");

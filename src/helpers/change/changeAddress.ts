@@ -46,10 +46,11 @@ export async function changeAddress(addressBlock: HTMLElement): Promise<boolean>
     ProfileChangeModalWindow(false, "Changes were not saved", "Enter the correct apartment number");
     result = false;
   }
-
+  console.log(result);
   if (!result) return false;
 
   const customerId = localStorage.getItem("customerId");
+  console.log(customerId, idAddress);
   if (!customerId) return false;
   if (!idAddress) return false;
 

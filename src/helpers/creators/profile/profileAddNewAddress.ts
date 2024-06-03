@@ -22,7 +22,8 @@ export async function AddNewAddres(parent: HTMLElement, addressParent: HTMLEleme
   const customer = await getCustomerById(clientId);
   const allAddresses = customer.addresses;
   let countAddresses = allAddresses.length + 1;
-  addShippingAddres.addEventListener("click", async () => {
+
+  async function newFunction(isShippingAddres: boolean) {
     if (addShippingAddres.classList.contains("disable_btn") || addBillingAddres.classList.contains("disable_btn"))
       return;
     addShippingAddres.classList.add("disable_btn");
@@ -84,77 +85,14 @@ export async function AddNewAddres(parent: HTMLElement, addressParent: HTMLEleme
           house.value,
           apartment.value,
         );
-        ProfileChangeModalWindow(true, "Changes saved", "You add new shipping addres");
-        if (address.addresses[countAddresses - 2]) {
-          await AddShippingAddressId(clientId, address.addresses[countAddresses - 2].id);
+        if (isShippingAddres) {
+          ProfileChangeModalWindow(true, "Changes saved", "You add new shipping addres");
+        } else {
+          ProfileChangeModalWindow(true, "Changes saved", "You add new billing addres");
         }
-        window.scrollTo(0, 0);
-        setTimeout(() => location.reload(), 2000);
-      }
-    });
-    showAddress();
-  });
-  addBillingAddres.addEventListener("click", async () => {
-    if (addShippingAddres.classList.contains("disable_btn") || addBillingAddres.classList.contains("disable_btn"))
-      return;
-    addShippingAddres.classList.add("disable_btn");
-    addBillingAddres.classList.add("disable_btn");
-    const newShippindAddres = await profileChangeAddress(clientId, "", "", "", "", "", "", "", [""]);
-    console.log(newShippindAddres);
-    const addressOption = createElement(
-      "option",
-      "option-address",
-      `Address - ${String(countAddresses)}`,
-    ) as HTMLOptionElement;
-    select.append(addressOption);
-
-    addressOption.value = String(countAddresses);
-    select.value = `${countAddresses}`;
-
-    countAddresses++;
-    newShippindAddres.classList.add("profile-inform_address");
-    addressParent.append(newShippindAddres);
-    const country = document.querySelectorAll(".select-country")[countAddresses - 2] as HTMLSelectElement;
-    const saveBtns = addressParent.querySelectorAll(".profile-inform__save");
-    const city = document.querySelectorAll('[name="inform__city"]')[countAddresses - 2] as HTMLInputElement;
-    const postcode = document.querySelectorAll('[name="inform__postcode"]')[countAddresses - 2] as HTMLInputElement;
-    const street = document.querySelectorAll('[name="inform__street"]')[countAddresses - 2] as HTMLInputElement;
-    const house = document.querySelectorAll('[name="inform__house"]')[countAddresses - 2] as HTMLInputElement;
-    const apartment = document.querySelectorAll('[name="inform__apartment"]')[countAddresses - 2] as HTMLInputElement;
-    saveBtns[countAddresses - 2]?.addEventListener("click", async () => {
-      let result = true;
-      if (!adressPattern.test(city.value)) {
-        ProfileChangeModalWindow(false, "Changes were not saved", "Enter the correct city");
-        result = false;
-      }
-      if (!postcodePattern.test(postcode.value)) {
-        ProfileChangeModalWindow(false, "Changes were not saved", "Enter the correct postcode");
-        result = false;
-      }
-      if (!adressPattern.test(street.value)) {
-        ProfileChangeModalWindow(false, "Changes were not saved", "Enter the correct street");
-        result = false;
-      }
-      if (!buildingPattern.test(house.value)) {
-        ProfileChangeModalWindow(false, "Changes were not saved", "Enter the correct house number");
-        result = false;
-      }
-      if (!apartmentPattern.test(apartment.value)) {
-        ProfileChangeModalWindow(false, "Changes were not saved", "Enter the correct apartment number");
-        result = false;
-      }
-      if (result) {
-        const address = await apiAddFullAdress(
-          clientId,
-          country.value,
-          city.value,
-          postcode.value,
-          street.value,
-          house.value,
-          apartment.value,
-        );
-        ProfileChangeModalWindow(true, "Changes saved", "You add new billing addres");
-        if (address.addresses[countAddresses - 2]) {
+        if (address.addresses[countAddresses - 2] && isShippingAddres) {
+          await AddShippingAddressId(clientId, address.addresses[countAddresses - 2].id);
+        } else if (address.addresses[countAddresses - 2]) {
           await AddBillingAddressId(clientId, address.addresses[countAddresses - 2].id);
         }
         window.scrollTo(0, 0);
@@ -162,5 +100,11 @@ export async function AddNewAddres(parent: HTMLElement, addressParent: HTMLEleme
       }
     });
     showAddress();
+  }
+  addShippingAddres.addEventListener("click", async () => {
+    newFunction(true);
+  });
+  addBillingAddres.addEventListener("click", async () => {
+    newFunction(false);
   });
 }
