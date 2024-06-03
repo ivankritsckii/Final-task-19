@@ -67,15 +67,12 @@ export async function profileChangeAddress(
   saveButton.classList.add("profile-inform__save_disable");
 
   const deleteAddres = createElement("div", "profile-add__default", "delete");
-  const allAddreses = document.querySelectorAll(".profile-inform_address");
-  if (allAddreses.length < 1) {
-    deleteAddres.classList.add("disable_btn");
-  } else {
-    deleteAddres.addEventListener("click", () => {
-      deleteAddressId(customerId, addressId);
-      wrapper.innerHTML = `Address was deleted`;
-    });
-  }
+
+  deleteAddres.addEventListener("click", async () => {
+    await deleteAddressId(customerId, addressId);
+    wrapper.innerHTML = `Address was deleted`;
+    createProfilePage();
+  });
 
   buttonsBlock.append(editButton, saveButton, deleteAddres);
 
