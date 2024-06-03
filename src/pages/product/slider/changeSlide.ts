@@ -14,6 +14,22 @@ export function changeSlide(selector?: string): void {
     moveSlide(1, parentElem);
   });
 
+  const keydownHandler = (event: KeyboardEvent) => {
+    if (event.key === "ArrowLeft") {
+      moveSlide(-1, parentElem);
+    } else if (event.key === "ArrowRight") {
+      moveSlide(1, parentElem);
+    }
+  };
+
+  parentElem.addEventListener("mouseenter", () => {
+    document.addEventListener("keydown", keydownHandler);
+  });
+
+  parentElem.addEventListener("mouseleave", () => {
+    document.removeEventListener("keydown", keydownHandler);
+  });
+
   controllers.forEach((controller, index) => {
     controller.addEventListener("click", () => {
       moveSlideController(index, parentElem);

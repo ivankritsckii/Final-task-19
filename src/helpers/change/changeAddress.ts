@@ -1,3 +1,9 @@
+import { AddBillingAddressId } from "../../apiRequests/addAddress/AddBillingAddressId";
+import { AddShippingAddressId } from "../../apiRequests/addAddress/AddShippingAddressId";
+import { RemoveBillingAddressId } from "../../apiRequests/addAddress/RemoveBillingAddressId";
+import { RemoveShippingAddressId } from "../../apiRequests/addAddress/RemoveShippingAddressId";
+import { SetDefaultBillingAddress } from "../../apiRequests/addAddress/SetDefaultBillingAddress";
+import { SetDefaultShippingAddress } from "../../apiRequests/addAddress/SetDefaultShippingAddress";
 import { apiChangeAddress } from "../../apiRequests/change/apiChangeAddress";
 import { ProfileChangeModalWindow } from "../creators/profile/profileChangeModalWindow";
 
@@ -14,6 +20,10 @@ export async function changeAddress(addressBlock: HTMLElement): Promise<boolean>
   const street = addressBlock.querySelector("input[name='inform__street']") as HTMLInputElement;
   const house = addressBlock.querySelector("input[name='inform__house']") as HTMLInputElement;
   const apartment = addressBlock.querySelector("input[name='inform__apartment']") as HTMLInputElement;
+  const shipping = addressBlock.querySelector("input[name='checkbox-shipping']") as HTMLInputElement;
+  const shippingDefaulth = addressBlock.querySelector("input[name='checkbox-shippingDefaulth']") as HTMLInputElement;
+  const billing = addressBlock.querySelector("input[name='checkbox-billing']") as HTMLInputElement;
+  const billingDefaulth = addressBlock.querySelector("input[name='checkbox-billingDefaulth']") as HTMLInputElement;
 
   let result = true;
   if (!adressPattern.test(city.value)) {
@@ -43,7 +53,6 @@ export async function changeAddress(addressBlock: HTMLElement): Promise<boolean>
   if (!customerId) return false;
   if (!idAddress) return false;
 
-  //TODO: добавить уведомление об ошибке(какой?*) и успешной смене адреса
   await apiChangeAddress(
     customerId,
     idAddress,
@@ -54,6 +63,27 @@ export async function changeAddress(addressBlock: HTMLElement): Promise<boolean>
     house.value,
     apartment.value,
   );
+
+  if (shipping.checked) {
+    await AddShippingAddressId(customerId, idAddress);
+  } else {
+    await RemoveShippingAddressId(customerId, idAddress);
+  }
+
+  if (billing.checked) {
+    await AddBillingAddressId(customerId, idAddress);
+  } else {
+    await RemoveBillingAddressId(customerId, idAddress);
+  }
+
+  if (shippingDefaulth.checked) {
+    await SetDefaultShippingAddress(customerId, idAddress);
+  }
+
+  if (billingDefaulth.checked) {
+    await SetDefaultBillingAddress(customerId, idAddress);
+  }
+
   ProfileChangeModalWindow(result, "Changes saved", "");
   return true;
 }
