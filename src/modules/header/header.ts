@@ -86,7 +86,7 @@ export function createHeader(parrent: HTMLElement): void {
   linkLogout.addEventListener("click", (event: Event) => {
     event.preventDefault();
     clearLocalStorage();
-    route(window.location.href);
+    route(window.location.origin);
   });
 
   list.append(itemMain, itemCategories, itemAboutUs, itemProfile, itemRegistration, itemLogin, itemLogout);

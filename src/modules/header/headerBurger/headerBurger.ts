@@ -85,7 +85,7 @@ export function headerBurger(parrent: HTMLElement): void {
     event.preventDefault();
     burgerStatus();
     clearLocalStorage();
-    route(window.location.href);
+    route(window.location.origin);
   });
 
   burgerButtonParent.addEventListener("click", () => {
