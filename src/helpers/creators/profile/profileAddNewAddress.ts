@@ -5,37 +5,29 @@ import { AddShippingAddressId } from "../../../apiRequests/addAddress/AddShippin
 import { AddBillingAddressId } from "../../../apiRequests/addAddress/AddBillingAddressId";
 import { apiAddFullAdress } from "../../../apiRequests/apiAddFullAdress";
 import { ProfileChangeModalWindow } from "../../creators/profile/profileChangeModalWindow";
+import { getCustomerById } from "../../../apiRequests/getCustomerById";
 
-export function AddNewAddres(
-  parent: HTMLElement,
-  addressParent: HTMLElement,
-  countAddresses: number,
-  clientId: string,
-) {
+export async function AddNewAddres(parent: HTMLElement, addressParent: HTMLElement, clientId: string) {
   const addShippingAddres = createElement("div", "shipping-address__add", "Add Shiping Addres");
   addShippingAddres.classList.add("profile-inform-address__edit");
   const addBillingAddres = createElement("div", "billing-address__add", "Add Billing Addres");
   addBillingAddres.classList.add("profile-inform-address__edit");
+  parent.append(addShippingAddres, addBillingAddres);
   const postcodePattern = /^\d{6}$/;
   const apartmentPattern = /^(\d{1,3})$/;
   const adressPattern = /^[a-zA-Z0-9\s]{4,}$/;
   const buildingPattern = /^[a-zA-Z0-9\s]{1,}$/;
-  parent.append(addShippingAddres, addBillingAddres);
-
   const select = document.getElementById("select-address") as HTMLSelectElement;
-  addShippingAddres.addEventListener("click", () => {
-    const newShippindAddres = profileChangeAddress(
-      "",
-      "profile-inform_shippingAddress",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-    );
+
+  const customer = await getCustomerById(clientId);
+  const allAddresses = customer.addresses;
+  let countAddresses = allAddresses.length + 1;
+  addShippingAddres.addEventListener("click", async () => {
+    if (addShippingAddres.classList.contains("disable_btn") || addBillingAddres.classList.contains("disable_btn"))
+      return;
+    addShippingAddres.classList.add("disable_btn");
+    addBillingAddres.classList.add("disable_btn");
+    const newShippindAddres = await profileChangeAddress(clientId, "", "", "", "", "", "", "");
     console.log(newShippindAddres);
     const addressOption = createElement(
       "option",
@@ -59,7 +51,7 @@ export function AddNewAddres(
     const street = document.querySelectorAll('[name="inform__street"]')[countAddresses - 2] as HTMLInputElement;
     const house = document.querySelectorAll('[name="inform__house"]')[countAddresses - 2] as HTMLInputElement;
     const apartment = document.querySelectorAll('[name="inform__apartment"]')[countAddresses - 2] as HTMLInputElement;
-    saveBtns[countAddresses - 2]?.addEventListener("click", async () => {
+    saveBtns[0]?.addEventListener("click", async () => {
       let result = true;
       if (!adressPattern.test(city.value)) {
         ProfileChangeModalWindow(false, "Changes were not saved", "Enter the correct city");
@@ -81,6 +73,7 @@ export function AddNewAddres(
         ProfileChangeModalWindow(false, "Changes were not saved", "Enter the correct apartment number");
         result = false;
       }
+      console.log(result);
       if (result) {
         const address = await apiAddFullAdress(
           clientId,
@@ -95,12 +88,18 @@ export function AddNewAddres(
         if (address.addresses[countAddresses - 2]) {
           await AddShippingAddressId(clientId, address.addresses[countAddresses - 2].id);
         }
+        window.scrollTo(0, 0);
+        setTimeout(() => location.reload(), 2000);
       }
     });
     showAddress();
   });
-  addBillingAddres.addEventListener("click", () => {
-    const newShippindAddres = profileChangeAddress("", "profile-inform_billingAddress", "", "", "", "", "", "", "", "");
+  addBillingAddres.addEventListener("click", async () => {
+    if (addShippingAddres.classList.contains("disable_btn") || addBillingAddres.classList.contains("disable_btn"))
+      return;
+    addShippingAddres.classList.add("disable_btn");
+    addBillingAddres.classList.add("disable_btn");
+    const newShippindAddres = await profileChangeAddress(clientId, "", "", "", "", "", "", "");
     console.log(newShippindAddres);
     const addressOption = createElement(
       "option",
@@ -158,6 +157,8 @@ export function AddNewAddres(
         if (address.addresses[countAddresses - 2]) {
           await AddBillingAddressId(clientId, address.addresses[countAddresses - 2].id);
         }
+        window.scrollTo(0, 0);
+        setTimeout(() => location.reload(), 2000);
       }
     });
     showAddress();
