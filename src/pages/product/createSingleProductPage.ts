@@ -14,6 +14,7 @@ export async function createSingleProductPage(product: Result): Promise<void> {
 
   const productPage: HTMLDivElement = document.createElement("div");
   productPage.className = "productPage";
+  productPage.id = product.id;
 
   const productPageWrapper: HTMLDivElement = document.createElement("div");
   productPageWrapper.className = "productPageWrapper";
