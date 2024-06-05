@@ -6,31 +6,77 @@ import { apiAddProductToShoppingList } from "../../../apiRequests/shoppingList/a
 import { getCustomerById } from "../../../apiRequests/getCustomerById";
 import { apiGetShoppingListByKey } from "../../../apiRequests/shoppingList/apiGetShoppingListByKey";
 import { apiDeleteProductToShoppingList } from "../../../apiRequests/shoppingList/apiDeleteProductToShoppingList";
+import { apiCreateAnonymousShoppingList } from "../../../apiRequests/shoppingList/apiCreateAnonymousShoppingList";
+import { ShoppingList } from "../../../helpers/interfaces/ShoppingList";
 
 export async function createPriceBlock(product: Result): Promise<HTMLElement> {
   const current = product.masterData.current;
+  const user = localStorage.getItem("customerId");
+  const customer = user ? await getCustomerById(user) : false;
 
   const priceBlock = createElement("div", "price-block");
   const pricesText = createElement("div", "prices");
   const price = createElement("span", "price", String(current.masterVariant.prices[0].value.centAmount / 100) + "$");
   const buttonSend = createElement("button", "login-btn-grad", "Add");
   buttonSend.addEventListener("click", async () => {
-    const user = localStorage.getItem("customerId");
-    if (!user) return;
-    const customer = await getCustomerById(user);
-    await apiCreateShoppingList(customer.id);
-    await apiAddProductToShoppingList(product.id);
+    // если пользователь залогинен
+    if (user) {
+      const newShoppingList = (await apiCreateShoppingList(customer.id)) as ShoppingList;
+      await apiAddProductToShoppingList(product.id, newShoppingList);
 
-    console.log("add product: ", await apiGetShoppingListByKey(customer.firstName));
+      console.log(
+        `Корзина пользователя ${customer.firstName}, после добавления товара:`,
+        await apiGetShoppingListByKey(customer.firstName),
+      );
+    } else {
+      // анонимный пользователь
+      const token = sessionStorage.getItem("token");
+      const anonymousShoppingList = await apiGetShoppingListByKey(`Anonymous-${token}-shopping-list`);
+      // проверяем есть ли анонимная корзина
+      if (typeof anonymousShoppingList != "boolean") {
+        await apiAddProductToShoppingList(product.id, anonymousShoppingList);
+        console.log(
+          "Анонимная корзина, после добавления товара:",
+          await apiGetShoppingListByKey(`Anonymous-${token}-shopping-list`),
+        );
+      } else {
+        // создаем анонимную корзину
+        const newAnonymousShoppingList = await apiCreateAnonymousShoppingList();
+        await apiAddProductToShoppingList(product.id, newAnonymousShoppingList);
+        console.log(
+          "Создали анонимную корзину и добавили в нее товар:",
+          await apiGetShoppingListByKey(`Anonymous-${token}-shopping-list`),
+        );
+      }
+    }
   });
 
   const buttonDelete = createElement("button", "login-btn-grad", "Delete");
   buttonDelete.addEventListener("click", async () => {
-    const user = localStorage.getItem("customerId");
-    if (!user) return;
-    const customer = await getCustomerById(user);
-    await apiDeleteProductToShoppingList(product.id);
-    console.log("after delete: ", await apiGetShoppingListByKey(customer.firstName));
+    // если пользователь залогинен
+    if (user) {
+      const newShoppingList = (await apiCreateShoppingList(customer.id)) as ShoppingList;
+      await apiDeleteProductToShoppingList(product.id, newShoppingList);
+      console.log(
+        `Корзина пользователя ${customer.firstName}, после удаления товара`,
+        await apiGetShoppingListByKey(customer.firstName),
+      );
+    } else {
+      // анонимный пользователь
+      const token = sessionStorage.getItem("token");
+      const anonymousShoppingList = await apiGetShoppingListByKey(`Anonymous-${token}-shopping-list`);
+
+      // проверяем есть ли такая анонимная корзина
+      if (typeof anonymousShoppingList != "boolean") {
+        await apiDeleteProductToShoppingList(product.id, anonymousShoppingList);
+        console.log(
+          "Анонимная корзина, после удаления товара:",
+          await apiGetShoppingListByKey(`Anonymous-${token}-shopping-list`),
+        );
+      } else {
+        return;
+      }
+    }
   });
 
   if (current.masterVariant.prices[0].discounted) {
