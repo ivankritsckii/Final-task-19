@@ -1,15 +1,18 @@
+import { ShoppingList } from "../../helpers/interfaces/ShoppingList";
 import { getCustomerById } from "../getCustomerById";
 import { apiGetShoppingListByKey } from "./apiGetShoppingListByKey";
 
-export async function apiCreateShoppingList(customerId: string) {
+export async function apiCreateShoppingList(customerId: string): Promise<ShoppingList | null> {
   const myHeaders = new Headers();
-  myHeaders.append("Authorization", `${sessionStorage.getItem("token-type")} ${sessionStorage.getItem("token")}`);
+  const token = sessionStorage.getItem("token");
+  const tokenType = sessionStorage.getItem("token-type");
+  myHeaders.append("Authorization", `${tokenType} ${token}`);
 
   const customer = await getCustomerById(customerId);
-  const customerShoppingList = await apiGetShoppingListByKey(customer.firstName);
+  const customerShoppingList = (await apiGetShoppingListByKey(customer.firstName)) as ShoppingList;
 
   if (customerShoppingList) {
-    return customerShoppingList;
+    return customerShoppingList as ShoppingList;
   }
 
   const raw = JSON.stringify({
@@ -40,9 +43,10 @@ export async function apiCreateShoppingList(customerId: string) {
       requestOptions,
     );
     const result = await response.text();
-    const json = JSON.parse(result);
+    const json = JSON.parse(result) as ShoppingList;
     return json;
   } catch (error) {
     console.log(error);
+    return null;
   }
 }
