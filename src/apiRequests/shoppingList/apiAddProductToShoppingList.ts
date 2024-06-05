@@ -1,22 +1,16 @@
 import { ShoppingList } from "../../helpers/interfaces/ShoppingList";
 import { apiGetProductById } from "../apiGetProductById";
-import { getCustomerById } from "../getCustomerById";
-import { apiGetShoppingListByKey } from "./apiGetShoppingListByKey";
 
-export async function apiAddProductToShoppingList(idProduct: string) {
+export async function apiAddProductToShoppingList(idProduct: string, shoppingList: ShoppingList) {
   const myHeaders = new Headers();
-  myHeaders.append("Authorization", `${sessionStorage.getItem("token-type")} ${sessionStorage.getItem("token")}`);
+  const token = sessionStorage.getItem("token");
+  const tokenType = sessionStorage.getItem("token-type");
+  myHeaders.append("Authorization", `${tokenType} ${token}`);
 
-  const userID = localStorage.getItem("customerId");
-  if (!userID) return; // заглушка
-  const customer = await getCustomerById(userID);
-  const customerShoppingList = (await apiGetShoppingListByKey(customer.firstName)) as ShoppingList;
   const product = await apiGetProductById(idProduct);
 
-  if (!customerShoppingList) return;
-
   const raw = JSON.stringify({
-    version: customerShoppingList ? customerShoppingList.version : 1,
+    version: shoppingList.version,
     actions: [
       {
         action: "addLineItem",
@@ -35,7 +29,7 @@ export async function apiAddProductToShoppingList(idProduct: string) {
 
   try {
     const response = await fetch(
-      `https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/shopping-lists/${customerShoppingList.id}`,
+      `https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/shopping-lists/${shoppingList.id}`,
       requestOptions,
     );
     const result = await response.text();
