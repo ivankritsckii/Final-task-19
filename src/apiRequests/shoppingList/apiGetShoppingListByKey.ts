@@ -2,7 +2,9 @@ import { ShoppingList } from "../../helpers/interfaces/ShoppingList";
 
 export async function apiGetShoppingListByKey(shoppingKey: string): Promise<ShoppingList | boolean> {
   const myHeaders = new Headers();
-  myHeaders.append("Authorization", `${sessionStorage.getItem("token-type")} ${sessionStorage.getItem("token")}`);
+  const token = sessionStorage.getItem("token");
+  const tokenType = sessionStorage.getItem("token-type");
+  myHeaders.append("Authorization", `${tokenType} ${token}`);
 
   const requestOptions = {
     method: "GET",
@@ -12,10 +14,16 @@ export async function apiGetShoppingListByKey(shoppingKey: string): Promise<Shop
 
   try {
     const response = await fetch(
-      `https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/shopping-lists/key=${shoppingKey}-shopping-list`,
+      `https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/shopping-lists/key=${shoppingKey}`, // delete -shopping-list
       requestOptions,
     );
     const result = await response.text();
+
+    // такой корзины нет, (значит пользователь анонимный + у него нет корзины) создаем корзину
+    if (JSON.parse(result).statusCode === 404) {
+      return false;
+    }
+
     const json = JSON.parse(result) as ShoppingList;
     return json;
   } catch (error) {
