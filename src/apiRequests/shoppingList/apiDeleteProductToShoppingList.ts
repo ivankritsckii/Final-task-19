@@ -1,27 +1,22 @@
 import { LineItem } from "../../helpers/interfaces/LineItem";
 import { ShoppingList } from "../../helpers/interfaces/ShoppingList";
-import { getCustomerById } from "../getCustomerById";
-import { apiGetShoppingListByKey } from "./apiGetShoppingListByKey";
 import { getIdListByProductId } from "./getIdListByProductId";
 
-export async function apiDeleteProductToShoppingList(idProduct: string) {
+export async function apiDeleteProductToShoppingList(idProduct: string, shoppingList: ShoppingList): Promise<void> {
   const myHeaders = new Headers();
-  myHeaders.append("Authorization", `${sessionStorage.getItem("token-type")} ${sessionStorage.getItem("token")}`);
+  const token = sessionStorage.getItem("token");
+  const tokenType = sessionStorage.getItem("token-type");
+  myHeaders.append("Authorization", `${tokenType} ${token}`);
 
-  const userID = localStorage.getItem("customerId");
-  if (!userID) return; // заглушка
-  const customer = await getCustomerById(userID);
-  const customerShoppingList = (await apiGetShoppingListByKey(customer.firstName)) as ShoppingList;
-  const idLineItem = (await getIdListByProductId(idProduct)) as LineItem;
+  const idLineItem = (await getIdListByProductId(idProduct, shoppingList)) as LineItem;
 
-  if (!customerShoppingList) return;
+  // ТОВАРА БОЛЬШЕ НЕТ В КОРЗИНЕ
   if (!idLineItem.quantity) {
-    console.log("ТОВАРА БОЛЬШЕ НЕТ");
     return;
   }
 
   const raw = JSON.stringify({
-    version: customerShoppingList ? customerShoppingList.version : 1,
+    version: shoppingList.version,
     actions: [
       {
         action: "changeLineItemQuantity",
@@ -40,7 +35,7 @@ export async function apiDeleteProductToShoppingList(idProduct: string) {
 
   try {
     const response = await fetch(
-      `https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/shopping-lists/${customerShoppingList.id}`,
+      `https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/shopping-lists/${shoppingList.id}`,
       requestOptions,
     );
     const result = await response.text();
