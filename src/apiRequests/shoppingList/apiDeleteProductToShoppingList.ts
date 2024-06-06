@@ -1,12 +1,15 @@
 import { LineItem } from "../../helpers/interfaces/LineItem";
 import { ShoppingList } from "../../helpers/interfaces/ShoppingList";
+import { apiGetShoppingList } from "./apiGetShoppingList";
 import { getIdListByProductId } from "./getIdListByProductId";
 
-export async function apiDeleteProductToShoppingList(idProduct: string, shoppingList: ShoppingList): Promise<void> {
+export async function apiDeleteProductToShoppingList(idProduct: string): Promise<void> {
   const myHeaders = new Headers();
   const token = sessionStorage.getItem("token");
   const tokenType = sessionStorage.getItem("token-type");
   myHeaders.append("Authorization", `${tokenType} ${token}`);
+
+  const shoppingList = (await apiGetShoppingList()) as ShoppingList;
 
   const idLineItem = (await getIdListByProductId(idProduct, shoppingList)) as LineItem;
 
