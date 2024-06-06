@@ -11,6 +11,9 @@
 .card {
   width: 30vw;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   border-radius: 20px;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
@@ -35,9 +38,10 @@
 .card__description {
   height: fit-content;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .card-link:hover .card__name {
@@ -57,7 +61,7 @@
   overflow: hidden;
   text-align: center;
   text-overflow: ellipsis;
-  padding: 0 10px 10px 10px;
+  padding: 0 10px 0 10px;
   width: 100%;
 }
 
@@ -79,6 +83,81 @@
   font-size: 1.5rem;
   color: #fb8500;
   text-decoration: line-through;
+}
+
+.buy-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: auto;
+  padding: 0 5px 10px 5px;
+}
+.counter-block {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.button__buy {
+  width: 40%;
+  height: 50px;
+  color: #fff;
+  font-size: 1.6rem;
+  cursor: pointer;
+  margin: auto;
+  background: #646cff;
+  border: none;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.button__basket {
+  min-width: 50%;
+  max-width: 60%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  background: #646cff;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+
+
+.button__delete, .product-count, .button__add {
+  min-width: 10%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 2rem;
+  background-color: rgba(0, 150, 255, 0.08);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.button_disable {
+  display: none;
 }
 
 @media (max-width: 750px) {
