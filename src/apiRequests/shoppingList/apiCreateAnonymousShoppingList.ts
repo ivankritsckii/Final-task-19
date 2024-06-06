@@ -1,4 +1,5 @@
-import { apiGetShoppingListByKey } from "./apiGetShoppingListByKey";
+import { ShoppingList } from "../../helpers/interfaces/ShoppingList";
+import { apiGetShoppingList } from "./apiGetShoppingList";
 
 export async function apiCreateAnonymousShoppingList() {
   const myHeaders = new Headers();
@@ -6,9 +7,9 @@ export async function apiCreateAnonymousShoppingList() {
   const tokenType = sessionStorage.getItem("token-type");
   myHeaders.append("Authorization", `${tokenType} ${token}`);
 
-  const anonymousShoppingList = await apiGetShoppingListByKey(`Anonymous-${token}`);
+  const anonymousShoppingList = (await apiGetShoppingList()) as ShoppingList;
 
-  // У ЭТОГО АНОНИМА УЖЕ ЕСТЬ КОРЗИНА
+  // у анонима уже есть корзина
   if (typeof anonymousShoppingList != "boolean") {
     return anonymousShoppingList;
   }
@@ -38,6 +39,7 @@ export async function apiCreateAnonymousShoppingList() {
     );
     const result = await response.text();
     const json = JSON.parse(result);
+    sessionStorage.setItem("AnonymousBasket", `Anonymous-${token}-shopping-list`);
     return json;
   } catch (error) {
     console.log(error);
