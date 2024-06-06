@@ -2,10 +2,10 @@ import { Result } from "../../interfaces/Results";
 import { createCard } from "./createCard";
 import { checkFilters } from "../../checks/checkFilters";
 
-export function createContent(parent: HTMLElement, element: Result): void {
+export async function createContent(parent: HTMLElement, element: Result): Promise<void> {
   if (!checkFilters(element)) {
     return;
   }
-  const cardProduct = createCard(element);
+  const cardProduct = await createCard(element);
   parent.append(cardProduct);
 }
