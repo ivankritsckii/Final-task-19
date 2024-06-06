@@ -1,0 +1,39 @@
+import { ShoppingList } from "../../helpers/interfaces/ShoppingList";
+
+export async function apiGetShoppingList(): Promise<ShoppingList | boolean> {
+  const myHeaders = new Headers();
+  const token = sessionStorage.getItem("token");
+  const tokenType = sessionStorage.getItem("token-type");
+  myHeaders.append("Authorization", `${tokenType} ${token}`);
+
+  const anonymous = sessionStorage.getItem("AnonymousBasket");
+  const userBasket = localStorage.getItem("basketKey") || ""; // пустая строка в виде заглушки
+
+  const shoppingKey = anonymous ? anonymous : userBasket;
+
+  const requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow" as const,
+  };
+
+  try {
+    const response = await fetch(
+      `https://api.us-central1.gcp.commercetools.com/rsschool-asdaasd/shopping-lists/key=${shoppingKey}`, // delete -shopping-list
+      requestOptions,
+    );
+    const result = await response.text();
+
+    // такой корзины нет, (значит пользователь анонимный + у него нет корзины) // по идее такой ошибки никогда уже не будет
+    // т.к корзина создается при загрузке сайта, но всё же
+    if (JSON.parse(result).statusCode === 404) {
+      return false;
+    }
+
+    const json = JSON.parse(result) as ShoppingList;
+    return json;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+}
