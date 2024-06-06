@@ -1,5 +1,4 @@
 import { createNotification } from "../notification/createNotificationElem";
-// import { route } from "../router/route";
 
 export const loginUser = async (accessToken: string, email: string, password: string) => {
   const apiHost = "https://api.us-central1.gcp.commercetools.com";
@@ -32,6 +31,8 @@ export const loginUser = async (accessToken: string, email: string, password: st
     const result = await response.json();
     createNotification("success", "Login successful! Welcome back.");
     localStorage.setItem("customerId", result.customer.id);
+    //TODO: добавить функцию которая проверит AnonymousBasket и при наличии товара добавит его в корзину пользователя
+    sessionStorage.removeItem("AnonymousBasket");
     return result;
   } catch (error) {
     createNotification("error", "Authentication failed. Verify your Email and Password and  try again.");
