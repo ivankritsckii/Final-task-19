@@ -1,6 +1,6 @@
 import { ShoppingList } from "../../helpers/interfaces/ShoppingList";
 import { getCustomerById } from "../getCustomerById";
-import { apiGetShoppingListByKey } from "./apiGetShoppingListByKey";
+import { apiGetShoppingList } from "./apiGetShoppingList";
 
 export async function apiCreateShoppingList(customerId: string): Promise<ShoppingList | null> {
   const myHeaders = new Headers();
@@ -9,7 +9,7 @@ export async function apiCreateShoppingList(customerId: string): Promise<Shoppin
   myHeaders.append("Authorization", `${tokenType} ${token}`);
 
   const customer = await getCustomerById(customerId);
-  const customerShoppingList = (await apiGetShoppingListByKey(customer.firstName)) as ShoppingList;
+  const customerShoppingList = (await apiGetShoppingList()) as ShoppingList;
 
   if (customerShoppingList) {
     return customerShoppingList as ShoppingList;
