@@ -12,6 +12,7 @@ import { isLoggedIn } from "../helpers/checks/isLoggedIn";
 import { createCategoriesPage } from "../pages/categories/createCategoriesPage";
 import { createCategoryPage } from "../pages/categories/category/categoryPage";
 import { createProfilePage } from "../pages/profile/createProfilePage";
+import { createAboutUsPage } from "../pages/aboutUs/createAboutUsPage";
 let isPageGoBack = false;
 
 export const route = (path: string, id?: string): Promise<void> => {
@@ -30,7 +31,7 @@ export const route = (path: string, id?: string): Promise<void> => {
       "#milk-chocolate": createCategoryPage,
       "#dark-chocolate": createCategoryPage,
       "#assorted": createCategoryPage,
-      //"#about": aboutPage,
+      "#aboutUs": createAboutUsPage,
       "#profile": createProfilePage,
     };
 
