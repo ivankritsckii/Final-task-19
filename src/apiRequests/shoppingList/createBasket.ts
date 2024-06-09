@@ -28,9 +28,9 @@ export async function createBasket(): Promise<ShoppingList> {
       return anonymousShoppingList;
     } else {
       // создаем анонимную корзину
-      const newAnonymousShoppingList = await apiCreateAnonymousShoppingList();
+      await apiCreateAnonymousShoppingList();
       sessionStorage.setItem("basketKey", `Anonymous-${token}-shopping-list`);
-      return newAnonymousShoppingList;
+      return (await apiGetShoppingList()) as ShoppingList;
     }
   }
 }
