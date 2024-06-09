@@ -16,7 +16,7 @@ export async function createBasket(): Promise<ShoppingList> {
       return shoppingListUser;
     }
 
-    const newShoppingListUser = (await apiCreateShoppingList(customer.firstName)) as ShoppingList;
+    const newShoppingListUser = (await apiCreateShoppingList(customer.id)) as ShoppingList;
     localStorage.setItem("basketKey", `${customer.firstName}-shopping-list`);
     return newShoppingListUser;
   } else {
