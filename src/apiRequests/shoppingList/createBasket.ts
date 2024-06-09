@@ -12,7 +12,7 @@ export async function createBasket(): Promise<ShoppingList> {
   // если пользователь вошел в систему
   if (user) {
     const shoppingList = (await apiGetShoppingList()) as ShoppingList;
-    const newShoppingList = (await apiCreateShoppingList(customer.firstName)) as ShoppingList;
+    const newShoppingList = (await apiCreateShoppingList(customer.id)) as ShoppingList;
     localStorage.setItem("basketKey", `${customer.firstName}-shopping-list`);
     return shoppingList || newShoppingList;
   } else {
