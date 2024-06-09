@@ -31,6 +31,7 @@ export const loginUser = async (accessToken: string, email: string, password: st
     const result = await response.json();
     createNotification("success", "Login successful! Welcome back.");
     localStorage.setItem("customerId", result.customer.id);
+    localStorage.setItem("basketKey", `${result.customer.firstName}-shopping-list`);
     //TODO: добавить функцию которая проверит AnonymousBasket и при наличии товара добавит его в корзину пользователя
     sessionStorage.removeItem("basketKey");
     return result;
