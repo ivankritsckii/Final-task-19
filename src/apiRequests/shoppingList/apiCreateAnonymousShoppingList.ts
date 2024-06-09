@@ -39,7 +39,7 @@ export async function apiCreateAnonymousShoppingList() {
     );
     const result = await response.text();
     const json = JSON.parse(result);
-    sessionStorage.setItem("AnonymousBasket", `Anonymous-${token}-shopping-list`);
+    sessionStorage.setItem("basketKey", `Anonymous-${token}-shopping-list`);
     return json;
   } catch (error) {
     console.log(error);
