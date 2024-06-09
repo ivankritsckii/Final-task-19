@@ -32,7 +32,7 @@ export const loginUser = async (accessToken: string, email: string, password: st
     createNotification("success", "Login successful! Welcome back.");
     localStorage.setItem("customerId", result.customer.id);
     //TODO: добавить функцию которая проверит AnonymousBasket и при наличии товара добавит его в корзину пользователя
-    sessionStorage.removeItem("AnonymousBasket");
+    sessionStorage.removeItem("basketKey");
     return result;
   } catch (error) {
     createNotification("error", "Authentication failed. Verify your Email and Password and  try again.");
