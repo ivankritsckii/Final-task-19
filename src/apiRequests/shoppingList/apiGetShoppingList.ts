@@ -31,6 +31,7 @@ export async function apiGetShoppingList(): Promise<ShoppingList | boolean> {
     }
 
     const json = JSON.parse(result) as ShoppingList;
+    console.log(json);
     return json;
   } catch (error) {
     console.log(error);
