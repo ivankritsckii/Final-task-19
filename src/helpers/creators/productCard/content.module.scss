@@ -160,6 +160,37 @@
   display: none;
 }
 
+.pages-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  order: 1;
+}
+.page-number {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.5rem;
+  border: 1px solid #646cff;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.page-number:hover {
+  box-shadow: 0 0 20px #646cff;
+}
+.page-number_active {
+  background-color: #36798b;
+}
+
 @media (max-width: 750px) {
   .card {
     width: 45vw;
