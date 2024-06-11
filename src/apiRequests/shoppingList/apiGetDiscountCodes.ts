@@ -1,5 +1,7 @@
-export async function apiGetDiscountCodes(parent: HTMLElement) {
-  parent.innerHTML = "Your promo codes: ";
+export async function apiGetDiscountCodes(parent?: HTMLElement) {
+  if (parent) {
+    parent.innerHTML = "Your promo codes: ";
+  }
   const promoCodesArray: string[] = [];
   const myHeaders = new Headers();
   const token = sessionStorage.getItem("token");
@@ -19,9 +21,10 @@ export async function apiGetDiscountCodes(parent: HTMLElement) {
     );
     const result = await response.text();
     const json = JSON.parse(result);
-    console.log(json.results[0].id);
     json.results.forEach((item: { id: string }) => {
-      parent.innerHTML += `${item.id}; `;
+      if (parent) {
+        parent.innerHTML += `${item.id}; `;
+      }
       promoCodesArray.push(item.id);
     });
     //useDiscountCodeById(json.results[0].id);
