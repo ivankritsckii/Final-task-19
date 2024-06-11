@@ -51,12 +51,7 @@ export async function createCard(product: Result): Promise<HTMLElement> {
   cardLink.addEventListener("click", (event: Event) => {
     event.preventDefault();
 
-    const buyButton = buyBlock.childNodes[0];
-    const counterBlock = buyBlock.childNodes[1] as HTMLDivElement;
-    const deleteButton = counterBlock.querySelector(".button__delete");
-    const counterProduct = counterBlock.querySelector(".product-count");
-    const addButton = counterBlock.querySelector(".button__add");
-    const ignoredButtons = [counterBlock, buyButton, deleteButton, counterProduct, addButton];
+    const ignoredButtons = Array.from(buyBlock.querySelectorAll("*"));
     // если клик не по кнопке купить/и не блок с кнопками
     if (!ignoredButtons.includes(event.target as HTMLElement)) {
       route(cardLink.href, cardLink.id);
