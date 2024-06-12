@@ -13,3 +13,41 @@
 .false_promo_code{
     border: 3px solid red;
 }
+.total_cost_wraper{
+    font-size: 1.5rem;
+    color: #646cff;
+}
+.valid_total_cost{
+    color: #64ff8b;
+}
+.invalid_total_cost{
+    font-size: 1.5rem;
+    color: #fb8500;
+    text-decoration: line-through;
+}
+.cost_promo_wraper{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    position: fixed;
+    top: 75vh;
+}
+.discont_wraper{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    input{
+        max-width: 400px;
+        min-width: 200px;
+        width: 40vw;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .cost_promo_wraper{
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        top: 70vh;
+    }
+}

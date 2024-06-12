@@ -21,6 +21,7 @@ export async function apiGetDiscountCodes(parent?: HTMLElement) {
     );
     const result = await response.text();
     const json = JSON.parse(result);
+    console.log(json);
     json.results.forEach((item: { id: string }) => {
       if (parent) {
         parent.innerHTML += `${item.id}; `;

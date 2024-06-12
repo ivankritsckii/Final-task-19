@@ -1,10 +1,14 @@
 import { getTotalCost } from "./getTotalCost";
 import { apiGetDiscountCodes } from "../../apiRequests/shoppingList/apiGetDiscountCodes";
+import { useDiscountCodeById } from "../../apiRequests/shoppingList/useDiscountCodeById";
 //import { ShoppingList } from "../../helpers/interfaces/ShoppingList";
 
 export async function createBasketPage() {
   const content = document.querySelector(".content") as HTMLDivElement;
   content.innerHTML = "";
+
+  const costAndPromoWraper = document.createElement("div");
+  costAndPromoWraper.classList.add("cost_promo_wraper");
 
   const totalCostWraper = document.createElement("div");
   totalCostWraper.classList.add("total_cost_wraper");
@@ -22,10 +26,13 @@ export async function createBasketPage() {
   discontBtn.classList.add("discont_btn");
   discontBtn.classList.add("nav__item");
   discontBtn.innerHTML = "apply code";
-  discontBtn.addEventListener("click", () => {
+  discontBtn.addEventListener("click", async () => {
     if (arrayOfCodes?.includes(discontInput.value)) {
       discontInput.classList.add("true_promo_code");
       discontInput.classList.remove("false_promo_code");
+      const discoutnObj = await useDiscountCodeById(discontInput.value);
+      await getTotalCost(totalCostWraper, discoutnObj);
+      console.log(discoutnObj);
     } else {
       discontInput.classList.remove("true_promo_code");
       discontInput.classList.add("false_promo_code");
@@ -33,5 +40,6 @@ export async function createBasketPage() {
   });
 
   discountWraper.append(discontInput, discontBtn);
-  content.append(discountWraper, totalCostWraper);
+  costAndPromoWraper.append(discountWraper, totalCostWraper);
+  content.append(costAndPromoWraper);
 }
