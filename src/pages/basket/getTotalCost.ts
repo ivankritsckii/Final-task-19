@@ -4,7 +4,14 @@ require("./basketPage.scss");
 
 export async function getTotalCost(wraper: HTMLElement, discontobj?: { type: string; permyriad: number }) {
   const list = await apiGetShoppingList();
+  console.log(list);
   let totalCost = 0;
+  if (typeof list !== "boolean") {
+    if (!list.lineItems.length) {
+      return true;
+    }
+  }
+  wraper.innerHTML = `The total cost is: ${totalCost / 100} $`;
   if (typeof list !== "boolean") {
     list.lineItems.forEach(async (item) => {
       const product = await apiGetProductById(item.productId);
@@ -36,4 +43,5 @@ export async function getTotalCost(wraper: HTMLElement, discontobj?: { type: str
       }
     });
   }
+  return false;
 }
