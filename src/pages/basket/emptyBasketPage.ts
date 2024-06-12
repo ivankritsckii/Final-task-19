@@ -16,7 +16,7 @@ export function emptyBasketPageCreator() {
   secondText.innerHTML = `Start shopping for awesome gifts`;
 
   const button = document.createElement("div");
-  button.classList.add("button", "nav__item");
+  button.classList.add("button_to_cataloge_page", "nav__item");
   button.innerHTML = `Go to catalog page`;
   button.addEventListener("click", (event) => {
     event.preventDefault();

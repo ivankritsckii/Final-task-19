@@ -2,6 +2,7 @@ import { getTotalCost } from "./getTotalCost";
 import { apiGetDiscountCodes } from "../../apiRequests/shoppingList/apiGetDiscountCodes";
 import { useDiscountCodeById } from "../../apiRequests/shoppingList/useDiscountCodeById";
 import { emptyBasketPageCreator } from "./emptyBasketPage";
+import { deleteAllProductFromBasket } from "./deleteAllProductFromBasket";
 //import { ShoppingList } from "../../helpers/interfaces/ShoppingList";
 
 export async function createBasketPage() {
@@ -39,8 +40,16 @@ export async function createBasketPage() {
     }
   });
 
+  const deleteAllBtn = document.createElement("div");
+  deleteAllBtn.classList.add("delete_all_btn", "nav__item");
+  deleteAllBtn.setAttribute("id", "delete_all_btn");
+  deleteAllBtn.innerHTML = "Clear Shopping Cart";
+  deleteAllBtn.addEventListener("click", () => {
+    deleteAllProductFromBasket();
+  });
+
   discountWraper.append(discontInput, discontBtn);
-  costAndPromoWraper.append(discountWraper, totalCostWraper);
+  costAndPromoWraper.append(discountWraper, deleteAllBtn, totalCostWraper);
   content.append(costAndPromoWraper);
   if (isEmptyBasket) {
     emptyBasketPageCreator();

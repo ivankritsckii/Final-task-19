@@ -3,7 +3,7 @@ import { ShoppingList } from "../../helpers/interfaces/ShoppingList";
 import { apiGetShoppingList } from "./apiGetShoppingList";
 import { getIdListByProductId } from "./getIdListByProductId";
 
-export async function apiDeleteProductToShoppingList(idProduct: string): Promise<void> {
+export async function apiDeleteAllProduct(idProduct: string) {
   const myHeaders = new Headers();
   const token = sessionStorage.getItem("token");
   const tokenType = sessionStorage.getItem("token-type");
@@ -12,6 +12,7 @@ export async function apiDeleteProductToShoppingList(idProduct: string): Promise
   const shoppingList = (await apiGetShoppingList()) as ShoppingList;
 
   const idLineItem = (await getIdListByProductId(idProduct, shoppingList)) as LineItem;
+  console.log(shoppingList);
   // ТОВАРА БОЛЬШЕ НЕТ В КОРЗИНЕ
   if (!idLineItem.quantity) {
     return;
@@ -23,7 +24,7 @@ export async function apiDeleteProductToShoppingList(idProduct: string): Promise
       {
         action: "changeLineItemQuantity",
         lineItemId: idLineItem.id,
-        quantity: idLineItem.quantity - 1,
+        quantity: 0,
       },
     ],
   });
@@ -42,6 +43,7 @@ export async function apiDeleteProductToShoppingList(idProduct: string): Promise
     );
     const result = await response.text();
     const json = JSON.parse(result);
+    console.log(json);
     return json;
   } catch (error) {
     console.log(error);
