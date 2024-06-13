@@ -30,11 +30,18 @@ export function createAboutUsPage() {
     "Ivan",
     "./Ivan.jpg",
     "Team lead",
-    "I am 28 years old. I've been studying frontend since 2021",
+    "I am 28 years old. I have a higher education in chemical engineering and economics. I have been studying frontend since 2021. In 2023, I completed the JS/FE PRE-SCHOOL 2023Q2 (JAVASCRIPT) course.",
     "https://github.com/ivankritsckii",
+  );
+  const MartaCard = MemberCardCreator(
+    "Marta",
+    "./Marta.jpg",
+    "Best in design",
+    "Hello, I'm Marta. I recently graduated from university with a bachelor's degree in Software Engineering. Currently, I'm actively learning web development at The Rolling Scopes School. I also completed training at TUMOLabs. I'm ready for new challenges and growth in the field of web development",
+    "https://github.com/marta109",
   );
 
   const aboutProjectMembersTitul = createTitulAbout("The project was made by");
   descriptionText.append(logoWraper);
-  content.append(aboutProjectTitul, descriptionText, aboutProjectMembersTitul, IvanCard);
+  content.append(aboutProjectTitul, descriptionText, aboutProjectMembersTitul, IvanCard, MartaCard);
 }

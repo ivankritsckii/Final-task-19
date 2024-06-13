@@ -18,10 +18,12 @@
 .member_card_wraper{
     display: flex;
     color: white;
+    width: 80vw;
+    max-width: 900px;
 }
 .member_photo{
     width: 110px;
-    height: 150px;
+    height: 130px;
     margin-right: 20px;
     margin-bottom: 20px;
 }

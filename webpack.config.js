@@ -48,7 +48,11 @@ module.exports = {
       extensions: ["js", "jsx", "ts", "tsx"],
     }),
     new CopyWebpackPlugin({
-      patterns: [{ from: "public/shopping.svg", to: "shopping.svg" }],
+      patterns: [
+        { from: "public/shopping.svg", to: "shopping.svg" },
+        { from: "public/Ivan.jpg", to: "Ivan.jpg" },
+        { from: "public/Marta.jpg", to: "Marta.jpg" },
+      ],
     }),
   ],
   devServer: {

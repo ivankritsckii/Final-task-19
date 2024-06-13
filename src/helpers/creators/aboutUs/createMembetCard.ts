@@ -9,13 +9,13 @@ export function MemberCardCreator(name: string, srcPhoto: string, role: string, 
 
   const MemberDescriptionWraper = document.createElement("div");
   const MemberName = document.createElement("div");
-  MemberName.innerHTML = `Name: ${name}`;
+  MemberName.innerHTML = `<b>Name</b>:   ${name}`;
   const MemberRole = document.createElement("div");
-  MemberRole.innerHTML = `Role: ${role}`;
+  MemberRole.innerHTML = `<b>Role</b>:   ${role}`;
   const MemberBio = document.createElement("div");
-  MemberBio.innerHTML = `Short bio: ${bio}`;
+  MemberBio.innerHTML = `<b>Short bio</b>:   ${bio}`;
   const MemberGit = document.createElement("div");
-  MemberGit.innerHTML = `Git:`;
+  MemberGit.innerHTML = `<b>Git</b>:  `;
   const gitLink = document.createElement("a");
   gitLink.classList.add("about_git_link");
   gitLink.href = git;
