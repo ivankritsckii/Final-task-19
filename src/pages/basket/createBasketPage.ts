@@ -3,7 +3,6 @@ import { apiGetDiscountCodes } from "../../apiRequests/shoppingList/apiGetDiscou
 import { useDiscountCodeById } from "../../apiRequests/shoppingList/useDiscountCodeById";
 import { emptyBasketPageCreator } from "./emptyBasketPage";
 import { deleteAllProductFromBasket } from "./deleteAllProductFromBasket";
-//import { ShoppingList } from "../../helpers/interfaces/ShoppingList";
 
 export async function createBasketPage() {
   const content = document.querySelector(".content") as HTMLDivElement;
@@ -33,24 +32,54 @@ export async function createBasketPage() {
       discontInput.classList.remove("false_promo_code");
       const discoutnObj = await useDiscountCodeById(discontInput.value);
       await getTotalCost(totalCostWraper, discoutnObj);
-      console.log(discoutnObj);
     } else {
       discontInput.classList.remove("true_promo_code");
       discontInput.classList.add("false_promo_code");
     }
   });
 
+  const modalWindowWraper = document.createElement("div");
+  modalWindowWraper.classList.add("modal_window_wraper");
+  const overFlow = document.createElement("div");
+  overFlow.classList.add("modal_overflow");
+  const modalWindow = document.createElement("div");
+  modalWindow.classList.add("modal_window");
+  const modalWindowText = document.createElement("div");
+  modalWindowText.innerHTML = "You want to remove all products from your carts. Are you sure?";
+  const modalBtnWraper = document.createElement("div");
+  modalBtnWraper.classList.add("modal_btn_wraper");
+  const YesBtn = document.createElement("div");
+  YesBtn.classList.add("nav__item");
+  YesBtn.innerHTML = "Yes";
+  const NoBtn = document.createElement("div");
+  NoBtn.classList.add("nav__item");
+  NoBtn.innerHTML = "No";
+  modalBtnWraper.append(YesBtn, NoBtn);
+  modalWindow.append(modalWindowText, modalBtnWraper);
+  modalWindowWraper.append(overFlow, modalWindow);
+
   const deleteAllBtn = document.createElement("div");
   deleteAllBtn.classList.add("delete_all_btn", "nav__item");
   deleteAllBtn.setAttribute("id", "delete_all_btn");
   deleteAllBtn.innerHTML = "Clear Shopping Cart";
+
   deleteAllBtn.addEventListener("click", () => {
+    modalWindowWraper.style.display = "flex";
+  });
+  overFlow.addEventListener("click", () => {
+    modalWindowWraper.style.display = "none";
+  });
+  NoBtn.addEventListener("click", () => {
+    modalWindowWraper.style.display = "none";
+  });
+  YesBtn.addEventListener("click", () => {
     deleteAllProductFromBasket();
+    modalWindowWraper.style.display = "none";
   });
 
   discountWraper.append(discontInput, discontBtn);
   costAndPromoWraper.append(discountWraper, deleteAllBtn, totalCostWraper);
-  content.append(costAndPromoWraper);
+  content.append(costAndPromoWraper, modalWindowWraper);
   if (isEmptyBasket) {
     emptyBasketPageCreator();
   }
