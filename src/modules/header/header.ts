@@ -83,9 +83,9 @@ export function createHeader(parrent: HTMLElement): void {
   itemLogout.append(linkLogout);
   linkLogout.textContent = "Logout";
   linkLogout.style.textDecoration = "underline";
-  linkLogout.addEventListener("click", (event: Event) => {
+  linkLogout.addEventListener("click", async (event: Event) => {
     event.preventDefault();
-    clearLocalStorage();
+    await clearLocalStorage();
     route(window.location.origin);
   });
 

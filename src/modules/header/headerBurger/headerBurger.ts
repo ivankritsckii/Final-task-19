@@ -81,10 +81,10 @@ export function headerBurger(parrent: HTMLElement): void {
   const linkLogout = createLink("nav-burger__link", "#logout", false);
   itemLogout.append(linkLogout);
   linkLogout.textContent = "Logout";
-  linkLogout.addEventListener("click", (event: Event) => {
+  linkLogout.addEventListener("click", async (event: Event) => {
     event.preventDefault();
     burgerStatus();
-    clearLocalStorage();
+    await clearLocalStorage();
     route(window.location.origin);
   });
 
