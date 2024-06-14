@@ -1,0 +1,120 @@
+.total_cost_wraper{
+    color: aliceblue;
+}
+.discont_btn{
+    text-align: center;
+}
+.discont_input{
+    border: 1px solid black;
+}
+.true_promo_code{
+    border: 3px solid greenyellow;
+}
+.false_promo_code{
+    border: 3px solid red;
+}
+.total_cost_wraper{
+    font-size: 1.5rem;
+    color: #646cff;
+}
+.valid_total_cost{
+    color: #64ff8b;
+}
+.invalid_total_cost{
+    font-size: 1.5rem;
+    color: #fb8500;
+    text-decoration: line-through;
+}
+.cost_promo_wraper{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    position: fixed;
+    top: 75vh;
+}
+.discont_wraper{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    input{
+        max-width: 400px;
+        min-width: 200px;
+        width: 40vw;
+    }
+}
+.empty_basket_message_wraper{
+    font-size: 1.5rem;
+    width: 50vw;
+    height: 50vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+    background-color: #4b3636;
+}
+.empty_basket_main_text{
+    font-size: 2rem;
+}
+.button_to_cataloge_page{
+    cursor: pointer;
+}
+
+.modal_window_wraper{
+    width: 100vw;
+    height: 75vh;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+.modal_overflow{
+    width: 100%;
+    height: 100%;
+    background-color: #fcfcfc;
+    opacity: 0.6;
+}
+.modal_window{
+    width: 50vw;
+    min-width: 320px;
+    height: 20vh;
+    position: absolute;
+    z-index: 10;
+    top: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+    gap: 30px;
+}
+.modal_btn_wraper{
+    display: flex;
+    gap: 30px;
+    div{
+        width: 60px;
+        text-align: center;
+        cursor: pointer;
+    }
+}
+#delete_all_btn{
+    background-color: rgb(145, 6, 6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 780px) {
+    .cost_promo_wraper{
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        top: 70vh;
+    }
+}

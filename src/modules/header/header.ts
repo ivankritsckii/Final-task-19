@@ -29,6 +29,15 @@ export function createHeader(parrent: HTMLElement): void {
     route(linkCategories.href);
   });
 
+  const itemBasket = createElement("li", "nav__item");
+  const linkBasket = createLink("nav__link", "#basket", false);
+  itemBasket.append(linkBasket);
+  linkBasket.textContent = "Basket";
+  linkBasket.addEventListener("click", (event: Event) => {
+    event.preventDefault();
+    route(linkBasket.href);
+  });
+
   const itemAboutUs = createElement("li", "nav__item");
   const linkAboutUs = createLink("nav__link", "#aboutUs", false);
   itemAboutUs.append(linkAboutUs);
@@ -89,7 +98,7 @@ export function createHeader(parrent: HTMLElement): void {
     route(window.location.origin);
   });
 
-  list.append(itemMain, itemCategories, itemAboutUs, itemProfile, itemRegistration, itemLogin, itemLogout);
+  list.append(itemMain, itemCategories, itemBasket, itemAboutUs, itemProfile, itemRegistration, itemLogin, itemLogout);
   nav.append(list);
   header.append(nav);
   parrent.append(header);
