@@ -40,8 +40,15 @@ export function createAboutUsPage() {
     "Hello, I'm Marta. I recently graduated from university with a bachelor's degree in Software Engineering. Currently, I'm actively learning web development at The Rolling Scopes School. I also completed training at TUMOLabs. I'm ready for new challenges and growth in the field of web development",
     "https://github.com/marta109",
   );
+  const DmitriyCard = MemberCardCreator(
+    "Dmitriy",
+    "./Dmitriy.jpeg",
+    "Best in commercetools API",
+    "My name is Dmitry, I am 30 years old. I hate writing about myself, but I love tapping my fingers on the keyboard. That's why I'm here 🙂",
+    "https://github.com/amiln",
+  );
 
   const aboutProjectMembersTitul = createTitulAbout("The project was made by");
   descriptionText.append(logoWraper);
-  content.append(aboutProjectTitul, descriptionText, aboutProjectMembersTitul, IvanCard, MartaCard);
+  content.append(aboutProjectTitul, descriptionText, aboutProjectMembersTitul, IvanCard, MartaCard, DmitriyCard);
 }
