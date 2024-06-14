@@ -9,7 +9,6 @@ import { validateEmail } from "./validateEmail";
 import { validatePassword } from "./validatePassword";
 import { isLoggedIn } from "../../helpers/checks/isLoggedIn";
 import { route } from "../../router/route";
-import { createNotification } from "../../notification/createNotificationElem";
 
 export function createLoginForm(): void {
   if (isLoggedIn()) {
@@ -54,8 +53,6 @@ export function createLoginForm(): void {
       apiAuthorizeUser()
         .then((authorize) => {
           if (authorize) {
-            // rememberEmail();
-            createNotification("success", "Login successful! Welcome back.");
             setTimeout(() => route(window.location.origin), 2000);
           }
         })
@@ -68,6 +65,7 @@ export function createLoginForm(): void {
   const rememberCheckbox: HTMLInputElement = document.createElement("input");
   rememberCheckbox.setAttribute("type", "checkbox");
   rememberCheckbox.id = "rememberCheckbox";
+  rememberCheckbox.checked = true;
   const rememberLabel: HTMLLabelElement = document.createElement("label");
   rememberLabel.textContent = "Remember me";
   rememberLabel.setAttribute("for", "rememberCheckbox");

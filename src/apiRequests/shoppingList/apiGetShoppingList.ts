@@ -1,6 +1,6 @@
 import { ShoppingList } from "../../helpers/interfaces/ShoppingList";
 
-export async function apiGetShoppingList(): Promise<ShoppingList | boolean> {
+export async function apiGetShoppingList(): Promise<ShoppingList | false> {
   const myHeaders = new Headers();
   const token = sessionStorage.getItem("token");
   const tokenType = sessionStorage.getItem("token-type");
