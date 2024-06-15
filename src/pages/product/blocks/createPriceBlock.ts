@@ -5,6 +5,8 @@ import { apiAddProductToShoppingList } from "../../../apiRequests/shoppingList/a
 import { getCustomerById } from "../../../apiRequests/getCustomerById";
 import { apiGetShoppingList } from "../../../apiRequests/shoppingList/apiGetShoppingList";
 import { apiDeleteProductToShoppingList } from "../../../apiRequests/shoppingList/apiDeleteProductToShoppingList";
+import { createNotification } from "../../../notification/createNotificationElem";
+import { checkBasket } from "../checkBasket";
 
 export async function createPriceBlock(product: Result): Promise<HTMLElement> {
   const current = product.masterData.current;
@@ -21,15 +23,19 @@ export async function createPriceBlock(product: Result): Promise<HTMLElement> {
       `Корзина пользователя ${customer.firstName || "Anon"}, после добавления товара:`,
       await apiGetShoppingList(),
     );
+    createNotification("success", " Product added to basket");
+    checkBasket(product.id);
   });
 
   const buttonDelete = createElement("button", "login-btn-grad", "Delete");
   buttonDelete.addEventListener("click", async () => {
-    await apiDeleteProductToShoppingList(product.id);
+    await apiDeleteProductToShoppingList(product.id, true);
+    createNotification("success", "Product removed from basket");
     console.log(
       `Корзина пользователя ${customer.firstName || "Anon"}, после удаления товара`,
       await apiGetShoppingList(),
     );
+    checkBasket(product.id);
   });
 
   if (current.masterVariant.prices[0].discounted) {
