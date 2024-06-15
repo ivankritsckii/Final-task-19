@@ -1,15 +1,15 @@
 import { ShoppingList } from "../../helpers/interfaces/ShoppingList";
 
-export async function apiGetShoppingList(): Promise<ShoppingList | boolean> {
+export async function apiGetShoppingList(): Promise<ShoppingList | false> {
   const myHeaders = new Headers();
   const token = sessionStorage.getItem("token");
   const tokenType = sessionStorage.getItem("token-type");
   myHeaders.append("Authorization", `${tokenType} ${token}`);
 
-  const anonymous = sessionStorage.getItem("AnonymousBasket");
-  const userBasket = localStorage.getItem("basketKey") || ""; // пустая строка в виде заглушки
+  const anonymous = `Anonymous-${token}-shopping-list`;
+  const userBasket = localStorage.getItem("basketKey");
 
-  const shoppingKey = anonymous ? anonymous : userBasket;
+  const shoppingKey = userBasket ? userBasket : anonymous;
 
   const requestOptions = {
     method: "GET",

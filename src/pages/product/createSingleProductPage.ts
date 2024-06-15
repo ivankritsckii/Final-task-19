@@ -7,6 +7,7 @@ import { createProductDescr } from "./productDescr/createProductDescr";
 import { openSliderModal } from "./sliderModal/openSliderModal";
 import { createSliderModal } from "./sliderModal/createSliderModal";
 import "./singleProductPage.module.scss";
+import { checkBasket } from "./checkBasket";
 
 export async function createSingleProductPage(product: Result): Promise<void> {
   const content = document.querySelector(".content") as HTMLDivElement;
@@ -32,4 +33,5 @@ export async function createSingleProductPage(product: Result): Promise<void> {
   changeSlide();
   createSliderModal(sliderModal);
   openSliderModal();
+  checkBasket(product.id);
 }

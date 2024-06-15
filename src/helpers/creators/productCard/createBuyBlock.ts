@@ -1,5 +1,6 @@
 import { apiAddProductToShoppingList } from "../../../apiRequests/shoppingList/apiAddProductToShoppingList";
 import { apiDeleteProductToShoppingList } from "../../../apiRequests/shoppingList/apiDeleteProductToShoppingList";
+import { buyLoading, buyLoadingOff, buyLoadingOn } from "../../../modules/loading/buyLoading";
 import { checkProductInBasket } from "../../checks/checkProductInBasket";
 import { createElement } from "../createElement";
 import { createLink } from "../createLink";
@@ -10,6 +11,7 @@ export async function createBuyBlock(idProduct: string): Promise<HTMLElement> {
   const basketButton = createLink("button__basket", "#basket", false);
   basketButton.textContent = "to basket";
   basketButton.classList.add("button_disable");
+  const counterWrapper = createElement("div", "counter-buttons-wrapper");
   const minusButton = createElement("div", "button__delete", "-");
   minusButton.classList.add("button_disable");
   const plusButton = createElement("div", "button__add", "+");
@@ -18,7 +20,10 @@ export async function createBuyBlock(idProduct: string): Promise<HTMLElement> {
   countProduct.classList.add("button_disable");
   countProduct.textContent = await checkProductInBasket(idProduct);
   const counterBlock = createElement("div", "counter-block");
-  counterBlock.append(basketButton, minusButton, countProduct, plusButton);
+
+  buyLoading(counterWrapper);
+  counterWrapper.append(minusButton, countProduct, plusButton);
+  counterBlock.append(basketButton, counterWrapper);
   buyBlock.append(buyButton, counterBlock);
 
   const arrayButtons = [basketButton, minusButton, plusButton, countProduct];
@@ -35,15 +40,19 @@ export async function createBuyBlock(idProduct: string): Promise<HTMLElement> {
     showButtons(buyButton, arrayButtons);
   });
   plusButton.addEventListener("click", async () => {
+    buyLoadingOn(counterWrapper);
     await apiAddProductToShoppingList(idProduct);
     countProduct.textContent = await checkProductInBasket(idProduct);
+    buyLoadingOff(counterWrapper);
   });
   minusButton.addEventListener("click", async () => {
+    buyLoadingOn(counterWrapper);
     await apiDeleteProductToShoppingList(idProduct);
     countProduct.textContent = await checkProductInBasket(idProduct);
     if (countProduct.textContent === "0") {
       disableButtons(buyButton, arrayButtons);
     }
+    buyLoadingOff(counterWrapper);
   });
 
   return buyBlock;

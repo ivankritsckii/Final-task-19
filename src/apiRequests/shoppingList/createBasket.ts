@@ -11,16 +11,20 @@ export async function createBasket(): Promise<ShoppingList> {
 
   // если пользователь вошел в систему
   if (user) {
-    const shoppingList = (await apiGetShoppingList()) as ShoppingList;
-    const newShoppingList = (await apiCreateShoppingList(customer.firstName)) as ShoppingList;
+    const shoppingListUser = (await apiGetShoppingList()) as ShoppingList;
+    if (shoppingListUser) {
+      return shoppingListUser;
+    }
+
+    const newShoppingListUser = (await apiCreateShoppingList(customer.id)) as ShoppingList;
     localStorage.setItem("basketKey", `${customer.firstName}-shopping-list`);
-    return shoppingList || newShoppingList;
+    return newShoppingListUser;
   } else {
     // анонимный пользователь
     const anonymousShoppingList = (await apiGetShoppingList()) as ShoppingList;
 
     // проверяем есть ли анонимная корзина
-    if (typeof anonymousShoppingList != "boolean") {
+    if (anonymousShoppingList) {
       return anonymousShoppingList;
     } else {
       // создаем анонимную корзину

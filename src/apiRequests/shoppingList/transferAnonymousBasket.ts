@@ -1,26 +1,22 @@
-//import { ShoppingList } from "../../helpers/interfaces/ShoppingList";
-import { ShoppingList } from "@commercetools/platform-sdk";
-import { apiGetProductById } from "../apiGetProductById";
+import { ShoppingList } from "../../helpers/interfaces/ShoppingList";
 import { apiGetShoppingList } from "./apiGetShoppingList";
+import { LineItem } from "../../helpers/interfaces/LineItem";
 
-export async function apiAddProductToShoppingList(idProduct: string) {
+export async function transferAnonymousBasket(product: LineItem): Promise<void> {
   const myHeaders = new Headers();
   const token = sessionStorage.getItem("token");
   const tokenType = sessionStorage.getItem("token-type");
   myHeaders.append("Authorization", `${tokenType} ${token}`);
 
-  const product = await apiGetProductById(idProduct);
-  console.log(product);
-
-  const shoppingList = (await apiGetShoppingList()) as unknown as ShoppingList;
+  const shoppingList = (await apiGetShoppingList()) as ShoppingList;
 
   const raw = JSON.stringify({
     version: shoppingList.version,
     actions: [
       {
         action: "addLineItem",
-        productId: product?.id,
-        quantity: 1,
+        productId: product.productId,
+        quantity: product.quantity,
       },
     ],
   });
