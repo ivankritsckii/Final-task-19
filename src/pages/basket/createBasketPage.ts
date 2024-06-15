@@ -3,6 +3,7 @@ import { apiGetDiscountCodes } from "../../apiRequests/shoppingList/apiGetDiscou
 import { useDiscountCodeById } from "../../apiRequests/shoppingList/useDiscountCodeById";
 import { emptyBasketPageCreator } from "./emptyBasketPage";
 import { deleteAllProductFromBasket } from "./deleteAllProductFromBasket";
+import { showBasketItems } from "./showBasketItems";
 
 export async function createBasketPage() {
   const content = document.querySelector(".content") as HTMLDivElement;
@@ -14,6 +15,8 @@ export async function createBasketPage() {
   const totalCostWraper = document.createElement("div");
   totalCostWraper.classList.add("total_cost_wraper");
   const isEmptyBasket = await getTotalCost(totalCostWraper);
+
+  await showBasketItems();
 
   const arrayOfCodes = await apiGetDiscountCodes();
 
