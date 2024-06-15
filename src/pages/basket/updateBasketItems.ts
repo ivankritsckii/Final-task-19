@@ -3,7 +3,7 @@ import { apiDeleteProductToShoppingList } from "../../apiRequests/shoppingList/a
 import { apiGetShoppingList } from "../../apiRequests/shoppingList/apiGetShoppingList";
 import { createNotification } from "../../notification/createNotificationElem";
 import { emptyBasketPageCreator } from "./emptyBasketPage";
-// import { getTotalCost } from "./getTotalCost";
+import { getTotalCost } from "./getTotalCost";
 
 async function updateItem(idProduct: string, quantityChange: number, itemWrapper: HTMLElement) {
   const minusButton = itemWrapper.querySelector(".minus-btn") as HTMLElement;
@@ -12,6 +12,7 @@ async function updateItem(idProduct: string, quantityChange: number, itemWrapper
   const itemTotalPrice = itemWrapper.querySelector(".item_total_price") as HTMLElement;
   const itemPrice = itemWrapper.querySelector(".item_price") as HTMLElement;
   const deleteBtn = itemWrapper.querySelector(".login-btn-grad.delete-item") as HTMLButtonElement;
+  const totalCostWraper = document.querySelector(".total_cost_wraper") as HTMLElement;
 
   minusButton.setAttribute("disabled", "true");
   plusButton.setAttribute("disabled", "true");
@@ -60,7 +61,7 @@ async function updateItem(idProduct: string, quantityChange: number, itemWrapper
       itemWrapper.remove();
       document.querySelector(".items_container")?.innerHTML === "" ? emptyBasketPageCreator() : "";
     }
-    // await getTotalCost(itemWrapper);
+    await getTotalCost(totalCostWraper);
   } catch (error) {
     console.error("Basket update error:", error);
     createNotification("error", "Basket update error");

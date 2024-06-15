@@ -33,8 +33,8 @@ export const route = (path: string, id?: string): Promise<void> => {
       "#milk-chocolate": createCategoryPage,
       "#dark-chocolate": createCategoryPage,
       "#assorted": createCategoryPage,
-       "#aboutUs": createAboutUsPage,
-       "#basket": createBasketPage,
+      "#aboutUs": createAboutUsPage,
+      "#basket": createBasketPage,
       "#profile": createProfilePage,
     };
 

@@ -33,11 +33,11 @@ export async function getTotalCost(wraper: HTMLElement, discontobj?: { type: str
       } else if (discontobj && discontobj.type === "relative") {
         wraper.innerHTML = "";
         oldCost.innerHTML = `${totalCost / 100} $`;
-        newCost.innerHTML = `${((totalCost / 100) * (100 - discontobj.permyriad / 1000)) / 100} $ `;
+        newCost.innerHTML = `${Math.round((totalCost / 100) * (100 - discontobj.permyriad / 100)) / 100} $ `;
         wraper.append(costText, newCost, oldCost);
       } else if (discontobj && discontobj.type === "absolute") {
         wraper.innerHTML = "";
-        newCost.innerHTML = `${totalCost / 100 - discontobj.permyriad / 1000} $ `;
+        newCost.innerHTML = `${totalCost / 100 - discontobj.permyriad / 100} $ `;
         oldCost.innerHTML = `${totalCost / 100} $`;
         wraper.append(costText, newCost, oldCost);
       }
