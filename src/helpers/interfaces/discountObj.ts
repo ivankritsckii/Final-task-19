@@ -4,6 +4,9 @@ export interface Discontobj {
   value: {
     type: string;
     permyriad: number;
+    money: {
+      centAmount: number;
+    }[];
   };
   target: {
     type: string;

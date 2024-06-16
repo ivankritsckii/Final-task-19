@@ -13,9 +13,10 @@ export async function getTotalCost(wraper: HTMLElement, discontobj?: Discontobj)
       return true;
     }
   }
-  wraper.innerHTML = `The total cost is: ${Math.round(totalCost / 100)} $`;
+  wraper.innerHTML = `The total cost is: ${Math.round(totalCost) / 100} $`;
 
   if (discontobj) {
+    console.log(discontobj);
     wraper.innerHTML = ``;
     const costText = document.createElement("span");
     costText.innerHTML = `The total cost is: `;
@@ -23,7 +24,7 @@ export async function getTotalCost(wraper: HTMLElement, discontobj?: Discontobj)
     newCost.classList.add("valid_total_cost");
     const oldCost = document.createElement("span");
     oldCost.classList.add("invalid_total_cost");
-    oldCost.innerHTML = `${Math.round(totalCost / 100)} $`;
+    oldCost.innerHTML = `${Math.round(totalCost) / 100} $`;
 
     wraper.append(costText, newCost, oldCost);
     await UseTotalPricePromo(totalCost, discontobj, list, newCost);
