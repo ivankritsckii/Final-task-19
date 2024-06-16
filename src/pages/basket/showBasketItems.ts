@@ -24,7 +24,6 @@ export async function showBasketItems() {
 
   for (const lineItem of shoppingList.lineItems) {
     const productDetails = await getProductDetails(lineItem.productId);
-    console.log(productDetails);
 
     if (productDetails) {
       const itemWrapper = document.createElement("div");

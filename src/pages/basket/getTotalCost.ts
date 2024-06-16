@@ -16,7 +16,6 @@ export async function getTotalCost(wraper: HTMLElement, discontobj?: Discontobj)
   wraper.innerHTML = `The total cost is: ${Math.round(totalCost) / 100} $`;
 
   if (discontobj) {
-    console.log(discontobj);
     wraper.innerHTML = ``;
     const costText = document.createElement("span");
     costText.innerHTML = `The total cost is: `;

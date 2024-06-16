@@ -10,7 +10,6 @@ export async function UseTotalPricePromo(
   newCostWraper: HTMLElement,
 ) {
   let newCost = oldCost / 100;
-  console.log(newCost);
 
   //скидка на всю корзину
   if (discontobj.target.type === "totalPrice") {
@@ -19,14 +18,12 @@ export async function UseTotalPricePromo(
     } else if (discontobj && discontobj.value.type === "absolute") {
       newCost = oldCost / 100 - discontobj.value.money[0].centAmount / 100;
     }
-    console.log(newCost);
     newCostWraper.innerHTML = `${Math.round(newCost * 100) / 100} $ `;
     //скидка на категорию
   } else if (discontobj.target.type === "lineItems" && list && discontobj.target.predicate.includes("categories.id")) {
     const categoryId = discontobj.references[0].id;
     list.lineItems.forEach(async (item) => {
       const product = await apiGetProductById(item.productId);
-      console.log(item);
       let isPromoProduct = false;
       if (product) {
         for (let i = 0; i < product.masterData.current.categories.length; i++) {
@@ -63,14 +60,12 @@ export async function UseTotalPricePromo(
           newCost -= (discontobj.value.money[0].centAmount * item.quantity) / 100;
         }
       }
-      console.log(newCost);
       newCostWraper.innerHTML = `${Math.round(newCost * 100) / 100} $ `;
     });
     //скидка на продукт
   } else if (discontobj.target.type === "lineItems" && list && discontobj.target.predicate.includes("product.id")) {
     const ProductId = discontobj.references[0].id;
     list.lineItems.forEach(async (item) => {
-      //console.log(item);
       if (item.productId === ProductId) {
         const product = await apiGetProductById(ProductId);
         if (
@@ -78,18 +73,11 @@ export async function UseTotalPricePromo(
           discontobj &&
           discontobj.value.type === "relative"
         ) {
-          console.log(
-            product?.masterData.current.masterVariant.prices[0].discounted.value.centAmount,
-            item.quantity,
-            discontobj.value.permyriad,
-            newCost,
-          );
           newCost -=
             (product?.masterData.current.masterVariant.prices[0].discounted.value.centAmount *
               item.quantity *
               (discontobj.value.permyriad / 100)) /
             10000;
-          console.log(newCost);
         } else if (
           product?.masterData.current.masterVariant.prices[0].discounted &&
           discontobj &&
@@ -105,10 +93,9 @@ export async function UseTotalPricePromo(
         } else if (product && discontobj && discontobj.value.type === "absolute") {
           newCost -= (discontobj.value.money[0].centAmount * item.quantity) / 100;
         }
-        console.log(item);
-        console.log(newCost);
         newCostWraper.innerHTML = `${Math.round(newCost * 100) / 100} $ `;
       }
+      if (newCostWraper.innerHTML === "") newCostWraper.innerHTML = `${Math.round(newCost * 100) / 100} $ `;
     });
   }
   return newCost;

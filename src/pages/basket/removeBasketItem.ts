@@ -1,6 +1,7 @@
 import { apiDeleteProductToShoppingList } from "../../apiRequests/shoppingList/apiDeleteProductToShoppingList";
 import { createNotification } from "../../notification/createNotificationElem";
 import { emptyBasketPageCreator } from "./emptyBasketPage";
+import { getTotalCost } from "./getTotalCost";
 
 async function deleteCartItem(productId: string, itemWrapper: HTMLElement) {
   try {
@@ -35,6 +36,7 @@ export function removeBasketItem() {
       const plusButton = itemWrapper.querySelector(".plus-btn") as HTMLButtonElement;
       minusButton.setAttribute("disabled", "true");
       plusButton.setAttribute("disabled", "true");
+      await getTotalCost(document.querySelector(".total_cost_wraper") as HTMLElement);
     });
   });
 }
