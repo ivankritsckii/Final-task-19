@@ -110,6 +110,10 @@
 }
 
 @media screen and (max-width: 780px) {
+  #delete_all_btn {
+    margin-bottom: 10px;
+  }
+
   .cost_promo_wraper {
     flex-direction: column-reverse;
     justify-content: center;

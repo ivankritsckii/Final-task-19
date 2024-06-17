@@ -34,6 +34,8 @@ export async function createBuyBlock(idProduct: string): Promise<HTMLElement> {
   }
 
   buyButton.addEventListener("click", async (event: Event) => {
+    const element = event.target as HTMLButtonElement;
+    element?.setAttribute("disabled", "true");
     event.preventDefault();
     await apiAddProductToShoppingList(idProduct);
     countProduct.textContent = await checkProductInBasket(idProduct);
@@ -62,6 +64,7 @@ export async function createBuyBlock(idProduct: string): Promise<HTMLElement> {
 
 function showButtons(buy: HTMLElement, array: HTMLElement[]) {
   buy.classList.add("button_disable");
+  buy.removeAttribute("disabled");
   array.forEach((element) => {
     element.classList.remove("button_disable");
   });
