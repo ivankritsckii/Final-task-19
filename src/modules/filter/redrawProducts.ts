@@ -38,6 +38,11 @@ export async function redrawProducts(pagesNumber?: number): Promise<void> {
     data = data.slice(necessaryElements - 9, necessaryElements);
   }
 
+  // проверка на пустые товары
+  if (data.length < 1) {
+    location.reload();
+  }
+
   await data.forEach(async (element: Result) => {
     const minInput = document.getElementById("min-price") as HTMLInputElement;
     const maxInput = document.getElementById("max-price") as HTMLInputElement;
@@ -54,6 +59,7 @@ export async function redrawProducts(pagesNumber?: number): Promise<void> {
       }
     }
   });
+
   if (pages > 1) {
     const pagesBlock = await createCountPages(pages, pagesNumber || 0);
     productsWrapper.append(pagesBlock);
