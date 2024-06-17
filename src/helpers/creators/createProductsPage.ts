@@ -12,8 +12,7 @@ export async function createProductsPage(): Promise<void> {
     productsWrapper = createElement("div", "productsMain") as HTMLDivElement;
     const discountCodes = document.createElement("div");
     discountCodes.classList.add("discount_codes_wraper");
-    const a = await apiGetDiscountCodes(discountCodes);
-    console.log(a, 1000000);
+    await apiGetDiscountCodes(discountCodes);
     productsWrapper.append(discountCodes);
     content.append(productsWrapper);
   }

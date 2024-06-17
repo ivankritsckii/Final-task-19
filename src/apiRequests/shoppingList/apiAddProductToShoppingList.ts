@@ -10,7 +10,6 @@ export async function apiAddProductToShoppingList(idProduct: string) {
   myHeaders.append("Authorization", `${tokenType} ${token}`);
 
   const product = await apiGetProductById(idProduct);
-  console.log(product);
 
   const shoppingList = (await apiGetShoppingList()) as unknown as ShoppingList;
 
