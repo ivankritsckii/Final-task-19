@@ -14,4 +14,6 @@ export async function deleteAllProductFromBasket() {
     });
   }
   emptyBasketPageCreator();
+  const qualityWraper = document.querySelector(".count_product_wraper") as HTMLElement;
+  qualityWraper.innerHTML = `0`;
 }
