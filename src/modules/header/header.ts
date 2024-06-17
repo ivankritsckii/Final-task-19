@@ -3,6 +3,7 @@ import { createElement } from "../../helpers/creators/createElement";
 import { createLink } from "../../helpers/creators/createLink";
 import { route } from "../../router/route";
 import { clearLocalStorage } from "../../helpers/clearLocalStorage";
+import { createQualityInBasket } from "../../helpers/creators/createQuantityInBasket";
 const styles = require("./header.module.scss");
 
 export function createHeader(parrent: HTMLElement): void {
@@ -27,6 +28,22 @@ export function createHeader(parrent: HTMLElement): void {
   linkCategories.addEventListener("click", (event: Event) => {
     event.preventDefault();
     route(linkCategories.href);
+  });
+
+  const itemBasket = createElement("li", "nav__item");
+  const linkBasket = createLink("nav__link", "#basket", false);
+  itemBasket.append(linkBasket);
+  const basketImg = document.createElement("img");
+  basketImg.src = "./basket.svg";
+  basketImg.alt = "basket";
+  const countProductWraper = document.createElement("div");
+  countProductWraper.classList.add("count_product_wraper");
+  countProductWraper.innerHTML = `0`;
+  linkBasket.append(basketImg, countProductWraper);
+  //linkBasket.textContent = `${basketImg}`;
+  linkBasket.addEventListener("click", (event: Event) => {
+    event.preventDefault();
+    route(linkBasket.href);
   });
 
   const itemAboutUs = createElement("li", "nav__item");
@@ -83,15 +100,16 @@ export function createHeader(parrent: HTMLElement): void {
   itemLogout.append(linkLogout);
   linkLogout.textContent = "Logout";
   linkLogout.style.textDecoration = "underline";
-  linkLogout.addEventListener("click", (event: Event) => {
+  linkLogout.addEventListener("click", async (event: Event) => {
     event.preventDefault();
-    clearLocalStorage();
+    await clearLocalStorage();
     route(window.location.origin);
   });
 
-  list.append(itemMain, itemCategories, itemAboutUs, itemProfile, itemRegistration, itemLogin, itemLogout);
+  list.append(itemMain, itemCategories, itemBasket, itemAboutUs, itemProfile, itemRegistration, itemLogin, itemLogout);
   nav.append(list);
   header.append(nav);
   parrent.append(header);
   headerBurger(header);
+  createQualityInBasket();
 }
