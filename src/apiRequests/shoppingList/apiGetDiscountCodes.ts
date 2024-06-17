@@ -22,10 +22,13 @@ export async function apiGetDiscountCodes(parent?: HTMLElement) {
     const result = await response.text();
     const json = JSON.parse(result);
     console.log(json);
-    json.results.forEach((item: { id: string; isActive: boolean }) => {
+    json.results.forEach((item: { id: string; isActive: boolean; name: { en: string } }) => {
       if (!item.isActive) return;
       if (parent) {
-        parent.innerHTML += `${item.id}; `;
+        const span = document.createElement("span");
+        span.title = item.name.en;
+        span.innerHTML += `${item.id}; `;
+        parent.append(span);
       }
       promoCodesArray.push(item.id);
     });

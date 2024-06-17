@@ -4,6 +4,7 @@ import { buyLoading, buyLoadingOff, buyLoadingOn } from "../../../modules/loadin
 import { checkProductInBasket } from "../../checks/checkProductInBasket";
 import { createElement } from "../createElement";
 import { createLink } from "../createLink";
+import { createQualityInBasket } from "../../creators/createQuantityInBasket";
 
 export async function createBuyBlock(idProduct: string): Promise<HTMLElement> {
   const buyBlock = createElement("div", "buy-block");
@@ -36,7 +37,7 @@ export async function createBuyBlock(idProduct: string): Promise<HTMLElement> {
     event.preventDefault();
     await apiAddProductToShoppingList(idProduct);
     countProduct.textContent = await checkProductInBasket(idProduct);
-
+    createQualityInBasket();
     showButtons(buyButton, arrayButtons);
   });
   plusButton.addEventListener("click", async () => {
@@ -51,6 +52,7 @@ export async function createBuyBlock(idProduct: string): Promise<HTMLElement> {
     countProduct.textContent = await checkProductInBasket(idProduct);
     if (countProduct.textContent === "0") {
       disableButtons(buyButton, arrayButtons);
+      createQualityInBasket();
     }
     buyLoadingOff(counterWrapper);
   });

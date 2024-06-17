@@ -96,3 +96,5 @@ export async function updateBasketItems() {
     }
   });
 }
+// реализовать пункт RSS-ECOMM-4_23
+// настроить кнопку to Basket на главной странице

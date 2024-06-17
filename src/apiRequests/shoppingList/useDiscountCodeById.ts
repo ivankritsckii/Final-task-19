@@ -17,8 +17,8 @@ export async function useDiscountCodeById(id: string) {
     );
     const result = await response.text();
     const json = JSON.parse(result);
-    console.log(json.value);
-    return json.value;
+    console.log(json);
+    return json;
   } catch (error) {
     console.log(error);
   }
