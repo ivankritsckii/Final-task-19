@@ -53,6 +53,7 @@ module.exports = {
         { from: "public/Ivan.jpg", to: "Ivan.jpg" },
         { from: "public/Marta.jpg", to: "Marta.jpg" },
         { from: "public/Dmitriy.jpeg", to: "Dmitriy.jpeg" },
+        { from: "public/basket.svg", to: "basket.svg" },
       ],
     }),
   ],

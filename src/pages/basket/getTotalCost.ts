@@ -2,6 +2,7 @@ import { apiGetShoppingList } from "../../apiRequests/shoppingList/apiGetShoppin
 import { Discontobj } from "../../helpers/interfaces/discountObj";
 import { UseTotalPricePromo } from "./calculateCostWithPromo";
 import { calculateTotalCost } from "./calculateCostFromAPI";
+import { createQualityInBasket } from "../../helpers/creators/createQuantityInBasket";
 require("./basketPage.scss");
 
 export async function getTotalCost(wraper: HTMLElement, discontobj?: Discontobj) {
@@ -27,7 +28,8 @@ export async function getTotalCost(wraper: HTMLElement, discontobj?: Discontobj)
 
     wraper.append(costText, newCost, oldCost);
     await UseTotalPricePromo(totalCost, discontobj, list, newCost);
+  } else {
+    createQualityInBasket();
   }
-
   return false;
 }

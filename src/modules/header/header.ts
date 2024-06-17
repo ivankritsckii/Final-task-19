@@ -3,6 +3,7 @@ import { createElement } from "../../helpers/creators/createElement";
 import { createLink } from "../../helpers/creators/createLink";
 import { route } from "../../router/route";
 import { clearLocalStorage } from "../../helpers/clearLocalStorage";
+import { createQualityInBasket } from "../../helpers/creators/createQuantityInBasket";
 const styles = require("./header.module.scss");
 
 export function createHeader(parrent: HTMLElement): void {
@@ -32,7 +33,14 @@ export function createHeader(parrent: HTMLElement): void {
   const itemBasket = createElement("li", "nav__item");
   const linkBasket = createLink("nav__link", "#basket", false);
   itemBasket.append(linkBasket);
-  linkBasket.textContent = "Basket";
+  const basketImg = document.createElement("img");
+  basketImg.src = "./basket.svg";
+  basketImg.alt = "basket";
+  const countProductWraper = document.createElement("div");
+  countProductWraper.classList.add("count_product_wraper");
+  countProductWraper.innerHTML = `0`;
+  linkBasket.append(basketImg, countProductWraper);
+  //linkBasket.textContent = `${basketImg}`;
   linkBasket.addEventListener("click", (event: Event) => {
     event.preventDefault();
     route(linkBasket.href);
@@ -103,4 +111,5 @@ export function createHeader(parrent: HTMLElement): void {
   header.append(nav);
   parrent.append(header);
   headerBurger(header);
+  createQualityInBasket();
 }
