@@ -30,9 +30,9 @@ export async function createCategoryPage() {
       const current = result.masterData.current as Current;
       const categories = current.categories as [TypeId];
 
-      categories.forEach((category) => {
+      categories.forEach(async (category) => {
         if (category.id === categoryPage.id) {
-          const cardProduct = createCard(result);
+          const cardProduct = await createCard(result);
           categoryProducts.append(cardProduct);
         }
       });

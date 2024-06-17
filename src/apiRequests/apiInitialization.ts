@@ -1,3 +1,5 @@
+import { createBasket } from "./shoppingList/createBasket";
+
 export async function apiInitialization() {
   const myHeaders = new Headers();
 
@@ -26,6 +28,8 @@ export async function apiInitialization() {
     const tokenType = JSON.parse(result).token_type;
     sessionStorage.setItem("token", token);
     sessionStorage.setItem("token-type", tokenType);
+
+    await createBasket(); // создаем корзину при входе на сайт (если ее нет)
   } catch (error) {
     console.error(error);
   }
