@@ -1,4 +1,5 @@
 import { ShoppingList } from "../../helpers/interfaces/ShoppingList";
+import { apiInitialization } from "../apiInitialization";
 
 export async function apiGetShoppingList(): Promise<ShoppingList | false> {
   const myHeaders = new Headers();
@@ -28,6 +29,12 @@ export async function apiGetShoppingList(): Promise<ShoppingList | false> {
     // т.к корзина создается при загрузке сайта, но всё же
     if (JSON.parse(result).statusCode === 404) {
       return false;
+    }
+
+    // исправление ошибки Unauthorized
+    if (JSON.parse(result).statusCode === 401) {
+      await apiInitialization();
+      location.reload();
     }
 
     const json = JSON.parse(result) as ShoppingList;
