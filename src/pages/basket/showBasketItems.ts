@@ -71,7 +71,7 @@ export async function showBasketItems() {
 
       const itemTotalPrice = document.createElement("div");
       itemTotalPrice.classList.add("item_total_price");
-      itemTotalPrice.innerHTML = `Total: $${totalPriceForItem}`;
+      itemTotalPrice.innerHTML = `Total: $${totalPriceForItem.toFixed(2)}`;
 
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
